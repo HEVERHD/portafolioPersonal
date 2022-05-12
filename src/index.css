@@ -38,7 +38,7 @@ body{
     background: var(--color-bg);
     color:var(--color-white);
     line-height: 1.7;
-    /* background-image: url(../src/assets/fondostexture.png); */
+    background-image: url(../src/assets/fondostexture.jpg);
 }
 /*================= ESTILOS GENERALES ==================*/
 .container {
