@@ -1,4 +1,4 @@
-header{
+header {
     height: 100vh;
     padding-top: 7rem;
     overflow: hidden;
@@ -37,7 +37,7 @@ header{
 }
 
 /*========IMG ME=========*/
-.me{
+.me {
     width: 25%;
     height: 10%;
     position: absolute;
@@ -59,21 +59,24 @@ header{
 }
 
 /*=========MEDIA QUERIES (MEDIUM)=======*/
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1024px) {
     .header {
         height: 68vh;
     }
 }
 
 /*=========MEDIA QUERIES(SMALL=======*/
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
     .header {
-        height:100vh;
+        height: 100vh;
     }
-    .header__socials, .scroll__down {
+
+    .header__socials,
+    .scroll__down {
         display: none;
     }
-    .me{
+
+    .me {
         display: none;
     }
 }

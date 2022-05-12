@@ -4,7 +4,7 @@ import { BsPatchCheckFill } from "react-icons/bs"
 import { AiFillHtml5 } from "react-icons/ai"
 import { RiCss3Fill } from "react-icons/ri"
 import { IoLogoJavascript} from "react-icons/io"
-import { SiBootstrap,SiReacttable,SiChakraui, SiMaterialui,SiAliexpress,SiPostgresql,SiMongodb,SiSequelize } from "react-icons/si"
+import { SiBootstrap,SiReacttable,SiChakraui, SiMaterialui,SiAliexpress,SiPostgresql,SiMongodb,SiSequelize ,SiAdobephotoshop} from "react-icons/si"
 import {FaNodeJs} from "react-icons/fa"
 
 
@@ -21,14 +21,14 @@ const Experience = () => {
                         <article className='experience__details'>
                               <AiFillHtml5 className="experience__details-icon"/>
                                 <div>
-                                <h4> HTML </h4>
+                                <h4> Html </h4>
                               <small className='text-light'> Intermediate </small>
                                 </div>
                         </article>
                         <article className='experience__details'>
                               <RiCss3Fill className="experience__details-icon"/>
                               <div>
-                              <h4> CSS </h4>
+                              <h4> Css </h4>
                               <small className='text-light'> Intermediate </small>
                               </div>
                         </article>
@@ -49,21 +49,28 @@ const Experience = () => {
                         <article className='experience__details'>
                               <SiReacttable className="experience__details-icon"/>
                               <div>
-                              <h4> REACT </h4>
+                              <h4> React </h4>
                               <small className='text-light'> Avanced </small>
                               </div>
                         </article>
                         <article className='experience__details'>
                               <SiChakraui className="experience__details-icon"/>
                               <div>
-                              <h4> CHAKARA UI </h4>
-                              <small className='text-light'> Experienced </small>
+                              <h4> Chakara Ui </h4>
+                              <small className='text-light'> Intermediate  </small>
                               </div>
                         </article>
                         <article className='experience__details'>
                               <SiMaterialui className="experience__details-icon"/>
                               <div>
-                              <h4> MATERIAL UI </h4>
+                              <h4> Material Ui </h4>
+                              <small className='text-light'> Avanced </small>
+                              </div>
+                        </article>
+                        <article className='experience__details'>
+                              <SiAdobephotoshop className="experience__details-icon"/>
+                              <div>
+                              <h4> Photshop cc</h4>
                               <small className='text-light'> Avanced </small>
                               </div>
                         </article>
