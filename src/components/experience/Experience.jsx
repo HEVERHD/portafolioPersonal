@@ -4,7 +4,7 @@ import { BsPatchCheckFill } from "react-icons/bs"
 import { AiFillHtml5 } from "react-icons/ai"
 import { RiCss3Fill } from "react-icons/ri"
 import { IoLogoJavascript} from "react-icons/io"
-import { SiBootstrap,SiReacttable,SiChakraui, SiMaterialui,SiAliexpress,SiPostgresql,SiMongodb,SiSequelize ,SiAdobephotoshop} from "react-icons/si"
+import { SiBootstrap,SiReacttable,SiChakraui, SiMaterialui,SiExpress,SiPostgresql,SiMongodb,SiSequelize ,SiAdobephotoshop} from "react-icons/si"
 import {FaNodeJs} from "react-icons/fa"
 
 
@@ -36,7 +36,7 @@ const Experience = () => {
                               <IoLogoJavascript className="experience__details-icon"/>
                               <div>
                               <h4> JavaScript </h4>
-                              <small className='text-light'> Avanced </small>
+                              <small className='text-light'> Advanced </small>
                               </div>
                         </article>
                         <article className='experience__details'>
@@ -50,7 +50,7 @@ const Experience = () => {
                               <SiReacttable className="experience__details-icon"/>
                               <div>
                               <h4> React </h4>
-                              <small className='text-light'> Avanced </small>
+                              <small className='text-light'> Advanced </small>
                               </div>
                         </article>
                         <article className='experience__details'>
@@ -64,7 +64,7 @@ const Experience = () => {
                               <SiMaterialui className="experience__details-icon"/>
                               <div>
                               <h4> Material Ui </h4>
-                              <small className='text-light'> Avanced </small>
+                              <small className='text-light'> Advanced </small>
                               </div>
                         </article>
                         <article className='experience__details'>
@@ -83,42 +83,42 @@ const Experience = () => {
                           <FaNodeJs className="experience__details-icon"/>
                           <div>
                           <h4> Node Js </h4>
-                          <small className='text-light'> Experienced </small>
+                          <small className='text-light'> Intermediate  </small>
                           </div>
                     </article>
                     <article className='experience__details'>
-                          <SiAliexpress className="experience__details-icon"/>
+                          <SiExpress className="experience__details-icon"/>
                         <div>
                         <h4> Express Js </h4>
-                          <small className='text-light'> Experienced </small>
+                          <small className='text-light'> Intermediate  </small>
                         </div>
                     </article>
                     <article className='experience__details'>
                           <SiPostgresql className="experience__details-icon"/>
                           <div>
                           <h4> Postgres SQL </h4>
-                          <small className='text-light'> Experienced </small>
+                          <small className='text-light'> Intermediate  </small>
                           </div>
                     </article>
                     <article className='experience__details'>
                           <SiMongodb className="experience__details-icon"/>
                           <div>
                           <h4> MongoDB</h4>
-                          <small className='text-light'> Experienced </small>
+                          <small className='text-light'> Intermediate  </small>
                           </div>
                     </article>
                     <article className='experience__details'>
                           <BsPatchCheckFill className="experience__details-icon"/>
                           <div>
                           <h4> Mongoose</h4>
-                          <small className='text-light'> Experienced </small>
+                          <small className='text-light'> Intermediate  </small>
                           </div>
                     </article>
                     <article className='experience__details'>
                           <SiSequelize className="experience__details-icon"/>
                          <div>
                          <h4> Sequelize</h4>
-                          <small className='text-light'> Experienced </small>
+                          <small className='text-light'> Intermediate  </small>
                          </div>
                     </article>
               </div>

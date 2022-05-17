@@ -1,7 +1,11 @@
 .services__container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 2rem;
+    margin: 0 auto;
+  
+
+
 }
 
 .service {
@@ -12,6 +16,7 @@
     height: fit-content;
     transition: var(--transition);
     cursor: pointer;
+
 
 }
 
