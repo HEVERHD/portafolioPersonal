@@ -55,6 +55,16 @@ export const ui = {
       en: "Tell me what you need. I usually reply the same day, often on WhatsApp.",
     },
   },
+  showreel: {
+    caption: {
+      es: "Animado con Remotion y React, corriendo en vivo en tu navegador",
+      en: "Animated with Remotion and React, running live in your browser",
+    },
+    alt: {
+      es: "Showreel: sistema de reservas, tiendas online y sitios de marca en celulares",
+      en: "Showreel: booking system, online stores and brand sites on phones",
+    },
+  },
   visit: { es: "Ver sitio", en: "Visit site" },
   code: { es: "Código", en: "Code" },
   liveAt: { es: "En producción en", en: "Live at" },

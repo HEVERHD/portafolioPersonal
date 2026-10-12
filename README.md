@@ -24,6 +24,20 @@ Todo el texto (en ambos idiomas), la experiencia, los proyectos y los datos de c
 - **CV descargable:** copia el PDF en `public/` y pon su ruta en `contact.cv`. Si está vacío, el botón no aparece.
 - **Capturas de proyectos:** `public/projects/*.jpg`, a 1200px de ancho.
 
+## Showreel (Remotion)
+
+El video bajo el hero es una composición de [Remotion](https://www.remotion.dev) en `src/reel/` que se reproduce
+**en vivo** en el navegador con `@remotion/player` (no hay archivo de video). Se carga solo cuando la sección
+entra en pantalla, se pausa fuera de ella y respeta `prefers-reduced-motion` mostrando `public/reel/poster.jpg`.
+
+```bash
+npm run reel   # abre Remotion Studio para editar escenas y tiempos
+```
+
+- Escenas: `src/reel/scenes/` · celular: `src/reel/components/Phone.tsx`
+- Capturas de los sitios: `public/reel/screens/*.jpg` (390px de ancho, viewport móvil real)
+- Si cambias la duración de una escena, actualiza `SHOWREEL_DURATION` en `src/reel/Showreel.tsx`.
+
 ## Dependencias
 
 Las versiones están fijadas (`save-exact`) y `.npmrc` desactiva los scripts de instalación (`ignore-scripts`).
