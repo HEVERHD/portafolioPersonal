@@ -25,8 +25,8 @@ export const ui = {
       en: "Frontend Developer · React · React Native · Next.js",
     },
     pitch: {
-      es: "Llevo apps de producción al siguiente nivel: migré productos completos a React Native y los publiqué en App Store y Google Play. He trabajado en apps que usan millones de personas, y me muevo con soltura en el backend con Node.js, NestJS y bases de datos.",
-      en: "I take production apps to the next level: I've migrated full products to React Native and shipped them to the App Store and Google Play. I've worked on apps used by millions of people, and I'm comfortable on the backend with Node.js, NestJS and databases.",
+      es: "Llevo apps de producción al siguiente nivel: migré productos completos a React Native y los publiqué en App Store y Google Play. He trabajado en apps que usan millones de personas, y tengo una base sólida en backend con Node.js, NestJS y bases de datos.",
+      en: "I take production apps to the next level: I've migrated full products to React Native and shipped them to the App Store and Google Play. I've worked on apps used by millions of people, and I have a solid backend foundation with Node.js, NestJS and databases.",
     },
     ctaPrimary: { es: "Hablemos por WhatsApp", en: "Message me on WhatsApp" },
     ctaSecondary: { es: "Ver proyectos", en: "See my work" },
