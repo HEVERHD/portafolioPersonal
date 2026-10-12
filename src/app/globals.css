@@ -72,6 +72,13 @@ body {
   }
 }
 
+/* Stack chips glow in their brand color (--c, set inline) on hover */
+.tech-chip:hover {
+  border-color: color-mix(in srgb, var(--c) 55%, transparent);
+  box-shadow: 0 0 22px -6px var(--c);
+  color: var(--color-ink);
+}
+
 /* Client logo marquee: slides one full copy of the list, so the loop is seamless */
 .marquee {
   mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);

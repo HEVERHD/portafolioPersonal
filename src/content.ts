@@ -89,6 +89,10 @@ export const ui = {
   present: { es: "Actualidad", en: "Present" },
   careerOf: { es: "de mi carrera", en: "of my career" },
   liveApp: { es: "App en producción", en: "Live app" },
+  stackCard: {
+    core: { es: "Mi fuerte", en: "Core" },
+    mobile: { es: "Apps en producción en App Store y Google Play", en: "Apps live on the App Store and Google Play" },
+  },
   stores: {
     getItOn: { es: "Disponible en", en: "Get it on" },
     downloadOn: { es: "Descárgala en", en: "Download on the" },
@@ -450,12 +454,78 @@ export const services: { title: T; text: T }[] = [
   },
 ];
 
-export const stack: { group: T; items: string[] }[] = [
-  { group: { es: "Frontend", en: "Frontend" }, items: ["React", "Next.js", "React Native", "TypeScript", "JavaScript", "Redux"] },
-  { group: { es: "Estilos", en: "Styling" }, items: ["Tailwind", "MUI", "Chakra UI", "CSS"] },
-  { group: { es: "Backend y datos", en: "Backend & data" }, items: ["Node.js", "NestJS", "Express", "PostgreSQL", "MySQL", "MongoDB"] },
-  { group: { es: "Diseño gráfico", en: "Graphic design" }, items: ["Figma", "Photoshop", "Illustrator", "After Effects", "Premiere Pro", "Adobe XD"] },
-  { group: { es: "Forma de trabajo", en: "Workflow" }, items: ["Git", "GitFlow", "Jira", "Scrum", "Docker", "Remotion"] },
+/**
+ * A technology chip: `icon` is a Simple Icons SVG in /public/tech tinted with `color`;
+ * `badge` draws an Adobe-style two-letter tile instead (Simple Icons dropped Adobe's logos).
+ * With neither, the chip shows a colored dot.
+ */
+export type Tech = { name: string; color: string; icon?: string; badge?: { text: string; bg: string } };
+
+export type StackGroup = { id: "frontend" | "backend" | "styling" | "design" | "workflow"; group: T; items: Tech[] };
+
+export const stack: StackGroup[] = [
+  {
+    id: "frontend",
+    group: { es: "Frontend", en: "Frontend" },
+    items: [
+      { name: "React", icon: "react", color: "#61DAFB" },
+      { name: "React Native", icon: "react", color: "#61DAFB" },
+      { name: "Expo", icon: "expo", color: "#FFFFFF" },
+      { name: "Next.js", icon: "nextdotjs", color: "#FFFFFF" },
+      { name: "TypeScript", icon: "typescript", color: "#3178C6" },
+      { name: "JavaScript", icon: "javascript", color: "#F7DF1E" },
+      { name: "Redux", icon: "redux", color: "#9B72E0" },
+      { name: "Zustand", color: "#C89B6D" },
+      { name: "TanStack Query", icon: "tanstack", color: "#FF4154" },
+    ],
+  },
+  {
+    id: "backend",
+    group: { es: "Backend y datos", en: "Backend & data" },
+    items: [
+      { name: "Node.js", icon: "nodedotjs", color: "#5FA04E" },
+      { name: "NestJS", icon: "nestjs", color: "#E0234E" },
+      { name: "Express", icon: "express", color: "#FFFFFF" },
+      { name: "PostgreSQL", icon: "postgresql", color: "#6B8CFF" },
+      { name: "MySQL", icon: "mysql", color: "#5D9BD1" },
+      { name: "MongoDB", icon: "mongodb", color: "#47A248" },
+      { name: "Redis", icon: "redis", color: "#FF4438" },
+    ],
+  },
+  {
+    id: "styling",
+    group: { es: "Estilos", en: "Styling" },
+    items: [
+      { name: "Tailwind", icon: "tailwindcss", color: "#06B6D4" },
+      { name: "MUI", icon: "mui", color: "#007FFF" },
+      { name: "Chakra UI", icon: "chakraui", color: "#319795" },
+      { name: "CSS", icon: "css", color: "#8E5CD9" },
+    ],
+  },
+  {
+    id: "design",
+    group: { es: "Diseño gráfico", en: "Graphic design" },
+    items: [
+      { name: "Figma", icon: "figma", color: "#F24E1E" },
+      { name: "Photoshop", color: "#31A8FF", badge: { text: "Ps", bg: "#001E36" } },
+      { name: "Illustrator", color: "#FF9A00", badge: { text: "Ai", bg: "#330000" } },
+      { name: "After Effects", color: "#D291FF", badge: { text: "Ae", bg: "#00005B" } },
+      { name: "Premiere Pro", color: "#9999FF", badge: { text: "Pr", bg: "#00005B" } },
+      { name: "Adobe XD", color: "#FF61F6", badge: { text: "Xd", bg: "#470137" } },
+    ],
+  },
+  {
+    id: "workflow",
+    group: { es: "Forma de trabajo", en: "Workflow" },
+    items: [
+      { name: "Git", icon: "git", color: "#F05032" },
+      { name: "GitFlow", icon: "git", color: "#F05032" },
+      { name: "Docker", icon: "docker", color: "#2496ED" },
+      { name: "Jira", icon: "jira", color: "#2684FF" },
+      { name: "Scrum", color: "#3EC7FF" },
+      { name: "Remotion", color: "#7C6CFF" },
+    ],
+  },
 ];
 
 export const about = {
