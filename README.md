@@ -21,7 +21,9 @@ npm run dev
 Todo el texto (en ambos idiomas), la experiencia, los proyectos y los datos de contacto viven en
 [`src/content.ts`](src/content.ts). Los componentes en `src/components/` solo se encargan de la presentación.
 
-- **CV descargable:** copia el PDF en `public/` y pon su ruta en `contact.cv`. Si está vacío, el botón no aparece.
+- **Hoja de vida:** el contenido (ES/EN) está en [`cv/cv.html`](cv/cv.html). Después de editarla, `node cv/build.mjs`
+  regenera `public/cv/Hevert-Gelis-CV-ES.pdf` y `-EN.pdf` con Edge o Chrome en modo headless. El botón "Descargar CV"
+  entrega el PDF del idioma activo.
 - **Capturas de proyectos:** `public/projects/*.jpg`, a 1200px de ancho.
 
 ## Showreel (Remotion)

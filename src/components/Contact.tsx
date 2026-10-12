@@ -43,16 +43,14 @@ export function Contact() {
           ))}
         </ul>
 
-        {contact.cv && (
-          <a
-            href={contact.cv}
-            download
-            className="relative mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
-          >
-            <Download />
-            {t(ui.downloadCv)}
-          </a>
-        )}
+        <a
+          href={t(contact.cv)}
+          download
+          className="relative mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
+        >
+          <Download />
+          {t(ui.downloadCv)}
+        </a>
       </div>
 
       <footer className="mt-12 flex flex-col items-center justify-between gap-2 text-xs text-muted sm:flex-row">

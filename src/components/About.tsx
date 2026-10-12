@@ -28,7 +28,14 @@ export function About() {
                 {about.education.map((e) => (
                   <li key={e.place}>
                     <p className="font-semibold">{t(e.title)}</p>
-                    <p className="text-sm text-muted">{e.place}</p>
+                    <p className="text-sm text-muted">
+                      {e.place}
+                      {"status" in e && e.status && (
+                        <span className="ml-2 rounded-full border border-neon/40 px-2 py-0.5 font-mono text-[10px] text-neon">
+                          {t(e.status)}
+                        </span>
+                      )}
+                    </p>
                   </li>
                 ))}
               </ul>

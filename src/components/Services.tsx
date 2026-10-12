@@ -19,7 +19,7 @@ export function Services() {
         ))}
       </div>
 
-      <div className="mt-16 grid gap-8 border-t border-line pt-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-16 grid gap-8 border-t border-line pt-10 sm:grid-cols-3 lg:grid-cols-5">
         {stack.map((g) => (
           <div key={g.group.en}>
             <p className="font-mono text-xs tracking-widest text-muted uppercase">{t(g.group)}</p>

@@ -2,7 +2,7 @@
 
 import { brands, contact, ui } from "@/content";
 import { useLang } from "@/lib/i18n";
-import { MapPin, WhatsApp } from "./icons";
+import { Download, MapPin, WhatsApp } from "./icons";
 import { Orbit } from "./Orbit";
 
 export function Hero() {
@@ -38,6 +38,14 @@ export function Hero() {
               className="inline-flex items-center rounded-full border border-line px-5 py-3 text-sm font-semibold transition-colors hover:bg-surface-2"
             >
               {t(ui.hero.ctaSecondary)}
+            </a>
+            <a
+              href={t(contact.cv)}
+              download
+              className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-semibold transition-colors hover:bg-surface-2"
+            >
+              <Download />
+              {t(ui.downloadCv)}
             </a>
           </div>
 

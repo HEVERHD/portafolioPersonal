@@ -7,8 +7,8 @@ export const contact = {
   email: "hever11.hdgd@gmail.com",
   linkedin: "https://www.linkedin.com/in/hever-gdesing/",
   github: "https://github.com/HEVERHD",
-  // Put the final PDF in /public and set the path here. Empty string hides the button.
-  cv: "",
+  // PDFs generated from cv/cv.html with `node cv/build.mjs`; the button serves the active language.
+  cv: { es: "/cv/Hevert-Gelis-CV-ES.pdf", en: "/cv/Hevert-Gelis-CV-EN.pdf" },
 };
 
 export const ui = {
@@ -454,7 +454,8 @@ export const stack: { group: T; items: string[] }[] = [
   { group: { es: "Frontend", en: "Frontend" }, items: ["React", "Next.js", "React Native", "TypeScript", "JavaScript", "Redux"] },
   { group: { es: "Estilos", en: "Styling" }, items: ["Tailwind", "MUI", "Chakra UI", "CSS"] },
   { group: { es: "Backend y datos", en: "Backend & data" }, items: ["Node.js", "NestJS", "Express", "PostgreSQL", "MySQL", "MongoDB"] },
-  { group: { es: "Forma de trabajo", en: "Workflow" }, items: ["Git", "GitFlow", "Jira", "Scrum", "Docker"] },
+  { group: { es: "Diseño gráfico", en: "Graphic design" }, items: ["Figma", "Photoshop", "Illustrator", "After Effects", "Premiere Pro", "Adobe XD"] },
+  { group: { es: "Forma de trabajo", en: "Workflow" }, items: ["Git", "GitFlow", "Jira", "Scrum", "Docker", "Remotion"] },
 ];
 
 export const about = {
@@ -463,7 +464,11 @@ export const about = {
     en: "I came to programming from Cartagena, with a bootcamp and a lot of drive. Today I'm a frontend developer with a solid backend foundation, and I enjoy big challenges (migrating an entire app or building for millions of users) as much as small ones (a neighborhood barbershop getting its first online bookings). What hooks me is still what hooked me at the start: seeing something I built make someone's day easier.",
   },
   education: [
-    { title: { es: "Ingeniería de Sistemas", en: "Systems Engineering" }, place: "Universidad de San Buenaventura, Cartagena" },
+    {
+      title: { es: "Ingeniería de Sistemas", en: "Systems Engineering" },
+      place: "Universidad de San Buenaventura, Cartagena",
+      status: { es: "En curso", en: "In progress" },
+    },
     { title: { es: "Full Stack Web Developer", en: "Full Stack Web Developer" }, place: "Henry · 2021" },
     { title: { es: "Técnico en Sistemas", en: "Systems Technician" }, place: "TECNAR" },
   ],
