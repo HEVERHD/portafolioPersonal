@@ -2,7 +2,7 @@
 
 import { brands, contact, ui } from "@/content";
 import { useLang } from "@/lib/i18n";
-import { WhatsApp } from "./icons";
+import { MapPin, WhatsApp } from "./icons";
 import { Orbit } from "./Orbit";
 
 export function Hero() {
@@ -53,19 +53,35 @@ export function Hero() {
 
         <div className="mx-auto w-full max-w-sm lg:max-w-[460px]">
           <Orbit src="/hevert-studio.jpg" alt="Hevert Gelis en su estudio" />
-          <p className="mt-2 text-center font-mono text-xs text-muted">📍 Bogotá · Cartagena, Colombia</p>
+          <p className="mt-2 flex items-center justify-center gap-1.5 font-mono text-xs text-muted">
+            <MapPin className="size-3.5 shrink-0 text-neon" />
+            {t(ui.hero.location)}
+          </p>
         </div>
       </div>
 
       <div className="relative mx-auto mt-16 max-w-6xl px-4 sm:px-6">
         <p className="font-mono text-xs tracking-widest text-muted uppercase">{t(ui.hero.brandsLabel)}</p>
-        <ul className="mt-4 flex flex-wrap gap-x-10 gap-y-3">
-          {brands.map((b) => (
-            <li key={b} className="font-display text-xl font-semibold text-ink/50 sm:text-2xl">
-              {b}
-            </li>
-          ))}
-        </ul>
+        {/* Infinite marquee: the list is rendered twice and the track slides by exactly one copy */}
+        <div className="marquee mt-6 overflow-hidden">
+          <div className="marquee-track flex w-max items-center">
+            {[0, 1].map((copy) => (
+              <ul key={copy} className={`flex shrink-0 items-center ${copy ? "marquee-dup" : ""}`} aria-hidden={copy ? true : undefined}>
+                {brands.map((b) => (
+                  <li key={b.name} className="px-6 sm:px-8">
+                    <img
+                      src={b.logo}
+                      alt={copy ? "" : b.name}
+                      title={b.name}
+                      style={{ height: `calc(clamp(26px, 2.6vw, 36px) * ${b.scale})` }}
+                      className="w-auto max-w-none opacity-50 transition-opacity duration-300 hover:opacity-100"
+                    />
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

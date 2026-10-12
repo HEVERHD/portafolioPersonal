@@ -36,6 +36,7 @@ export const ui = {
       { value: "10+", label: { es: "negocios en línea", en: "businesses online" } },
     ],
     brandsLabel: { es: "He construido producto para", en: "I've built product for" },
+    location: { es: "Bogotá · Cartagena · Panamá (remoto)", en: "Bogotá · Cartagena · Panama (remote)" },
   },
   sections: {
     experience: { es: "Trayectoria", en: "Experience" },
@@ -100,7 +101,19 @@ export const ui = {
   footer: { es: "Diseñado y desarrollado por Hevert Gelis", en: "Designed and built by Hevert Gelis" },
 } satisfies Record<string, unknown>;
 
-export const brands = ["Cochez y Cía", "Bancolombia", "App Morado", "Chedraui", "Pepeganga", "Scanovate"];
+/**
+ * White logo silhouettes in /public/brands (120px tall, trimmed). `scale` evens out their
+ * optical size: wide one-line wordmarks need less height than stacked logos to look equal.
+ */
+export const brands = [
+  { name: "Cochez y Cía", logo: "/brands/cochez.png", scale: 1 },
+  { name: "Aludra", logo: "/brands/aludra.png", scale: 1 },
+  { name: "Bancolombia", logo: "/brands/bancolombia.png", scale: 0.95 },
+  { name: "App Morado", logo: "/brands/morado.png", scale: 0.95 },
+  { name: "Chedraui", logo: "/brands/chedraui.png", scale: 1 },
+  { name: "Pepe Ganga", logo: "/brands/pepeganga.png", scale: 1.25 },
+  { name: "Scanovate", logo: "/brands/scanovate.png", scale: 0.85 },
+];
 
 export type Job = {
   role: T;
