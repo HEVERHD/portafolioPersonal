@@ -3,6 +3,7 @@
 import { brands, contact, ui } from "@/content";
 import { useLang } from "@/lib/i18n";
 import { WhatsApp } from "./icons";
+import { Orbit } from "./Orbit";
 
 export function Hero() {
   const { t } = useLang();
@@ -16,18 +17,10 @@ export function Hero() {
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.25fr_1fr]">
         <div>
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface/60 px-3 py-1.5 text-xs text-muted">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-wa opacity-60" />
-              <span className="relative inline-flex size-2 rounded-full bg-wa" />
-            </span>
-            {t(ui.hero.status)}
-          </p>
-
           <h1 className="font-display text-5xl leading-[0.95] font-bold tracking-tight sm:text-7xl">
             Hevert <span className="text-gradient">Gelis</span>
           </h1>
-          <p className="mt-4 font-mono text-sm text-neon sm:text-base">{t(ui.hero.role)}</p>
+          <p className="mt-4 font-mono text-sm text-balance text-neon sm:text-base">{t(ui.hero.role)}</p>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{t(ui.hero.pitch)}</p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -58,20 +51,9 @@ export function Hero() {
           </dl>
         </div>
 
-        <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
-          <div className="absolute -inset-px rounded-[2rem] bg-gradient-to-br from-neon/60 via-accent/40 to-transparent" />
-          <div className="relative overflow-hidden rounded-[2rem] bg-surface">
-            <img
-              src="/hevert-studio.jpg"
-              alt="Hevert Gelis en su estudio"
-              width={900}
-              height={1350}
-              className="aspect-[4/5] w-full object-cover object-top"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg/90 to-transparent p-5 pt-16">
-              <p className="font-mono text-xs text-muted">📍 Bogotá · Cartagena, Colombia</p>
-            </div>
-          </div>
+        <div className="mx-auto w-full max-w-sm lg:max-w-[460px]">
+          <Orbit src="/hevert-studio.jpg" alt="Hevert Gelis en su estudio" />
+          <p className="mt-2 text-center font-mono text-xs text-muted">📍 Bogotá · Cartagena, Colombia</p>
         </div>
       </div>
 

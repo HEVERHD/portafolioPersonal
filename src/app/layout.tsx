@@ -11,10 +11,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://hevertgelis.vercel.app"),
   title: "Hevert Gelis · Desarrollador Frontend",
   description:
-    "Desarrollador Frontend con React, Next.js y React Native. Producto para Cochez y Cía, Bancolombia, Chedraui y Pepeganga, y sitios para negocios en Colombia.",
+    "Desarrollador Frontend con React, React Native y Next.js, y conocimientos de backend con Node.js. Producto para Cochez y Cía, Bancolombia, Chedraui y Pepeganga, y sistemas para negocios en Colombia.",
   openGraph: {
     title: "Hevert Gelis · Desarrollador Frontend",
-    description: "React · Next.js · React Native. Aplicaciones web y móviles de la idea a producción.",
+    description: "React · React Native · Next.js. Apps web y móviles en producción, de la idea a las tiendas.",
     images: ["/hevert-studio.jpg"],
     type: "website",
   },

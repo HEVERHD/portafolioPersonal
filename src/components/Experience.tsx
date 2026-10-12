@@ -1,7 +1,9 @@
 "use client";
 
-import { jobs, ui } from "@/content";
+import { useEffect, useRef, useState } from "react";
+import { jobs, ui, type Job, type Lang } from "@/content";
 import { useLang } from "@/lib/i18n";
+import { useInView } from "@/lib/useInView";
 import { ArrowUpRight } from "./icons";
 import { Section, Tags } from "./Section";
 
@@ -10,8 +12,123 @@ const MONTHS = {
   en: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 };
 
+/** "YYYY-MM" → absolute month index. */
+const monthIndex = (ym: string) => {
+  const [y, m] = ym.split("-").map(Number);
+  return y * 12 + (m - 1);
+};
+
+/** Current month index, read after mount so the static export never bakes in the build date. */
+function useNowIndex() {
+  const [now, setNow] = useState<number | null>(null);
+  useEffect(() => {
+    const d = new Date();
+    setNow(d.getFullYear() * 12 + d.getMonth());
+  }, []);
+  return now;
+}
+
+/** Inclusive month count, the way LinkedIn shows it (May–Oct = 6 months). */
+const jobMonths = (job: Job, now: number) => (job.end ? monthIndex(job.end) : now) - monthIndex(job.start) + 1;
+
+function formatDuration(months: number, lang: Lang) {
+  const y = Math.floor(months / 12);
+  const m = months % 12;
+  const parts =
+    lang === "es"
+      ? [y && `${y} ${y === 1 ? "año" : "años"}`, m && `${m} ${m === 1 ? "mes" : "meses"}`]
+      : [y && `${y} ${y === 1 ? "yr" : "yrs"}`, m && `${m} ${m === 1 ? "mo" : "mos"}`];
+  return parts.filter(Boolean).join(" ");
+}
+
+/** Time in the role plus a bar showing its share of the whole career, filled on scroll. */
+function JobDuration({ job, now, total }: { job: Job; now: number | null; total: number | null }) {
+  const { lang, t } = useLang();
+  // The observed wrapper must render from the first paint, even before `now` is known.
+  const [ref, inView] = useInView<HTMLDivElement>(0.6);
+  const months = now === null ? null : jobMonths(job, now);
+  const share = months === null || total === null ? 0 : Math.round((months / total) * 100);
+
+  return (
+    <div ref={ref} className="mt-4 max-w-[200px]">
+      <p className="h-5 font-display text-sm font-semibold text-ink">{months !== null && formatDuration(months, lang)}</p>
+      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-line">
+        <div
+          className="h-full origin-left rounded-full bg-gradient-to-r from-accent to-neon transition-transform duration-1000 ease-out motion-reduce:transition-none"
+          style={{ width: `${share}%`, transform: `scaleX(${inView && months !== null ? 1 : 0})` }}
+        />
+      </div>
+      <p className="mt-1.5 h-3 font-mono text-[10px] text-muted">{months !== null && `${share}% ${t(ui.careerOf)}`}</p>
+    </div>
+  );
+}
+
+/** Store link with the store's logo (Simple Icons, in public/tech). */
+function StoreBadge({ href, icon, label, store }: { href: string; icon: string; label: string; store: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2.5 rounded-xl border border-white/15 bg-black px-3.5 py-2 transition-colors hover:border-neon/60"
+    >
+      <span
+        aria-hidden
+        className="block size-5 shrink-0 bg-ink"
+        style={{
+          mask: `url(/tech/${icon}.svg) center / contain no-repeat`,
+          WebkitMask: `url(/tech/${icon}.svg) center / contain no-repeat`,
+        }}
+      />
+      <span className="flex flex-col leading-none">
+        <span className="text-[10px] text-muted">{label}</span>
+        <span className="mt-0.5 text-sm font-semibold text-ink">{store}</span>
+      </span>
+    </a>
+  );
+}
+
+/**
+ * Scroll-linked progress for the vertical timeline: returns refs for the list, the fill bar and
+ * each item, plus which items the fill has reached. The fill height is written straight to the DOM
+ * on scroll; React only re-renders when an item turns on or off.
+ */
+function useTimelineProgress(count: number) {
+  const listRef = useRef<HTMLOListElement>(null);
+  const fillRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const [reached, setReached] = useState<boolean[]>(() => Array(count).fill(false));
+
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+    // Scroll events already fire at most once per frame, so update directly.
+    const update = () => {
+      const rect = list.getBoundingClientRect();
+      // The line "arrives" at whatever crosses 60% of the viewport height
+      const px = Math.max(0, Math.min(rect.height, window.innerHeight * 0.6 - rect.top));
+      if (fillRef.current) fillRef.current.style.height = `${px}px`;
+      const next = itemRefs.current.map((li) => !!li && li.offsetTop + 8 <= px);
+      setReached((prev) => (prev.join() === next.join() ? prev : next));
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  return { listRef, fillRef, itemRefs, reached };
+}
+
 export function Experience() {
   const { lang, t } = useLang();
+  const now = useNowIndex();
+  const { listRef, fillRef, itemRefs, reached } = useTimelineProgress(jobs.length);
+  const careerStart = Math.min(...jobs.map((j) => monthIndex(j.start)));
+  const total = now === null ? null : now - careerStart + 1;
   const fmt = (ym: string) => {
     const [y, m] = ym.split("-").map(Number);
     return `${MONTHS[lang][m - 1]} ${y}`;
@@ -19,18 +136,40 @@ export function Experience() {
 
   return (
     <Section id="experiencia" eyebrow={t(ui.sections.experience)} title={t(ui.sections.experienceTitle)}>
-      <ol className="relative border-l border-line">
+      <ol ref={listRef} className="relative border-l border-line">
+        {/* Progress fill that grows down the line as you scroll, with a glowing head */}
+        <div
+          ref={fillRef}
+          aria-hidden
+          className="pointer-events-none absolute top-0 -left-px h-0 w-0.5 rounded-full bg-gradient-to-b from-accent to-neon shadow-[0_0_10px] shadow-neon/60"
+        >
+          <span className="absolute -bottom-1 left-1/2 size-2 -translate-x-1/2 rounded-full bg-neon shadow-[0_0_12px_2px] shadow-neon" />
+        </div>
         {jobs.map((job, i) => (
-          <li key={job.company} className="relative pb-12 pl-8 last:pb-0 sm:pl-12">
-            <span
-              className={`absolute top-1.5 -left-[5px] size-2.5 rounded-full ring-4 ring-bg ${
-                i === 0 ? "bg-neon shadow-[0_0_12px] shadow-neon" : "bg-muted/60"
-              }`}
-            />
+          <li
+            key={job.company}
+            ref={(el) => {
+              itemRefs.current[i] = el;
+            }}
+            className="relative pb-12 pl-8 last:pb-0 sm:pl-12"
+          >
+            <span className="absolute top-1.5 -left-[5px] grid size-2.5 place-items-center">
+              {i === 0 && reached[i] && (
+                <span className="absolute size-full animate-ping rounded-full bg-neon opacity-60" />
+              )}
+              <span
+                className={`relative size-2.5 rounded-full ring-4 ring-bg transition-all duration-500 ${
+                  reached[i] ? "scale-125 bg-neon shadow-[0_0_14px] shadow-neon" : "bg-muted/60"
+                }`}
+              />
+            </span>
             <div className="grid gap-4 md:grid-cols-[200px_1fr] md:gap-10">
-              <p className="font-mono text-xs text-muted uppercase md:pt-1">
-                {fmt(job.start)} — {job.end ? fmt(job.end) : t(ui.present)}
-              </p>
+              <div>
+                <p className="font-mono text-xs text-muted uppercase md:pt-1">
+                  {fmt(job.start)} — {job.end ? fmt(job.end) : t(ui.present)}
+                </p>
+                <JobDuration job={job} now={now} total={total} />
+              </div>
               <div>
                 <h3 className="font-display text-xl font-semibold">{t(job.role)}</h3>
                 <p className="mt-1 text-sm text-muted">
@@ -57,12 +196,9 @@ export function Experience() {
                 {job.highlights && (
                   <div className={`mt-6 grid gap-3 ${job.highlights.length > 1 ? "lg:grid-cols-2" : ""}`}>
                     {job.highlights.map((h) => (
-                      <a
-                        key={h.url}
-                        href={h.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex flex-col rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-neon/50"
+                      <div
+                        key={h.name}
+                        className="flex flex-col rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-neon/50"
                       >
                         <p className="flex items-center gap-2 font-mono text-[11px] tracking-wider text-neon uppercase">
                           <span className="size-1.5 rounded-full bg-wa" />
@@ -71,11 +207,24 @@ export function Experience() {
                         <p className="mt-1.5 font-display text-lg font-semibold">{h.name}</p>
                         <p className="text-xs text-muted">{t(h.meta)}</p>
                         <p className="mt-2 flex-1 text-sm text-muted">{t(h.text)}</p>
-                        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ink group-hover:text-neon">
-                          {t(h.cta ?? ui.googlePlay)}
-                          <ArrowUpRight className="size-3.5" />
-                        </span>
-                      </a>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {h.android && (
+                            <StoreBadge href={h.android} icon="googleplay" label={t(ui.stores.getItOn)} store="Google Play" />
+                          )}
+                          {h.ios && <StoreBadge href={h.ios} icon="apple" label={t(ui.stores.downloadOn)} store="App Store" />}
+                          {h.url && (
+                            <a
+                              href={h.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-neon"
+                            >
+                              {h.cta && t(h.cta)}
+                              <ArrowUpRight className="size-3.5" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}

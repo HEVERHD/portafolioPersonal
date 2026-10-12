@@ -20,11 +20,13 @@ export const ui = {
     contact: { es: "Contacto", en: "Contact" },
   },
   hero: {
-    status: { es: "Disponible para nuevos proyectos", en: "Available for new projects" },
-    role: { es: "Desarrollador Frontend · React · Next.js", en: "Frontend Developer · React · Next.js" },
+    role: {
+      es: "Desarrollador Frontend · React · React Native · Next.js",
+      en: "Frontend Developer · React · React Native · Next.js",
+    },
     pitch: {
-      es: "Construyo aplicaciones web y móviles para banca, retail y negocios que necesitan vender y agendar en línea. De la idea a producción, y después también.",
-      en: "I build web and mobile apps for banking, retail and businesses that need to sell and take bookings online. From idea to production, and beyond.",
+      es: "Llevo apps de producción al siguiente nivel: migré productos completos a React Native y los publiqué en App Store y Google Play. He trabajado en apps que usan millones de personas, y me muevo con soltura en el backend con Node.js, NestJS y bases de datos.",
+      en: "I take production apps to the next level: I've migrated full products to React Native and shipped them to the App Store and Google Play. I've worked on apps used by millions of people, and I'm comfortable on the backend with Node.js, NestJS and databases.",
     },
     ctaPrimary: { es: "Hablemos por WhatsApp", en: "Message me on WhatsApp" },
     ctaSecondary: { es: "Ver proyectos", en: "See my work" },
@@ -65,12 +67,31 @@ export const ui = {
       en: "Showreel: booking system, online stores and brand sites on phones",
     },
   },
+  work: {
+    details: { es: "Ver detalles", en: "View details" },
+    features: { es: "Qué construí", en: "What I built" },
+    stack: { es: "Stack", en: "Stack" },
+    mobileHint: { es: "Haz scroll dentro del celular para recorrer el sitio", en: "Scroll inside the phone to browse the site" },
+    prev: { es: "Proyecto anterior", en: "Previous project" },
+    next: { es: "Proyecto siguiente", en: "Next project" },
+    prevShort: { es: "Anterior", en: "Previous" },
+    nextShort: { es: "Siguiente", en: "Next" },
+    close: { es: "Cerrar", en: "Close" },
+    privateNote: {
+      es: "Sistema privado del cliente: sin capturas públicas.",
+      en: "Client's private system: no public screenshots.",
+    },
+  },
   visit: { es: "Ver sitio", en: "Visit site" },
   code: { es: "Código", en: "Code" },
   liveAt: { es: "En producción en", en: "Live at" },
   present: { es: "Actualidad", en: "Present" },
+  careerOf: { es: "de mi carrera", en: "of my career" },
   liveApp: { es: "App en producción", en: "Live app" },
-  googlePlay: { es: "Ver en Google Play", en: "View on Google Play" },
+  stores: {
+    getItOn: { es: "Disponible en", en: "Get it on" },
+    downloadOn: { es: "Descárgala en", en: "Download on the" },
+  },
   downloadCv: { es: "Descargar CV", en: "Download CV" },
   whatsappMsg: {
     es: "Hola Hevert, vi tu portafolio y quiero hablar de un proyecto.",
@@ -90,8 +111,8 @@ export type Job = {
   end?: string;
   points: T[];
   tags: string[];
-  /** `cta` defaults to "View on Google Play". */
-  highlights?: { name: string; meta: T; text: T; url: string; cta?: T }[];
+  /** Store links render as Google Play / App Store badges; `url` + `cta` is for web products. */
+  highlights?: { name: string; meta: T; text: T; android?: string; ios?: string; url?: string; cta?: T }[];
 };
 
 export const jobs: Job[] = [
@@ -124,7 +145,8 @@ export const jobs: Job[] = [
           es: "Migré la app completa de Java nativo a React Native, funcionalidad por funcionalidad, y la publiqué en App Store y Google Play.",
           en: "Migrated the entire app from native Java to React Native, feature by feature, and shipped it to the App Store and Google Play.",
         },
-        url: "https://play.google.com/store/apps/details?id=com.hnlappsales",
+        android: "https://play.google.com/store/apps/details?id=com.hnlappsales",
+        ios: "https://apps.apple.com/co/app/aludra-ventas-asistidas/id1525609760",
       },
     ],
   },
@@ -179,7 +201,8 @@ export const jobs: Job[] = [
           es: "Desarrollé el login y el home de la app de supermercado: la puerta de entrada y la primera pantalla que ven millones de usuarios.",
           en: "I built the login and home screens of the supermarket app: the entry point and first screen millions of users see.",
         },
-        url: "https://play.google.com/store/apps/details?id=com.planetmedia.paymentsloyalty.chedraui",
+        android: "https://play.google.com/store/apps/details?id=com.planetmedia.paymentsloyalty.chedraui",
+        ios: "https://apps.apple.com/co/app/chedraui-tienda-en-l%C3%ADnea/id1239945600",
       },
       {
         name: "Pepe Ganga",
@@ -188,7 +211,7 @@ export const jobs: Job[] = [
           es: "Integré los pagos en línea con la pasarela de pagos de la app de compras de la cadena de juguetes y hogar.",
           en: "Integrated online payments through the payment gateway in the toys and home retail chain's shopping app.",
         },
-        url: "https://play.google.com/store/apps/details?id=com.pepeganga",
+        android: "https://play.google.com/store/apps/details?id=com.pepeganga",
       },
     ],
   },
@@ -228,91 +251,165 @@ export const jobs: Job[] = [
   },
 ];
 
-export const booking = {
-  title: { es: "Sistema de reservas online", en: "Online booking system" },
-  text: {
-    es: "Un producto que construí y adapto para cada negocio: el cliente agenda en segundos y recibe la confirmación por WhatsApp. Sin llamadas, sin filas.",
-    en: "A product I built and tailor for each business: customers book in seconds and get confirmed on WhatsApp. No calls, no queues.",
-  },
-  features: [
-    { es: "Agenda en línea por servicio y horario", en: "Online booking by service and time slot" },
-    { es: "Confirmación instantánea por WhatsApp", en: "Instant WhatsApp confirmation" },
-    { es: "Panel de administración para el negocio", en: "Admin panel for the business" },
-    { es: "Instalable como app (PWA)", en: "Installable as an app (PWA)" },
-  ],
-  image: "/projects/barber.jpg",
-  live: [
-    { name: "Frailin Studio", url: "https://frailinbarber.vercel.app" },
-    { name: "Cecy D'Estética & Spa", url: "https://cecy-spa.vercel.app" },
-    { name: "StyleCut (demo)", url: "https://barberia-demo-eta.vercel.app" },
-  ],
-  tags: ["Next.js", "TypeScript", "WhatsApp", "PWA"],
-};
+export type Category = "booking" | "store" | "brand" | "internal";
 
-export type Project = { name: string; kind: T; text: T; image: string; url: string; tags: string[] };
+export const categories: { id: Category | "all"; label: T }[] = [
+  { id: "all", label: { es: "Todos", en: "All" } },
+  { id: "booking", label: { es: "Reservas", en: "Booking" } },
+  { id: "store", label: { es: "E-commerce", en: "E-commerce" } },
+  { id: "brand", label: { es: "Marcas y turismo", en: "Brands & travel" } },
+  { id: "internal", label: { es: "Sistemas internos", en: "Internal systems" } },
+];
+
+export type Project = {
+  id: string;
+  name: string;
+  category: Category;
+  kind: T;
+  summary: T;
+  features: T[];
+  tags: string[];
+  /** 1200px-wide desktop capture in /public/projects. */
+  desktop?: string;
+  /** 390px-wide full-page mobile capture in /public/reel/screens. */
+  mobile?: string;
+  url?: string;
+  /** Extra live deployments, e.g. the booking system running for several businesses. */
+  live?: { name: string; url: string }[];
+  codeUrl?: string;
+  featured?: boolean;
+};
 
 export const projects: Project[] = [
   {
-    name: "CataPlan",
-    kind: { es: "Turismo · Cartagena", en: "Travel · Cartagena" },
-    text: {
-      es: "Experiencias gastronómicas, culturales y de aventura curadas por locales, con carrito de reservas.",
-      en: "Food, culture and adventure experiences curated by locals, with a booking cart.",
+    id: "reservas",
+    name: "Sistema de reservas online",
+    category: "booking",
+    kind: { es: "Producto propio · 3 negocios", en: "My own product · 3 businesses" },
+    summary: {
+      es: "Un producto que construí y adapto para cada negocio: el cliente agenda en segundos y recibe la confirmación por WhatsApp. Sin llamadas, sin filas.",
+      en: "A product I built and tailor for each business: customers book in seconds and get confirmed on WhatsApp. No calls, no queues.",
     },
-    image: "/projects/cataplan.jpg",
-    url: "https://cataplan.vercel.app",
-    tags: ["Next.js", "TypeScript"],
+    features: [
+      { es: "Agenda en línea por servicio, profesional y horario", en: "Online booking by service, staff and time slot" },
+      { es: "Confirmación instantánea por WhatsApp", en: "Instant WhatsApp confirmation" },
+      { es: "Catálogo de servicios con precios y duración", en: "Service catalog with prices and duration" },
+      { es: "Panel de administración para el negocio", en: "Admin panel for the business" },
+      { es: "Instalable como app en el celular (PWA)", en: "Installable as a phone app (PWA)" },
+    ],
+    tags: ["Next.js", "TypeScript", "WhatsApp", "PWA"],
+    desktop: "/projects/barber.jpg",
+    mobile: "/reel/screens/frailin.jpg",
+    url: "https://frailinbarber.vercel.app",
+    live: [
+      { name: "Frailin Studio", url: "https://frailinbarber.vercel.app" },
+      { name: "Cecy D'Estética & Spa", url: "https://cecy-spa.vercel.app" },
+      { name: "StyleCut (demo)", url: "https://barberia-demo-eta.vercel.app" },
+    ],
+    featured: true,
   },
   {
+    id: "masterpiece",
     name: "Masterpiece CTG",
-    kind: { es: "Tienda de ropa", en: "Fashion store" },
-    text: {
-      es: "Catálogo con búsqueda y categorías, pedidos por WhatsApp y panel para que el dueño suba productos.",
-      en: "Searchable catalog, WhatsApp ordering and an admin panel so the owner can manage products.",
+    category: "store",
+    kind: { es: "Tienda de ropa · Cartagena", en: "Fashion store · Cartagena" },
+    summary: {
+      es: "Tienda de ropa y accesorios con más de 100 productos, pedidos por WhatsApp y un panel para que el dueño administre su catálogo.",
+      en: "Clothing and accessories store with 100+ products, WhatsApp ordering and a panel for the owner to manage the catalog.",
     },
-    image: "/projects/masterpiece.jpg",
-    url: "https://masterpiece-brown.vercel.app",
+    features: [
+      { es: "Catálogo con búsqueda, categorías y orden", en: "Catalog with search, categories and sorting" },
+      { es: "Carrusel de productos destacados", en: "Featured products carousel" },
+      { es: "Pedidos y carrito por WhatsApp", en: "Cart and orders via WhatsApp" },
+      { es: "Panel de administración de productos", en: "Product admin panel" },
+    ],
     tags: ["Next.js", "TypeScript", "Admin"],
+    desktop: "/projects/masterpiece.jpg",
+    mobile: "/reel/screens/masterpiece.jpg",
+    url: "https://masterpiece-brown.vercel.app",
   },
   {
+    id: "majestic",
     name: "Majestic Luxe Jewels",
+    category: "store",
     kind: { es: "Joyería de lujo", en: "Luxury jewelry" },
-    text: {
-      es: "E-commerce con pagos en línea vía Wompi o contra entrega y envíos a toda Colombia.",
-      en: "E-commerce with online payments via Wompi or cash on delivery, shipping nationwide.",
+    summary: {
+      es: "E-commerce de joyería artesanal con pagos en línea, envíos a todo Colombia y una estética editorial de lujo.",
+      en: "Handmade jewelry e-commerce with online payments, nationwide shipping and an editorial luxury look.",
     },
-    image: "/projects/majestic.jpg",
-    url: "https://majesticluxejewels.vercel.app",
+    features: [
+      { es: "Pagos en línea con Wompi o contra entrega", en: "Online payments via Wompi or cash on delivery" },
+      { es: "Catálogo por categorías y piezas destacadas", en: "Catalog by category and featured pieces" },
+      { es: "Carrito de compras", en: "Shopping cart" },
+      { es: "Envío nacional con umbral de envío gratis", en: "Nationwide shipping with a free-shipping threshold" },
+    ],
     tags: ["Next.js", "TypeScript", "Wompi"],
+    desktop: "/projects/majestic.jpg",
+    mobile: "/reel/screens/majestic.jpg",
+    url: "https://majesticluxejewels.vercel.app",
   },
   {
-    name: "Jader Tremendo",
-    kind: { es: "Artista · DJ", en: "Artist · DJ" },
-    text: {
-      es: "Sitio oficial de un DJ y productor de champeta: trayectoria, shows y contrataciones.",
-      en: "Official site for a champeta DJ and producer: career, shows and bookings.",
+    id: "cataplan",
+    name: "CataPlan",
+    category: "brand",
+    kind: { es: "Turismo · Cartagena", en: "Travel · Cartagena" },
+    summary: {
+      es: "Experiencias gastronómicas, culturales y de aventura en Cartagena, curadas por locales y reservables desde el celular.",
+      en: "Food, culture and adventure experiences in Cartagena, curated by locals and bookable from your phone.",
     },
-    image: "/projects/jader.jpg",
-    url: "https://jadertremendo.vercel.app",
+    features: [
+      { es: "Catálogo de experiencias con precios y detalles", en: "Experience catalog with prices and details" },
+      { es: "Carrito de reservas", en: "Booking cart" },
+      { es: "Reservas por WhatsApp", en: "Bookings via WhatsApp" },
+    ],
     tags: ["Next.js", "TypeScript"],
+    desktop: "/projects/cataplan.jpg",
+    mobile: "/reel/screens/cataplan.jpg",
+    url: "https://cataplan.vercel.app",
   },
-];
-
-export const internal: { name: string; text: T; url?: string }[] = [
   {
+    id: "jader",
+    name: "Jader Tremendo",
+    category: "brand",
+    kind: { es: "Artista · DJ de champeta", en: "Artist · Champeta DJ" },
+    summary: {
+      es: "Sitio oficial de un DJ y productor de champeta con más de 13 años de trayectoria: identidad visual fuerte, shows y contrataciones.",
+      en: "Official site for a champeta DJ and producer with 13+ years on stage: bold visual identity, shows and bookings.",
+    },
+    features: [
+      { es: "Hero con video e identidad de marca", en: "Video hero with brand identity" },
+      { es: "Álbum, galería y clásicos", en: "Album, gallery and classics" },
+      { es: "Contrataciones directas por WhatsApp", en: "Direct bookings via WhatsApp" },
+    ],
+    tags: ["Next.js", "TypeScript"],
+    desktop: "/projects/jader.jpg",
+    mobile: "/reel/screens/jader.jpg",
+    url: "https://jadertremendo.vercel.app",
+  },
+  {
+    id: "taller-jca",
     name: "Taller JCA",
-    text: {
+    category: "internal",
+    kind: { es: "Sistema de gestión", en: "Management system" },
+    summary: {
       es: "Sistema de gestión para un taller de latonería y pintura.",
       en: "Management system for an auto body and paint shop.",
     },
+    features: [],
+    tags: ["Next.js", "TypeScript"],
   },
   {
+    id: "club-mercancias",
     name: "Club Mercancías",
-    text: {
+    category: "internal",
+    kind: { es: "Plataforma web", en: "Web platform" },
+    summary: {
       es: "Plataforma de clubes de clientes: beneficios, productos, pagos y reportes.",
       en: "Customer club platform: benefits, products, payments and reports.",
     },
-    url: "https://github.com/HEVERHD/cmh",
+    features: [],
+    tags: ["TypeScript"],
+    codeUrl: "https://github.com/HEVERHD/cmh",
   },
 ];
 
@@ -334,8 +431,8 @@ export const services: { title: T; text: T }[] = [
   {
     title: { es: "Frontend para equipos de producto", en: "Frontend for product teams" },
     text: {
-      es: "Me sumo a tu equipo con React, Next.js o React Native: componentes, rendimiento y entregas con Scrum.",
-      en: "I join your team on React, Next.js or React Native: components, performance and Scrum delivery.",
+      es: "Me sumo a tu equipo con React, React Native y Next.js: interfaces, migraciones y rendimiento, hablando el mismo idioma que backend.",
+      en: "I join your team on React, React Native and Next.js: interfaces, migrations and performance, speaking the same language as backend.",
     },
   },
 ];
@@ -349,8 +446,8 @@ export const stack: { group: T; items: string[] }[] = [
 
 export const about = {
   text: {
-    es: "Soy de Cartagena y vivo en Bogotá. Empecé en el bootcamp de Henry en 2020 y desde entonces he trabajado en banca, retail e identidad digital. En paralelo construyo productos para negocios locales, donde veo de primera mano cómo una buena web cambia las ventas de alguien.",
-    en: "I'm from Cartagena and live in Bogotá. I started at Henry's bootcamp in 2020 and have since worked in banking, retail and digital identity. On the side I build products for local businesses, where I see first-hand how a good website changes someone's sales.",
+    es: "Llegué a la programación desde Cartagena, con un bootcamp y muchas ganas. Hoy soy desarrollador frontend con base sólida en backend, y disfruto tanto los retos grandes (migrar una app completa o construir para millones de usuarios) como los pequeños (que la barbería del barrio reciba sus primeras reservas online). Lo que me engancha sigue siendo lo del principio: ver que algo que hice le resuelve el día a alguien.",
+    en: "I came to programming from Cartagena, with a bootcamp and a lot of drive. Today I'm a frontend developer with a solid backend foundation, and I enjoy big challenges (migrating an entire app or building for millions of users) as much as small ones (a neighborhood barbershop getting its first online bookings). What hooks me is still what hooked me at the start: seeing something I built make someone's day easier.",
   },
   education: [
     { title: { es: "Ingeniería de Sistemas", en: "Systems Engineering" }, place: "Universidad de San Buenaventura, Cartagena" },

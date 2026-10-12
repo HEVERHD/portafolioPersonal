@@ -48,6 +48,30 @@ body {
   color: transparent;
 }
 
+/* Hero orbit: one slow revolution per minute; chips counter-rotate to stay upright */
+.orbit-spin,
+.orbit-counter {
+  animation: orbit-spin 60s linear infinite;
+}
+.orbit-counter {
+  animation-direction: reverse;
+}
+.orbit:hover .orbit-spin,
+.orbit:hover .orbit-counter {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit-spin,
+  .orbit-counter {
+    animation: none;
+  }
+}
+@keyframes orbit-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
 /* Fade sections in as they scroll into view, where supported */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
