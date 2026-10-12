@@ -5,14 +5,20 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "reel": "remotion studio"
   },
   "dependencies": {
+    "@remotion/google-fonts": "4.0.530",
+    "@remotion/player": "4.0.530",
+    "@remotion/transitions": "4.0.530",
     "next": "16.3.8",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "remotion": "4.0.530"
   },
   "devDependencies": {
+    "@remotion/cli": "4.0.530",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "24.19.0",
     "@types/react": "19.3.0",
