@@ -89,6 +89,26 @@ export const ui = {
   present: { es: "Actualidad", en: "Present" },
   careerOf: { es: "de mi carrera", en: "of my career" },
   liveApp: { es: "App en producción", en: "Live app" },
+  remote: {
+    eyebrow: { es: "Trabajo remoto", en: "Remote work" },
+    lead: { es: "Zonas horarias distintas, mismo ritmo.", en: "Different time zones, same pace." },
+    title: {
+      es: "Me integro rápido a equipos remotos: entiendo el negocio, me comunico claro y entrego a tiempo, esté donde esté el cliente.",
+      en: "I ramp up fast on remote teams: I understand the business, communicate clearly and deliver on time, wherever the client is.",
+    },
+    // Country cards; hovering or tapping one rotates the globe to its `focus` marker
+    places: [
+      { focus: "bog", country: { es: "Colombia", en: "Colombia" }, detail: { es: "Bogotá · Cartagena · base", en: "Bogotá · Cartagena · home base" } },
+      { focus: "pty", country: { es: "Panamá", en: "Panama" }, detail: { es: "Cochez y Cía · actual", en: "Cochez y Cía · current" } },
+      { focus: "mex", country: { es: "México", en: "Mexico" }, detail: { es: "Chedraui", en: "Chedraui" } },
+    ],
+    // Globe markers and their floating labels; arcs run from "bog" to the rest
+    globe: [
+      { id: "bog", location: [4.711, -74.0721], label: { es: "Bogotá", en: "Bogotá" }, detail: { es: "base", en: "home base" } },
+      { id: "pty", location: [8.9824, -79.5199], label: { es: "Panamá", en: "Panama" }, detail: { es: "Cochez y Cía", en: "Cochez y Cía" } },
+      { id: "mex", location: [19.4326, -99.1332], label: { es: "CDMX", en: "Mexico City" }, detail: { es: "Chedraui", en: "Chedraui" } },
+    ] as { id: string; location: [number, number]; label: T; detail: T }[],
+  },
   stackCard: {
     core: { es: "Mi fuerte", en: "Core" },
     mobile: { es: "Apps en producción en App Store y Google Play", en: "Apps live on the App Store and Google Play" },
