@@ -560,8 +560,8 @@ export const stack: StackGroup[] = [
 
 export const about = {
   text: {
-    es: "Llegué a la programación desde Cartagena, con un bootcamp y muchas ganas. Hoy soy desarrollador frontend con base sólida en backend, y disfruto tanto los retos grandes (migrar una app completa o construir para millones de usuarios) como los pequeños (que la barbería del barrio reciba sus primeras reservas online). Lo que me engancha sigue siendo lo del principio: ver que algo que hice le resuelve el día a alguien.",
-    en: "I came to programming from Cartagena, with a bootcamp and a lot of drive. Today I'm a frontend developer with a solid backend foundation, and I enjoy big challenges (migrating an entire app or building for millions of users) as much as small ones (a neighborhood barbershop getting its first online bookings). What hooks me is still what hooked me at the start: seeing something I built make someone's day easier.",
+    es: "Frontend con 5+ años en producción, React Native en App Store y Google Play, apps con millones de usuarios y base sólida en backend. Lo que mejor hago: tomar un producto que funciona a medias y dejarlo listo para escalar.",
+    en: "Frontend developer with 5+ years in production, React Native apps on the App Store and Google Play, products used by millions and a solid backend foundation. What I do best: take a product that half works and make it ready to scale.",
   },
   education: [
     {
