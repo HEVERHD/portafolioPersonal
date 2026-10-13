@@ -345,9 +345,9 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "WhatsApp", "PWA"],
     desktop: "/projects/barber.jpg",
     mobile: "/reel/screens/frailin.jpg",
-    url: "https://frailinbarber.vercel.app",
+    url: "https://frailinstudio.com",
     live: [
-      { name: "Frailin Studio", url: "https://frailinbarber.vercel.app" },
+      { name: "Frailin Studio", url: "https://frailinstudio.com" },
       { name: "Cecy D'Estética & Spa", url: "https://cecy-spa.vercel.app" },
       { name: "StyleCut (demo)", url: "https://barberia-demo-eta.vercel.app" },
     ],
