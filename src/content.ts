@@ -201,6 +201,10 @@ export const jobs: Job[] = [
         en: "Web and mobile features for Bancolombia, App Morado, Chedraui (Mexico) and Pepeganga.",
       },
       {
+        es: "Tiendas de Chedraui y Pepe Ganga sobre VTEX IO: componentes custom en React y TypeScript, configurables desde el Site Editor.",
+        en: "Chedraui and Pepe Ganga stores on VTEX IO: custom React and TypeScript components, configurable from the Site Editor.",
+      },
+      {
         es: "E-commerce y banca digital sobre APIs REST, con foco en rendimiento y experiencia de usuario.",
         en: "E-commerce and digital banking interfaces on REST APIs, focused on performance and UX.",
       },
@@ -472,6 +476,7 @@ export const stack: StackGroup[] = [
       { name: "React Native", icon: "react", color: "#61DAFB" },
       { name: "Expo", icon: "expo", color: "#FFFFFF" },
       { name: "Next.js", icon: "nextdotjs", color: "#FFFFFF" },
+      { name: "VTEX IO", icon: "vtex", color: "#F71963" },
       { name: "TypeScript", icon: "typescript", color: "#3178C6" },
       { name: "JavaScript", icon: "javascript", color: "#F7DF1E" },
       { name: "Redux", icon: "redux", color: "#9B72E0" },
