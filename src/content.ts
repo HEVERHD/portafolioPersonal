@@ -371,7 +371,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "Admin"],
     desktop: "/projects/masterpiece.jpg",
     mobile: "/reel/screens/masterpiece.jpg",
-    url: "https://masterpiece-brown.vercel.app",
+    url: "https://www.masterpiecectg.com",
   },
   {
     id: "majestic",
