@@ -302,7 +302,7 @@ export const categories: { id: Category | "all"; label: T }[] = [
   { id: "all", label: { es: "Todos", en: "All" } },
   { id: "booking", label: { es: "Reservas", en: "Booking" } },
   { id: "store", label: { es: "E-commerce", en: "E-commerce" } },
-  { id: "brand", label: { es: "Marcas y turismo", en: "Brands & travel" } },
+  { id: "brand", label: { es: "Turismo", en: "Travel" } },
   { id: "internal", label: { es: "Sistemas internos", en: "Internal systems" } },
 ];
 
@@ -394,6 +394,27 @@ export const projects: Project[] = [
     url: "https://majesticluxejewels.vercel.app",
   },
   {
+    id: "dulces",
+    name: "Dulces Detalles ER",
+    category: "store",
+    kind: { es: "Regalos personalizados · Cartagena", en: "Custom gifts · Cartagena" },
+    summary: {
+      es: "Tienda de arreglos y regalos personalizados para cumpleaños, aniversarios y fechas especiales, con pedidos a dos sucursales y catálogo administrable.",
+      en: "Store for custom gift arrangements for birthdays, anniversaries and special dates, with orders to two branches and a manageable catalog.",
+    },
+    features: [
+      { es: "Catálogo con búsqueda y filtros por precio, ocasión y disponibilidad", en: "Catalog with search and filters by price, occasion and availability" },
+      { es: "Carrito y pedidos por WhatsApp a cada sucursal", en: "Cart and WhatsApp orders routed to each branch" },
+      { es: "Sucursales con mapa (Google Maps)", en: "Branch locator with Google Maps" },
+      { es: "Favoritos, modo claro/oscuro y banners administrables", en: "Favorites, light/dark mode and manageable banners" },
+      { es: "Base de datos con Prisma", en: "Database with Prisma" },
+    ],
+    tags: ["Next.js", "TypeScript", "Prisma", "Google Maps"],
+    desktop: "/projects/dulces.jpg",
+    mobile: "/reel/screens/dulces.jpg",
+    url: "https://www.dulcesdetallescartagenaer.com/",
+  },
+  {
     id: "cataplan",
     name: "CataPlan",
     category: "brand",
@@ -411,25 +432,6 @@ export const projects: Project[] = [
     desktop: "/projects/cataplan.jpg",
     mobile: "/reel/screens/cataplan.jpg",
     url: "https://cataplan.vercel.app",
-  },
-  {
-    id: "jader",
-    name: "Jader Tremendo",
-    category: "brand",
-    kind: { es: "Artista · DJ de champeta", en: "Artist · Champeta DJ" },
-    summary: {
-      es: "Sitio oficial de un DJ y productor de champeta con más de 13 años de trayectoria: identidad visual fuerte, shows y contrataciones.",
-      en: "Official site for a champeta DJ and producer with 13+ years on stage: bold visual identity, shows and bookings.",
-    },
-    features: [
-      { es: "Hero con video e identidad de marca", en: "Video hero with brand identity" },
-      { es: "Álbum, galería y clásicos", en: "Album, gallery and classics" },
-      { es: "Contrataciones directas por WhatsApp", en: "Direct bookings via WhatsApp" },
-    ],
-    tags: ["Next.js", "TypeScript"],
-    desktop: "/projects/jader.jpg",
-    mobile: "/reel/screens/jader.jpg",
-    url: "https://jadertremendo.vercel.app",
   },
   {
     id: "taller-jca",
