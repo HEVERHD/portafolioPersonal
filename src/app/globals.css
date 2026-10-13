@@ -72,6 +72,20 @@ body {
   }
 }
 
+/* Specialty cards: a soft light follows the pointer (--x/--y set on pointermove) */
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(360px circle at var(--x, 50%) var(--y, 0%), rgb(124 108 255 / 0.14), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
 /* Stack chips glow in their brand color (--c, set inline) on hover */
 .tech-chip:hover {
   border-color: color-mix(in srgb, var(--c) 55%, transparent);

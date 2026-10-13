@@ -12,7 +12,37 @@ export const Check = ({ className = "size-4" }: P) => (
   </svg>
 );
 
-export const MapPin = ({ className = "size-4" }: P) => (
+const line = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" } as const;
+
+export const IconFrontend = ({ className = "size-7" }: P) => (
+  <svg viewBox="0 0 24 24" {...line} className={className} aria-hidden>
+    <rect x="2.5" y="4" width="19" height="13" rx="2" />
+    <path d="M8 21h8M12 17v4M9.5 8.5 7 10.5l2.5 2M14.5 8.5l2.5 2-2.5 2" />
+  </svg>
+);
+
+export const IconMobile = ({ className = "size-7" }: P) => (
+  <svg viewBox="0 0 24 24" {...line} className={className} aria-hidden>
+    <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" />
+    <path d="M10.5 5h3M12 18.2h.01M9 10.5l3-2 3 2v3.5l-3 2-3-2Z" />
+  </svg>
+);
+
+export const IconStore = ({ className = "size-7" }: P) => (
+  <svg viewBox="0 0 24 24" {...line} className={className} aria-hidden>
+    <path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8Z" />
+    <path d="M9 10V6.5a3 3 0 0 1 6 0V10" />
+  </svg>
+);
+
+export const IconBackend = ({ className = "size-7" }: P) => (
+  <svg viewBox="0 0 24 24" {...line} className={className} aria-hidden>
+    <ellipse cx="12" cy="5.5" rx="7.5" ry="2.8" />
+    <path d="M4.5 5.5v6.5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V5.5M4.5 12v6.5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V12" />
+  </svg>
+);
+
+export const MapPin =({ className = "size-4" }: P) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
     <path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z" />
     <circle cx="12" cy="9.5" r="2.5" />

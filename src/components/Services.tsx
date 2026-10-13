@@ -1,8 +1,9 @@
 "use client";
 
-import type { CSSProperties } from "react";
-import { services, stack, ui, type StackGroup, type Tech } from "@/content";
+import type { CSSProperties, JSX } from "react";
+import { skills, stack, ui, type Skill, type StackGroup, type Tech } from "@/content";
 import { useLang } from "@/lib/i18n";
+import { IconBackend, IconFrontend, IconMobile, IconStore } from "./icons";
 import { Section } from "./Section";
 
 // Bento placement per group (literal class strings so Tailwind generates them).
@@ -93,18 +94,63 @@ function StackCard({ group }: { group: StackGroup }) {
   );
 }
 
+const SKILL_ICONS: Record<Skill["id"], (p: { className?: string }) => JSX.Element> = {
+  frontend: IconFrontend,
+  mobile: IconMobile,
+  ecommerce: IconStore,
+  backend: IconBackend,
+};
+
+/** Specialty card with a soft glow that follows the pointer (see .spotlight in globals.css). */
+function SkillCard({ skill }: { skill: Skill }) {
+  const { t } = useLang();
+  const Icon = SKILL_ICONS[skill.id];
+
+  return (
+    <article
+      onPointerMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty("--x", `${e.clientX - r.left}px`);
+        e.currentTarget.style.setProperty("--y", `${e.clientY - r.top}px`);
+      }}
+      className="spotlight group relative overflow-hidden rounded-3xl border border-line bg-surface p-6 transition-colors hover:border-white/15 sm:p-8"
+    >
+      {/* Fixed corner glow, like a light source behind the card */}
+      <div aria-hidden className="pointer-events-none absolute -top-16 -right-16 size-40 rounded-full bg-accent/25 blur-3xl" />
+
+      <div className="relative flex gap-5 sm:gap-6">
+        <div className="relative shrink-0 self-start">
+          <div aria-hidden className="absolute inset-0 rounded-2xl bg-gradient-to-br from-neon to-accent opacity-40 blur-xl transition-opacity duration-500 group-hover:opacity-70" />
+          <div className="relative grid size-14 place-items-center rounded-2xl bg-gradient-to-br from-neon to-accent text-white shadow-lg transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105 sm:size-16">
+            <Icon className="size-7 sm:size-8" />
+          </div>
+        </div>
+
+        <div className="min-w-0">
+          <h3 className="font-display text-xl font-semibold sm:text-2xl">{t(skill.title)}</h3>
+          <p className="mt-1 font-mono text-xs text-neon">{skill.tech}</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted">{t(skill.text)}</p>
+          <ul className="mt-4 flex flex-wrap gap-1.5">
+            {skill.proof.map((p) => (
+              <li key={p} className="rounded-full border border-line bg-bg/60 px-2.5 py-0.5 text-[11px] text-ink/80">
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export function Services() {
   const { t } = useLang();
 
   return (
     <Section id="servicios" eyebrow={t(ui.sections.services)} title={t(ui.sections.servicesTitle)}>
-      <div className="grid gap-4 md:grid-cols-3">
-        {services.map((s, i) => (
-          <article key={s.title.en} className="rounded-3xl border border-line bg-surface p-7">
-            <span className="font-mono text-sm text-accent">0{i + 1}</span>
-            <h3 className="mt-6 font-display text-xl font-semibold">{t(s.title)}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted">{t(s.text)}</p>
-          </article>
+      <div className="grid gap-4 md:grid-cols-2">
+        {skills.map((s) => (
+          <SkillCard key={s.id} skill={s} />
         ))}
       </div>
 

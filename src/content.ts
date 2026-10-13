@@ -15,7 +15,7 @@ export const ui = {
   nav: {
     experience: { es: "Experiencia", en: "Experience" },
     work: { es: "Proyectos", en: "Work" },
-    services: { es: "Servicios", en: "Services" },
+    services: { es: "Habilidades", en: "Skills" },
     about: { es: "Sobre mí", en: "About" },
     contact: { es: "Contacto", en: "Contact" },
   },
@@ -45,8 +45,8 @@ export const ui = {
     work: { es: "Proyectos freelance", en: "Freelance work" },
     workTitle: { es: "Sitios que hoy están vendiendo", en: "Sites that are selling right now" },
     internal: { es: "Sistemas internos", en: "Internal systems" },
-    services: { es: "Servicios", en: "Services" },
-    servicesTitle: { es: "Qué puedo construir para ti", en: "What I can build for you" },
+    services: { es: "Especialidades", en: "Specialties" },
+    servicesTitle: { es: "Lo que hago mejor", en: "What I do best" },
     stack: { es: "Stack", en: "Stack" },
     about: { es: "Sobre mí", en: "About me" },
     education: { es: "Formación", en: "Education" },
@@ -460,27 +460,49 @@ export const projects: Project[] = [
   },
 ];
 
-export const services: { title: T; text: T }[] = [
+/** Specialty cards: what I do, the core tech, and real work that backs it up. */
+export type Skill = { id: "frontend" | "mobile" | "ecommerce" | "backend"; title: T; tech: string; text: T; proof: string[] };
+
+export const skills: Skill[] = [
   {
-    title: { es: "Sitios y tiendas para negocios", en: "Websites and stores for businesses" },
+    id: "frontend",
+    title: { es: "Desarrollo Frontend", en: "Frontend Development" },
+    tech: "React · Next.js · TypeScript",
     text: {
-      es: "Catálogo, pedidos por WhatsApp o pagos en línea, y un panel para que tú mismo actualices productos.",
-      en: "Catalog, WhatsApp orders or online payments, plus a panel so you can update products yourself.",
+      es: "Interfaces rápidas y escalables, con componentes reutilizables y foco en rendimiento, para productos de banca, retail y SaaS en producción.",
+      en: "Fast, scalable interfaces built from reusable components and tuned for performance, for banking, retail and SaaS products in production.",
     },
+    proof: ["Bancolombia", "SIGEFI", "ADO Technologies"],
   },
   {
-    title: { es: "Reservas y sistemas de gestión", en: "Booking and management systems" },
+    id: "mobile",
+    title: { es: "Apps móviles", en: "Mobile Apps" },
+    tech: "React Native · Expo",
     text: {
-      es: "Agenda de citas, inventario, clientes y reportes. Herramientas internas hechas a la medida de tu operación.",
-      en: "Appointments, inventory, customers and reports. Internal tools shaped around how you work.",
+      es: "Apps iOS y Android integradas con APIs, desde la migración de productos completos hasta su publicación en App Store y Google Play.",
+      en: "iOS and Android apps wired to APIs, from migrating full products to shipping them on the App Store and Google Play.",
     },
+    proof: ["Aludra", "Chedraui · 5M+", "Framework II"],
   },
   {
-    title: { es: "Frontend para equipos de producto", en: "Frontend for product teams" },
+    id: "ecommerce",
+    title: { es: "E-commerce", en: "E-commerce" },
+    tech: "VTEX IO · Next.js · Pagos",
     text: {
-      es: "Me sumo a tu equipo con React, React Native y Next.js: interfaces, migraciones y rendimiento, hablando el mismo idioma que backend.",
-      en: "I join your team on React, React Native and Next.js: interfaces, migrations and performance, speaking the same language as backend.",
+      es: "Tiendas que venden: catálogos, carritos, pasarelas de pago y pedidos por WhatsApp, para cadenas de retail y negocios locales.",
+      en: "Stores that sell: catalogs, carts, payment gateways and WhatsApp orders, for retail chains and local businesses.",
     },
+    proof: ["Pepe Ganga", "Masterpiece", "Dulces Detalles"],
+  },
+  {
+    id: "backend",
+    title: { es: "Backend y APIs", en: "Backend & APIs" },
+    tech: "Node.js · NestJS · GraphQL",
+    text: {
+      es: "APIs REST y GraphQL, bases de datos SQL y NoSQL, caché con Redis y sistemas de gestión a la medida para operar el negocio.",
+      en: "REST and GraphQL APIs, SQL and NoSQL databases, Redis caching and custom management systems to run the business.",
+    },
+    proof: ["Reservas", "Taller JCA", "Club Mercancías"],
   },
 ];
 
