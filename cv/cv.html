@@ -37,7 +37,10 @@
   .edu { margin-bottom: 2mm; break-inside: avoid; }
   .edu b { display: block; font-weight: 600; font-size: 8.8pt; }
   .edu p { color: var(--muted); font-size: 8.4pt; }
-  .job { margin-bottom: 4.2mm; break-inside: avoid; }
+  /* Long roles may continue on the next page, but never split a bullet or the role header */
+  .job { margin-bottom: 4.2mm; }
+  .job li, .job-head, .org { break-inside: avoid; }
+  .job-head { break-after: avoid; }
   .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
   .job-head h3 { font-size: 10.6pt; font-weight: 600; }
   .dates { font-size: 8.2pt; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -71,7 +74,7 @@ const CV = {
     skills: [
       ["Frontend", "React · React Native · Expo · Next.js · VTEX IO · TypeScript · JavaScript · Redux · Zustand · TanStack Query · HTML · CSS"],
       ["Estilos", "Tailwind CSS · MUI · Chakra UI · Bootstrap"],
-      ["Backend y datos", "Node.js · NestJS · Express · APIs REST · PostgreSQL · MySQL · MongoDB · Redis (caché) · TypeORM · Sequelize"],
+      ["Backend y datos", "Node.js · NestJS · Express · APIs REST · GraphQL · PostgreSQL · MySQL · MongoDB · Redis (caché) · TypeORM · Sequelize"],
       ["Móvil", "React Native · Expo · publicación en App Store y Google Play"],
       ["Diseño gráfico", "Adobe Creative Cloud: Photoshop · Illustrator · XD · After Effects · Premiere Pro · InDesign · Figma"],
       ["Herramientas", "Git · GitFlow · GitHub · Docker · Jira · Scrum · Remotion"],
@@ -112,6 +115,7 @@ const CV = {
         points: [
           "<b>Chedraui</b> (México, 5M+ descargas, 4.2★): desarrollé el login y el home de la app de supermercado en línea.",
           "<b>Pepe Ganga</b> (Colombia): integré los pagos en línea con la pasarela de pagos de la app de compras.",
+          "Participé en el desarrollo de <b>Framework II</b>, un framework interno sobre React Native para crear apps a partir de JSON declarativos (server-driven UI) y lanzarlas mucho más rápido.",
           "Tiendas de Chedraui y Pepe Ganga sobre <b>VTEX IO</b>: componentes custom en React y TypeScript, configurables desde el Site Editor.",
           "Funcionalidades web y móviles para <b>Bancolombia</b> y <b>App Morado</b>, consumiendo APIs REST con foco en rendimiento y experiencia de usuario.",
           "Equipos ágiles multipaís con GitFlow, code review y Jira.",
@@ -150,7 +154,7 @@ const CV = {
     skills: [
       ["Frontend", "React · React Native · Expo · Next.js · VTEX IO · TypeScript · JavaScript · Redux · Zustand · TanStack Query · HTML · CSS"],
       ["Styling", "Tailwind CSS · MUI · Chakra UI · Bootstrap"],
-      ["Backend & data", "Node.js · NestJS · Express · REST APIs · PostgreSQL · MySQL · MongoDB · Redis (caching) · TypeORM · Sequelize"],
+      ["Backend & data", "Node.js · NestJS · Express · REST APIs · GraphQL · PostgreSQL · MySQL · MongoDB · Redis (caching) · TypeORM · Sequelize"],
       ["Mobile", "React Native · Expo · App Store and Google Play releases"],
       ["Graphic design", "Adobe Creative Cloud: Photoshop · Illustrator · XD · After Effects · Premiere Pro · InDesign · Figma"],
       ["Tools", "Git · GitFlow · GitHub · Docker · Jira · Scrum · Remotion"],
@@ -191,6 +195,7 @@ const CV = {
         points: [
           "<b>Chedraui</b> (Mexico, 5M+ downloads, 4.2★): built the login and home screens of the online supermarket app.",
           "<b>Pepe Ganga</b> (Colombia): integrated online payments through the shopping app's payment gateway.",
+          "Contributed to <b>Framework II</b>, an internal React Native framework for building apps from declarative JSON (server-driven UI) and launching them much faster.",
           "Chedraui and Pepe Ganga stores on <b>VTEX IO</b>: custom React and TypeScript components, configurable from the Site Editor.",
           "Web and mobile features for <b>Bancolombia</b> and <b>App Morado</b> on REST APIs, focused on performance and UX.",
           "Multi-country agile teams with GitFlow, code review and Jira.",

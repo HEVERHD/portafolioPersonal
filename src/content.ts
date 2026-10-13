@@ -201,6 +201,10 @@ export const jobs: Job[] = [
         en: "Web and mobile features for Bancolombia, App Morado, Chedraui (Mexico) and Pepeganga.",
       },
       {
+        es: "Participé en el desarrollo de Framework II, un framework interno sobre React Native para crear apps a partir de JSON declarativos (server-driven UI) y lanzarlas mucho más rápido.",
+        en: "Contributed to Framework II, an internal React Native framework for building apps from declarative JSON (server-driven UI) and launching them much faster.",
+      },
+      {
         es: "Tiendas de Chedraui y Pepe Ganga sobre VTEX IO: componentes custom en React y TypeScript, configurables desde el Site Editor.",
         en: "Chedraui and Pepe Ganga stores on VTEX IO: custom React and TypeScript components, configurable from the Site Editor.",
       },
@@ -491,6 +495,7 @@ export const stack: StackGroup[] = [
       { name: "Node.js", icon: "nodedotjs", color: "#5FA04E" },
       { name: "NestJS", icon: "nestjs", color: "#E0234E" },
       { name: "Express", icon: "express", color: "#FFFFFF" },
+      { name: "GraphQL", icon: "graphql", color: "#E10098" },
       { name: "PostgreSQL", icon: "postgresql", color: "#6B8CFF" },
       { name: "MySQL", icon: "mysql", color: "#5D9BD1" },
       { name: "MongoDB", icon: "mongodb", color: "#47A248" },
