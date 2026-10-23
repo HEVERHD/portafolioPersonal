@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Caveat, Fraunces, Instrument_Sans } from "next/font/google";
 import { LangProvider } from "@/lib/i18n";
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, structuredData } from "@/lib/site";
 import "./globals.css";
 
 // Editorial identity: serif headlines, plain sans body, a handwritten accent
@@ -9,22 +10,37 @@ const instrument = Instrument_Sans({ subsets: ["latin"], variable: "--font-instr
 const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://hevertgelis.vercel.app"),
-  title: "Hevert Gelis · Desarrollador Frontend",
-  description:
-    "Desarrollador Frontend con React, React Native y Next.js, y conocimientos de backend con Node.js. Producto para Cochez y Cía, Bancolombia, Chedraui y Pepeganga, y sistemas para negocios en Colombia.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  // Both Vercel deployments serve this page; tell search engines which address is the real one
+  alternates: { canonical: "/" },
+  authors: [{ name: "Hevert Gelis", url: SITE_URL }],
+  creator: "Hevert Gelis",
+  // Social image comes from app/opengraph-image.png and app/twitter-image.png
   openGraph: {
-    title: "Hevert Gelis · Desarrollador Frontend",
+    title: SITE_TITLE,
     description: "React · React Native · Next.js. Apps web y móviles en producción, de la idea a las tiendas.",
-    images: ["/hevert-studio.jpg"],
-    type: "website",
+    url: "/",
+    siteName: "Hevert Gelis",
+    locale: "es_CO",
+    type: "profile",
+    firstName: "Hevert",
+    lastName: "Gelis",
   },
+  twitter: { card: "summary_large_image", title: SITE_TITLE },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${fraunces.variable} ${instrument.variable} ${caveat.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          // JSON-LD built from our own static data, not from user input
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData()).replace(/</g, "\\u003c") }}
+        />
         <LangProvider>{children}</LangProvider>
       </body>
     </html>

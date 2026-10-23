@@ -15,15 +15,18 @@ export function Hero() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           {/* Copy */}
           <div className="lg:col-span-7">
-            <p className="flex items-center gap-3 text-sm text-press-muted">
-              <span className="h-px w-8 bg-terra" />
-              {t(ui.hero.eyebrow)}
-            </p>
+            {/* The page's h1 carries the name and role for search engines; the big line below is the visual headline */}
+            <h1 className="flex items-center gap-3 text-sm font-normal text-press-muted">
+              <span className="h-px w-8 shrink-0 bg-terra" />
+              <span>
+                <span className="font-semibold text-press">Hevert Gelis</span> · {t(ui.hero.eyebrow)}
+              </span>
+            </h1>
 
-            <h1 className="mt-6 font-serif text-[2.9rem] leading-[1.02] font-medium tracking-[-0.02em] text-balance sm:text-7xl">
+            <p className="mt-6 font-serif text-[2.9rem] leading-[1.02] font-medium tracking-[-0.02em] text-balance sm:text-7xl">
               {t(ui.hero.headline)}{" "}
               <em className="font-normal text-terra [font-variation-settings:'SOFT'_100]">{t(ui.hero.headlineAccent)}</em>
-            </h1>
+            </p>
 
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-press-muted">{t(ui.hero.pitch)}</p>
 
