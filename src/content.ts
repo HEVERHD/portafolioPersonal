@@ -38,7 +38,6 @@ export const ui = {
     eyebrow: { es: "Desarrollador frontend · React, React Native y Next.js", en: "Frontend developer · React, React Native and Next.js" },
     headline: { es: "Hago apps y tiendas que la gente usa", en: "I build apps and stores people use" },
     headlineAccent: { es: "todos los días.", en: "every single day." },
-    photoCaption: { es: "En mi estudio, entre código y música.", en: "In my studio, between code and music." },
     note: { es: "hola, soy yo", en: "hi, that's me" },
     statsLabel: { es: "En números", en: "By the numbers" },
     brandsLabel: { es: "He construido producto para", en: "I've built product for" },

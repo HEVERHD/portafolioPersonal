@@ -76,10 +76,7 @@ export function Hero() {
                 className="aspect-[4/5] w-full object-cover object-[50%_20%]"
               />
             </div>
-            <figcaption className="mt-3 flex items-baseline justify-between gap-4 text-xs text-press-muted">
-              <span className="font-serif text-sm italic">{t(ui.hero.photoCaption)}</span>
-              <span className="shrink-0">{t(ui.hero.location)}</span>
-            </figcaption>
+            <figcaption className="mt-3 text-right text-xs text-press-muted">{t(ui.hero.location)}</figcaption>
           </figure>
         </div>
 
