@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Caveat, Fraunces, Instrument_Sans } from "next/font/google";
 import { LangProvider } from "@/lib/i18n";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const space = Space_Grotesk({ subsets: ["latin"], variable: "--font-space" });
-const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
+// Editorial identity: serif headlines, plain sans body, a handwritten accent
+const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", style: ["normal", "italic"], axes: ["opsz", "SOFT"] });
+const instrument = Instrument_Sans({ subsets: ["latin"], variable: "--font-instrument" });
+const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://hevertgelis.vercel.app"),
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${inter.variable} ${space.variable} ${jetbrains.variable}`}>
+    <html lang="es" className={`${fraunces.variable} ${instrument.variable} ${caveat.variable}`}>
       <body>
         <LangProvider>{children}</LangProvider>
       </body>

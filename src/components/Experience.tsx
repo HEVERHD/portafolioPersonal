@@ -51,14 +51,14 @@ function JobDuration({ job, now, total }: { job: Job; now: number | null; total:
 
   return (
     <div ref={ref} className="mt-4 max-w-[200px]">
-      <p className="h-5 font-display text-sm font-semibold text-ink">{months !== null && formatDuration(months, lang)}</p>
-      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-line">
+      <p className="h-6 font-display text-lg font-medium text-ink">{months !== null && formatDuration(months, lang)}</p>
+      <div className="mt-2 h-1 overflow-hidden bg-line">
         <div
-          className="h-full origin-left rounded-full bg-gradient-to-r from-accent to-neon transition-transform duration-1000 ease-out motion-reduce:transition-none"
+          className="h-full origin-left bg-accent transition-transform duration-1000 ease-out motion-reduce:transition-none"
           style={{ width: `${share}%`, transform: `scaleX(${inView && months !== null ? 1 : 0})` }}
         />
       </div>
-      <p className="mt-1.5 h-3 font-mono text-[10px] text-muted">{months !== null && `${share}% ${t(ui.careerOf)}`}</p>
+      <p className="mt-1.5 h-3 text-[11px] text-muted">{months !== null && `${share}% ${t(ui.careerOf)}`}</p>
     </div>
   );
 }
@@ -70,19 +70,19 @@ function StoreBadge({ href, icon, label, store }: { href: string; icon: string; 
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2.5 rounded-xl border border-white/15 bg-black px-3.5 py-2 transition-colors hover:border-neon/60"
+      className="inline-flex items-center gap-2.5 rounded-md bg-ink px-3.5 py-2 transition-colors hover:bg-accent"
     >
       <span
         aria-hidden
-        className="block size-5 shrink-0 bg-ink"
+        className="block size-5 shrink-0 bg-paper"
         style={{
           mask: `url(/tech/${icon}.svg) center / contain no-repeat`,
           WebkitMask: `url(/tech/${icon}.svg) center / contain no-repeat`,
         }}
       />
       <span className="flex flex-col leading-none">
-        <span className="text-[10px] text-muted">{label}</span>
-        <span className="mt-0.5 text-sm font-semibold text-ink">{store}</span>
+        <span className="text-[10px] text-paper/70">{label}</span>
+        <span className="mt-0.5 text-sm font-semibold text-paper">{store}</span>
       </span>
     </a>
   );
@@ -137,14 +137,8 @@ export function Experience() {
   return (
     <Section id="experiencia" eyebrow={t(ui.sections.experience)} title={t(ui.sections.experienceTitle)}>
       <ol ref={listRef} className="relative border-l border-line">
-        {/* Progress fill that grows down the line as you scroll, with a glowing head */}
-        <div
-          ref={fillRef}
-          aria-hidden
-          className="pointer-events-none absolute top-0 -left-px h-0 w-0.5 rounded-full bg-gradient-to-b from-accent to-neon shadow-[0_0_10px] shadow-neon/60"
-        >
-          <span className="absolute -bottom-1 left-1/2 size-2 -translate-x-1/2 rounded-full bg-neon shadow-[0_0_12px_2px] shadow-neon" />
-        </div>
+        {/* Progress fill that grows down the line as you scroll */}
+        <div ref={fillRef} aria-hidden className="pointer-events-none absolute top-0 -left-px h-0 w-0.5 bg-accent" />
         {jobs.map((job, i) => (
           <li
             key={job.company}
@@ -153,25 +147,20 @@ export function Experience() {
             }}
             className="relative pb-12 pl-8 last:pb-0 sm:pl-12"
           >
-            <span className="absolute top-1.5 -left-[5px] grid size-2.5 place-items-center">
-              {i === 0 && reached[i] && (
-                <span className="absolute size-full animate-ping rounded-full bg-neon opacity-60" />
-              )}
-              <span
-                className={`relative size-2.5 rounded-full ring-4 ring-bg transition-all duration-500 ${
-                  reached[i] ? "scale-125 bg-neon shadow-[0_0_14px] shadow-neon" : "bg-muted/60"
-                }`}
-              />
-            </span>
+            <span
+              className={`absolute top-2 -left-[5px] size-2.5 ring-4 ring-bg transition-colors duration-500 ${
+                reached[i] ? "bg-accent" : "bg-line"
+              }`}
+            />
             <div className="grid gap-4 md:grid-cols-[200px_1fr] md:gap-10">
               <div>
-                <p className="font-mono text-xs text-muted uppercase md:pt-1">
+                <p className="text-sm text-muted tabular-nums md:pt-1.5">
                   {fmt(job.start)} — {job.end ? fmt(job.end) : t(ui.present)}
                 </p>
                 <JobDuration job={job} now={now} total={total} />
               </div>
               <div>
-                <h3 className="font-display text-xl font-semibold">{t(job.role)}</h3>
+                <h3 className="font-display text-2xl font-medium tracking-tight">{t(job.role)}</h3>
                 <p className="mt-1 text-sm text-muted">
                   <span className="text-ink">{job.company}</span>
                   {job.client && (
@@ -198,13 +187,13 @@ export function Experience() {
                     {job.highlights.map((h) => (
                       <div
                         key={h.name}
-                        className="flex flex-col rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-neon/50"
+                        className="flex flex-col border border-line bg-surface p-5 transition-colors hover:border-ink"
                       >
-                        <p className="flex items-center gap-2 font-mono text-[11px] tracking-wider text-neon uppercase">
+                        <p className="flex items-center gap-2 text-xs font-medium text-muted">
                           <span className="size-1.5 rounded-full bg-wa" />
                           {t(ui.liveApp)}
                         </p>
-                        <p className="mt-1.5 font-display text-lg font-semibold">{h.name}</p>
+                        <p className="mt-1.5 font-display text-xl font-medium">{h.name}</p>
                         <p className="text-xs text-muted">{t(h.meta)}</p>
                         <p className="mt-2 flex-1 text-sm text-muted">{t(h.text)}</p>
                         <div className="mt-4 flex flex-wrap gap-2">
@@ -217,7 +206,7 @@ export function Experience() {
                               href={h.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-neon"
+                              className="inline-flex items-center gap-1.5 border-b border-ink pb-0.5 text-sm font-semibold text-ink hover:border-accent hover:text-accent"
                             >
                               {h.cta && t(h.cta)}
                               <ArrowUpRight className="size-3.5" />

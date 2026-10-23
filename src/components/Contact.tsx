@@ -2,7 +2,8 @@
 
 import { contact, ui } from "@/content";
 import { useLang } from "@/lib/i18n";
-import { Download, GitHub, LinkedIn, Mail, WhatsApp } from "./icons";
+import { ArrowUpRight, Download, GitHub, LinkedIn, Mail, WhatsApp } from "./icons";
+import { Eyebrow } from "./Section";
 
 export function Contact() {
   const { t } = useLang();
@@ -17,43 +18,44 @@ export function Contact() {
 
   return (
     <section id="contacto" className="reveal mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-      <div className="relative overflow-hidden rounded-[2rem] border border-line bg-surface p-6 sm:p-14">
-        <div className="pointer-events-none absolute -top-32 -right-20 size-96 rounded-full bg-accent/25 blur-[100px]" />
-        <p className="relative font-mono text-xs tracking-widest text-neon uppercase">{t(ui.sections.contact)}</p>
-        <h2 className="relative mt-3 max-w-2xl font-display text-3xl font-bold tracking-tight sm:text-5xl">
+      <div className="border-t border-ink pt-5">
+        <Eyebrow>{t(ui.sections.contact)}</Eyebrow>
+        <h2 className="mt-4 max-w-3xl font-display text-4xl leading-[1.05] font-medium tracking-[-0.02em] text-balance sm:text-7xl">
           {t(ui.sections.contactTitle)}
         </h2>
-        <p className="relative mt-4 max-w-xl text-muted">{t(ui.sections.contactText)}</p>
-
-        <ul className="relative mt-10 grid gap-3 sm:grid-cols-2">
-          {channels.map((c) => (
-            <li key={c.label}>
-              <a
-                href={c.href}
-                {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="flex items-center gap-4 rounded-2xl border border-line bg-bg/40 p-4 transition-colors hover:border-accent/60 hover:bg-surface-2"
-              >
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-surface-2 text-neon">{c.icon}</span>
-                <span className="min-w-0">
-                  <span className="block text-xs text-muted">{c.label}</span>
-                  <span className="block truncate font-medium">{c.value}</span>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <a
-          href={t(contact.cv)}
-          download
-          className="relative mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
-        >
-          <Download />
-          {t(ui.downloadCv)}
-        </a>
+        <p className="mt-5 max-w-xl text-lg text-muted">{t(ui.sections.contactText)}</p>
       </div>
 
-      <footer className="mt-12 flex flex-col items-center justify-between gap-2 text-xs text-muted sm:flex-row">
+      {/* Channels as a ruled list, like a colophon */}
+      <ul className="mt-12 border-t border-line">
+        {channels.map((c) => (
+          <li key={c.label}>
+            <a
+              href={c.href}
+              {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 border-b border-line py-5 transition-colors hover:text-accent sm:grid-cols-[160px_1fr_auto]"
+            >
+              <span className="flex items-center gap-3 text-sm text-muted group-hover:text-accent">
+                {c.icon}
+                {c.label}
+              </span>
+              <span className="truncate font-display text-xl font-medium sm:text-2xl">{c.value}</span>
+              <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href={t(contact.cv)}
+        download
+        className="mt-8 inline-flex items-center gap-2 bg-ink px-5 py-3.5 text-sm font-semibold text-bg transition-colors hover:bg-accent"
+      >
+        <Download />
+        {t(ui.downloadCv)}
+      </a>
+
+      <footer className="mt-20 flex flex-col justify-between gap-2 border-t border-line pt-6 text-xs text-muted sm:flex-row">
         <p>© {new Date().getFullYear()} Hevert Gelis</p>
         <p>{t(ui.footer)}</p>
       </footer>

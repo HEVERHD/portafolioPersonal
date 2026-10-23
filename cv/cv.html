@@ -136,7 +136,7 @@ const CV = {
     projects: [
       ["Sistema de reservas online", "Producto propio en producción para 3 negocios: agenda por servicio y horario, confirmación por WhatsApp, panel de administración y PWA.", "frailinstudio.com"],
       ["Masterpiece CTG", "Tienda de ropa con más de 100 productos, pedidos por WhatsApp y panel de administración de catálogo.", "www.masterpiecectg.com"],
-      ["Majestic Luxe Jewels", "E-commerce de joyería con pagos en línea vía Wompi y envíos nacionales.", "majesticluxejewels.vercel.app"],
+      ["Majestic Luxe Jewels", "E-commerce de joyería con pagos en línea vía Wompi y envíos nacionales.", "www.majesticluxejewels.com"],
       ["Dulces Detalles ER", "Tienda de regalos personalizados con catálogo administrable, pedidos por WhatsApp a dos sucursales y mapa; Next.js + Prisma.", "www.dulcesdetallescartagenaer.com"],
       ["CataPlan", "Experiencias turísticas en Cartagena con carrito y reservas por WhatsApp.", "cataplan.vercel.app"],
       ["Sistemas de gestión", "Taller JCA (taller de latonería y pintura) y Club Mercancías (clubes de clientes, beneficios, pagos y reportes).", ""],
@@ -217,7 +217,7 @@ const CV = {
     projects: [
       ["Online booking system", "My own product, live for 3 businesses: booking by service and time slot, WhatsApp confirmation, admin panel and PWA.", "frailinstudio.com"],
       ["Masterpiece CTG", "Fashion store with 100+ products, WhatsApp ordering and a catalog admin panel.", "www.masterpiecectg.com"],
-      ["Majestic Luxe Jewels", "Jewelry e-commerce with online payments via Wompi and nationwide shipping.", "majesticluxejewels.vercel.app"],
+      ["Majestic Luxe Jewels", "Jewelry e-commerce with online payments via Wompi and nationwide shipping.", "www.majesticluxejewels.com"],
       ["Dulces Detalles ER", "Custom gift store with a manageable catalog, WhatsApp orders to two branches and a map; Next.js + Prisma.", "www.dulcesdetallescartagenaer.com"],
       ["CataPlan", "Travel experiences in Cartagena with a cart and WhatsApp bookings.", "cataplan.vercel.app"],
       ["Management systems", "Taller JCA (auto body shop) and Club Mercancías (customer clubs, benefits, payments and reports).", ""],
@@ -228,8 +228,43 @@ const CV = {
   },
 };
 
-const lang = new URLSearchParams(location.search).get("lang") === "en" ? "en" : "es";
-const c = CV[lang];
+// Versiones adaptadas a una vacante: ?lang=es&variant=vtex reemplaza solo los campos indicados
+const VARIANTS = {
+  vtex: {
+    es: {
+      role: "Desarrollador Frontend · React · Next.js · VTEX IO",
+      summary:
+        "Desarrollador frontend con más de 5 años llevando aplicaciones web y móviles a producción, con más de 1 año en e-commerce sobre <b>VTEX IO</b> para retailers como <b>Chedraui</b> y <b>Pepe Ganga</b>: componentes custom, checkout, regionalización y optimización de rendimiento. Trabajo con React, TypeScript, Next.js y GraphQL, tengo base en backend con Node.js y NestJS, he publicado apps en App Store y Google Play y construyo tiendas online propias para negocios.",
+      skills: [["Frontend", "React · Next.js · VTEX IO · TypeScript · JavaScript · GraphQL · React Native · Expo · Redux · Zustand · TanStack Query · HTML · CSS"]],
+      jobs: {
+        2: {
+          points: [
+            "Tiendas e-commerce de <b>Chedraui</b> y <b>Pepe Ganga</b> sobre <b>VTEX IO Store Framework</b>: componentes custom en React y TypeScript configurables desde el Site Editor, y maquetación responsive de home, PLP y PDP.",
+            "<b>Regionalización</b> por tienda o región, con precios y disponibilidad según la ubicación del cliente.",
+            "Personalizaciones de <b>checkout</b> (checkout-ui-custom) y consumo de APIs VTEX (Catalog, Intelligent Search, Checkout/OrderForm) y GraphQL.",
+            "Contenido gestionado desde <b>Headless CMS</b> y optimización de rendimiento y <b>Core Web Vitals</b>.",
+            "<b>Chedraui</b> (México, 5M+ descargas, 4.2★): desarrollé el login y el home de la app de supermercado en línea.",
+            "<b>Pepe Ganga</b> (Colombia): integré los pagos en línea con la pasarela de pagos de la app de compras.",
+            "Participé en <b>Framework II</b>, un framework interno sobre React Native para crear apps a partir de JSON declarativos (server-driven UI).",
+            "Funcionalidades web y móviles para <b>Bancolombia</b> y <b>App Morado</b>, consumiendo APIs REST con foco en rendimiento y experiencia de usuario.",
+            "Equipos ágiles multipaís con GitFlow, code review y Jira.",
+          ],
+        },
+      },
+    },
+  },
+};
+
+const params = new URLSearchParams(location.search);
+const lang = params.get("lang") === "en" ? "en" : "es";
+const c = structuredClone(CV[lang]);
+const v = VARIANTS[params.get("variant")]?.[lang];
+if (v) {
+  if (v.role) c.role = v.role;
+  if (v.summary) c.summary = v.summary;
+  for (const [k, val] of v.skills ?? []) c.skills.find((s) => s[0] === k)[1] = val;
+  for (const [i, job] of Object.entries(v.jobs ?? {})) Object.assign(c.jobs[i], job);
+}
 const L = c.labels;
 document.documentElement.lang = c.htmlLang;
 if (!c.photo) document.body.classList.add("no-photo");

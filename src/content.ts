@@ -35,6 +35,12 @@ export const ui = {
       { value: "5M+", label: { es: "descargas en apps donde he trabajado", en: "downloads on apps I've worked on" } },
       { value: "10+", label: { es: "negocios en línea", en: "businesses online" } },
     ],
+    eyebrow: { es: "Desarrollador frontend · React, React Native y Next.js", en: "Frontend developer · React, React Native and Next.js" },
+    headline: { es: "Hago apps y tiendas que la gente usa", en: "I build apps and stores people use" },
+    headlineAccent: { es: "todos los días.", en: "every single day." },
+    photoCaption: { es: "En mi estudio, entre código y música.", en: "In my studio, between code and music." },
+    note: { es: "hola, soy yo", en: "hi, that's me" },
+    statsLabel: { es: "En números", en: "By the numbers" },
     brandsLabel: { es: "He construido producto para", en: "I've built product for" },
     location: { es: "Bogotá · Cartagena · Panamá (remoto)", en: "Bogotá · Cartagena · Panama (remote)" },
   },
@@ -59,10 +65,6 @@ export const ui = {
     },
   },
   showreel: {
-    caption: {
-      es: "Animado con Remotion y React, corriendo en vivo en tu navegador",
-      en: "Animated with Remotion and React, running live in your browser",
-    },
     alt: {
       es: "Showreel: sistema de reservas, tiendas online y sitios de marca en celulares",
       en: "Showreel: booking system, online stores and brand sites on phones",
@@ -111,11 +113,61 @@ export const ui = {
   },
   stackCard: {
     core: { es: "Mi fuerte", en: "Core" },
+    proof: { es: "Lo apliqué en:", en: "Used it on:" },
     mobile: { es: "Apps en producción en App Store y Google Play", en: "Apps live on the App Store and Google Play" },
   },
   stores: {
     getItOn: { es: "Disponible en", en: "Get it on" },
     downloadOn: { es: "Descárgala en", en: "Download on the" },
+  },
+  // Recruiter quick view: the whole profile on one screen
+  quick: {
+    trigger: { es: "Vista rápida", en: "Quick view" },
+    title: { es: "Hevert Gelis en 30 segundos", en: "Hevert Gelis in 30 seconds" },
+    rows: {
+      role: { es: "Rol", en: "Role" },
+      experience: { es: "Experiencia", en: "Experience" },
+      clients: { es: "Clientes", en: "Clients" },
+      stack: { es: "Stack principal", en: "Core stack" },
+      location: { es: "Ubicación", en: "Location" },
+      languages: { es: "Idiomas", en: "Languages" },
+      availability: { es: "Disponibilidad", en: "Availability" },
+    },
+    role: { es: "Desarrollador Frontend (web y móvil)", en: "Frontend Developer (web and mobile)" },
+    experience: {
+      es: "5+ años en producción · apps en App Store y Google Play · e-commerce en VTEX",
+      en: "5+ years shipping · apps on the App Store and Google Play · VTEX e-commerce",
+    },
+    location: { es: "Bogotá, Colombia · GMT-5 · trabajo remoto", en: "Bogotá, Colombia · GMT-5 · remote" },
+    availability: { es: "Abierto a proyectos freelance y remotos", en: "Open to freelance and remote projects" },
+  },
+  // Lighthouse scores measured by scripts/lighthouse.mjs (PageSpeed Insights, mobile)
+  lighthouse: {
+    performance: { es: "Rendimiento", en: "Performance" },
+    accessibility: { es: "Accesibilidad", en: "Accessibility" },
+    seo: { es: "SEO", en: "SEO" },
+    measured: { es: "Lighthouse móvil · medido el", en: "Mobile Lighthouse · measured on" },
+    report: { es: "Ver informe", en: "See report" },
+  },
+  // "Right now" line in the hero
+  now: {
+    time: { es: "en Bogotá", en: "in Bogotá" },
+    lastCommit: { es: "Último commit:", en: "Last commit:" },
+  },
+  // Interactive replica of the FastStore demo inside its project dialog
+  demo: {
+    title: { es: "Pruébalo aquí", en: "Try it here" },
+    note: {
+      es: "Réplica de la interfaz con datos de ejemplo. La tienda real corre sobre VTEX FastStore.",
+      en: "Interface replica with sample data. The real store runs on VTEX FastStore.",
+    },
+    region: { es: "Entregar en", en: "Deliver to" },
+    currency: { es: "Moneda", en: "Currency" },
+    pickRegion: { es: "Elige tu ciudad", en: "Pick your city" },
+    outOfStock: { es: "Agotado en esta región", en: "Out of stock in this region" },
+    delivery: { es: "Entrega en", en: "Delivery in" },
+    days: { es: "días", en: "days" },
+    save: { es: "Ahorras", en: "You save" },
   },
   downloadCv: { es: "Descargar CV", en: "Download CV" },
   whatsappMsg: {
@@ -323,6 +375,8 @@ export type Project = {
   live?: { name: string; url: string }[];
   codeUrl?: string;
   featured?: boolean;
+  /** Interactive replica shown inside the project dialog. */
+  demo?: "faststore";
 };
 
 export const projects: Project[] = [
@@ -352,6 +406,28 @@ export const projects: Project[] = [
       { name: "StyleCut (demo)", url: "https://barberia-demo-eta.vercel.app" },
     ],
     featured: true,
+  },
+  {
+    id: "faststore",
+    name: "FastStore Demo",
+    category: "store",
+    kind: { es: "VTEX FastStore · Demo técnica", en: "VTEX FastStore · Tech demo" },
+    summary: {
+      es: "Tienda headless sobre VTEX FastStore con Next.js y GraphQL: regionalizador por código postal, selector de moneda y una tarjeta de producto propia, todo en español.",
+      en: "Headless store on VTEX FastStore with Next.js and GraphQL: postal-code regionalization, a currency switcher and a custom product card, fully in Spanish.",
+    },
+    features: [
+      { es: "Regionalizador que valida la sesión de VTEX por código postal", en: "Regionalizer that validates the VTEX session by postal code" },
+      { es: "Selector de moneda: USD, BRL, COP y MXN", en: "Currency switcher: USD, BRL, COP and MXN" },
+      { es: "Override del ProductCard con descuento y ahorro", en: "ProductCard override with discount and savings" },
+      { es: "Tema propio con design tokens en Sass", en: "Custom theme with Sass design tokens" },
+      { es: "Contenido del Headless CMS traducido al español", en: "Headless CMS content translated to Spanish" },
+    ],
+    tags: ["VTEX FastStore", "Next.js", "TypeScript", "GraphQL", "Sass"],
+    desktop: "/projects/faststore.jpg",
+    mobile: "/reel/screens/faststore.jpg",
+    codeUrl: "https://github.com/HEVERHD/faststore-demo",
+    demo: "faststore",
   },
   {
     id: "masterpiece",
@@ -391,7 +467,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "Wompi"],
     desktop: "/projects/majestic.jpg",
     mobile: "/reel/screens/majestic.jpg",
-    url: "https://majesticluxejewels.vercel.app",
+    url: "https://www.majesticluxejewels.com",
   },
   {
     id: "dulces",

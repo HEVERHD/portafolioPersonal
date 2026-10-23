@@ -19,8 +19,9 @@ type Props = {
   className?: string;
 };
 
-const NEON: [number, number, number] = [0.24, 0.78, 1];
-const DIM: [number, number, number] = [0.32, 0.36, 0.6];
+// Terracotta markers on a paper-colored globe, matching the site palette
+const NEON: [number, number, number] = [0.77, 0.28, 0.11];
+const DIM: [number, number, number] = [0.72, 0.68, 0.6];
 const CENTER_LNG = -80;
 const SWAY = 0.55;
 const TAU = Math.PI * 2;
@@ -76,14 +77,14 @@ export function Globe({ places, homeId, focusId, className = "" }: Props) {
       height: size * dpr,
       phi,
       theta: 0.28,
-      dark: 1,
-      diffuse: 1.4,
+      dark: 0,
+      diffuse: 1.2,
       mapSamples: 16000,
-      mapBrightness: 5,
-      mapBaseBrightness: 0.02,
-      baseColor: [0.16, 0.18, 0.42],
+      mapBrightness: 2,
+      mapBaseBrightness: 0,
+      baseColor: [0.91, 0.89, 0.84],
       markerColor: NEON,
-      glowColor: [0.25, 0.22, 0.7],
+      glowColor: [0.95, 0.94, 0.9],
       ...markersAndArcs(places, homeId, focusRef.current),
       arcColor: NEON,
       arcWidth: 0.6,
@@ -193,8 +194,8 @@ export function Globe({ places, homeId, focusId, className = "" }: Props) {
         <div
           key={p.id}
           aria-hidden
-          className={`globe-label globe-label-${p.id} pointer-events-none absolute -translate-x-1/2 -translate-y-2 rounded-full border px-2.5 py-1 text-[11px] leading-none whitespace-nowrap backdrop-blur transition-[opacity,filter,background-color,border-color] duration-300 ${
-            p.id === focusId ? "border-neon bg-neon/20 text-ink" : "border-white/15 bg-bg/70 text-ink/90"
+          className={`globe-label globe-label-${p.id} pointer-events-none absolute -translate-x-1/2 -translate-y-2 border px-2.5 py-1 text-[11px] leading-none whitespace-nowrap transition-[opacity,filter,background-color,border-color] duration-300 ${
+            p.id === focusId ? "border-accent bg-paper text-ink" : "border-line bg-paper/90 text-ink/90"
           }`}
         >
           <span className="font-semibold">{p.label}</span>

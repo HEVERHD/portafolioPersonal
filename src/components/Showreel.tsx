@@ -32,25 +32,24 @@ export function Showreel() {
 
   return (
     <section className="reveal mx-auto max-w-6xl px-4 sm:px-6">
-      <div ref={ref} className="relative overflow-hidden rounded-[2rem] border border-line bg-surface shadow-2xl shadow-accent/10">
-        {/* Poster keeps the layout stable and is the reduced-motion fallback */}
-        <img
-          src="/reel/poster.jpg"
-          alt={t(ui.showreel.alt)}
-          width={1280}
-          height={720}
-          className="aspect-video w-full object-cover"
-        />
-        {mount && (
-          <div className="absolute inset-0">
-            <ReelPlayer />
-          </div>
-        )}
+      {/* Printed like the hero portrait: a thin frame on paper */}
+      <div className="border border-line bg-surface-2 p-2.5">
+        <div ref={ref} className="relative overflow-hidden">
+          {/* Poster keeps the layout stable and is the reduced-motion fallback */}
+          <img
+            src="/reel/poster.jpg"
+            alt={t(ui.showreel.alt)}
+            width={1280}
+            height={720}
+            className="aspect-video w-full object-cover"
+          />
+          {mount && (
+            <div className="absolute inset-0">
+              <ReelPlayer />
+            </div>
+          )}
+        </div>
       </div>
-      <p className="mt-3 flex items-center justify-center gap-2 font-mono text-xs text-muted">
-        <span className="size-1.5 rounded-full bg-neon" />
-        {t(ui.showreel.caption)}
-      </p>
     </section>
   );
 }

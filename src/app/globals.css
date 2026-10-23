@@ -1,19 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #07070c;
-  --color-surface: #0e0e17;
-  --color-surface-2: #151522;
-  --color-line: rgb(255 255 255 / 0.08);
-  --color-ink: #ededf3;
-  --color-muted: #9b9bb2;
-  --color-accent: #7c6cff;
-  --color-neon: #3ec7ff;
+  /* Editorial identity: warm paper, near-black ink and one terracotta accent */
+  --color-paper: #f3efe6;
+  --color-paper-2: #e9e3d6;
+  --color-press: #1c1a16;
+  --color-press-muted: #6b665c;
+  --color-rule: #d6cfbf;
+  --color-terra: #c4471d;
+
+  /* Semantic names used across the components, mapped to the same palette */
+  --color-bg: var(--color-paper);
+  --color-surface: #f8f5ee;
+  --color-surface-2: var(--color-paper-2);
+  --color-line: var(--color-rule);
+  --color-ink: var(--color-press);
+  --color-muted: var(--color-press-muted);
+  --color-accent: var(--color-terra);
+  --color-neon: var(--color-terra);
   --color-wa: #25d366;
 
-  --font-display: var(--font-space), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-body: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-hand: var(--font-caveat), cursive;
+
+  --font-display: var(--font-serif);
+  --font-sans: var(--font-body);
+  --font-mono: ui-monospace, monospace;
 }
 
 html {
@@ -33,96 +46,10 @@ body {
   color: white;
 }
 
-.grid-bg {
-  background-image:
-    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
-}
-
-.text-gradient {
-  background: linear-gradient(100deg, var(--color-ink) 20%, var(--color-neon) 60%, var(--color-accent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Hero orbit: one slow revolution per minute; chips counter-rotate to stay upright */
-.orbit-spin,
-.orbit-counter {
-  animation: orbit-spin 60s linear infinite;
-}
-.orbit-counter {
-  animation-direction: reverse;
-}
-.orbit:hover .orbit-spin,
-.orbit:hover .orbit-counter {
-  animation-play-state: paused;
-}
-@media (prefers-reduced-motion: reduce) {
-  .orbit-spin,
-  .orbit-counter {
-    animation: none;
-  }
-}
-@keyframes orbit-spin {
-  to {
-    rotate: 360deg;
-  }
-}
-
-/* Specialty cards: a soft light follows the pointer (--x/--y set on pointermove) */
-.spotlight::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(360px circle at var(--x, 50%) var(--y, 0%), rgb(124 108 255 / 0.14), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.spotlight:hover::before {
-  opacity: 1;
-}
-
-/* Stack chips glow in their brand color (--c, set inline) on hover */
+/* Stack chips pick up their brand color as an underline on hover (--c, set inline) */
 .tech-chip:hover {
-  border-color: color-mix(in srgb, var(--c) 55%, transparent);
-  box-shadow: 0 0 22px -6px var(--c);
+  border-color: var(--c);
   color: var(--color-ink);
-}
-
-/* Client logo marquee: slides one full copy of the list, so the loop is seamless */
-.marquee {
-  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-}
-.marquee-track {
-  animation: marquee 32s linear infinite;
-}
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
-}
-@keyframes marquee {
-  to {
-    translate: -50% 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    mask-image: none;
-  }
-  .marquee-track {
-    animation: none;
-    width: auto;
-  }
-  .marquee-track > ul {
-    flex-wrap: wrap;
-    row-gap: 1.5rem;
-  }
-  .marquee-dup {
-    display: none;
-  }
 }
 
 /* Fade sections in as they scroll into view, where supported */

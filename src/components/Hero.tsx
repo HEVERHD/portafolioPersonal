@@ -2,93 +2,116 @@
 
 import { brands, contact, ui } from "@/content";
 import { useLang } from "@/lib/i18n";
-import { Download, MapPin, WhatsApp } from "./icons";
-import { Orbit } from "./Orbit";
+import { ArrowUpRight, Download, WhatsApp } from "./icons";
+import { NowLine } from "./NowLine";
 
 export function Hero() {
   const { t } = useLang();
   const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(t(ui.whatsappMsg))}`;
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 sm:pt-36">
-      <div className="grid-bg pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute -top-40 right-0 size-[520px] rounded-full bg-accent/20 blur-[120px]" />
-      <div className="pointer-events-none absolute top-40 -left-40 size-[420px] rounded-full bg-neon/10 blur-[120px]" />
+    <section className="bg-paper font-body text-press">
+      <div className="mx-auto max-w-6xl px-4 pt-28 pb-14 sm:px-6 sm:pt-36">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+          {/* Copy */}
+          <div className="lg:col-span-7">
+            <p className="flex items-center gap-3 text-sm text-press-muted">
+              <span className="h-px w-8 bg-terra" />
+              {t(ui.hero.eyebrow)}
+            </p>
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.25fr_1fr]">
-        <div>
-          <h1 className="font-display text-5xl leading-[0.95] font-bold tracking-tight sm:text-7xl">
-            Hevert <span className="text-gradient">Gelis</span>
-          </h1>
-          <p className="mt-4 font-mono text-sm text-balance text-neon sm:text-base">{t(ui.hero.role)}</p>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{t(ui.hero.pitch)}</p>
+            <h1 className="mt-6 font-serif text-[2.9rem] leading-[1.02] font-medium tracking-[-0.02em] text-balance sm:text-7xl">
+              {t(ui.hero.headline)}{" "}
+              <em className="font-normal text-terra [font-variation-settings:'SOFT'_100]">{t(ui.hero.headlineAccent)}</em>
+            </h1>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={wa}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
-            >
-              <WhatsApp className="size-4" />
-              {t(ui.hero.ctaPrimary)}
-            </a>
-            <a
-              href="#proyectos"
-              className="inline-flex items-center rounded-full border border-line px-5 py-3 text-sm font-semibold transition-colors hover:bg-surface-2"
-            >
-              {t(ui.hero.ctaSecondary)}
-            </a>
-            <a
-              href={t(contact.cv)}
-              download
-              className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-semibold transition-colors hover:bg-surface-2"
-            >
-              <Download />
-              {t(ui.downloadCv)}
-            </a>
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-press-muted">{t(ui.hero.pitch)}</p>
+
+            <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <a
+                href={wa}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-press px-5 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-terra"
+              >
+                <WhatsApp className="size-4" />
+                {t(ui.hero.ctaPrimary)}
+              </a>
+              <a
+                href="#proyectos"
+                className="inline-flex items-center gap-1 border-b border-press pb-0.5 text-sm font-semibold transition-colors hover:border-terra hover:text-terra"
+              >
+                {t(ui.hero.ctaSecondary)} <ArrowUpRight className="size-3.5" />
+              </a>
+              <a
+                href={t(contact.cv)}
+                download
+                className="inline-flex items-center gap-1.5 border-b border-press pb-0.5 text-sm font-semibold transition-colors hover:border-terra hover:text-terra"
+              >
+                <Download className="size-3.5" />
+                {t(ui.downloadCv)}
+              </a>
+            </div>
+
+            <div className="mt-8">
+              <NowLine />
+            </div>
           </div>
 
-          <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-line pt-6">
-            {ui.hero.stats.map((s) => (
-              <div key={s.value + s.label.en}>
-                <dt className="font-display text-3xl font-bold">{s.value}</dt>
-                <dd className="mt-1 text-xs text-muted">{t(s.label)}</dd>
-              </div>
-            ))}
-          </dl>
+          {/* Portrait, printed like a magazine photo with a handwritten note */}
+          <figure className="relative mx-auto w-full max-w-sm lg:col-span-5 lg:max-w-none">
+            <div className="pointer-events-none absolute -top-9 -left-3 z-10 flex items-end gap-1 text-terra sm:-left-12">
+              <span className="font-hand text-2xl leading-none -rotate-6">{t(ui.hero.note)}</span>
+              <svg viewBox="0 0 60 44" className="mb-[-14px] h-10 w-14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+                <path d="M3 6c18 0 34 8 44 28" />
+                <path d="M38 30l9 5 2-10" />
+              </svg>
+            </div>
+            <div className="border border-rule bg-paper-2 p-2.5 shadow-[0_1px_0_#d6cfbf]">
+              <img
+                src="/hevert-studio.jpg"
+                alt="Hevert Gelis en su estudio"
+                width={900}
+                height={1350}
+                className="aspect-[4/5] w-full object-cover object-[50%_20%]"
+              />
+            </div>
+            <figcaption className="mt-3 flex items-baseline justify-between gap-4 text-xs text-press-muted">
+              <span className="font-serif text-sm italic">{t(ui.hero.photoCaption)}</span>
+              <span className="shrink-0">{t(ui.hero.location)}</span>
+            </figcaption>
+          </figure>
         </div>
 
-        <div className="mx-auto w-full max-w-sm lg:max-w-[460px]">
-          <Orbit src="/hevert-studio.jpg" alt="Hevert Gelis en su estudio" />
-          <p className="mt-2 flex items-center justify-center gap-1.5 font-mono text-xs text-muted">
-            <MapPin className="size-3.5 shrink-0 text-neon" />
-            {t(ui.hero.location)}
-          </p>
-        </div>
-      </div>
+        {/* Index of numbers, set like a table of contents */}
+        <dl className="mt-16 grid border-t border-press sm:grid-cols-3">
+          {ui.hero.stats.map((s, i) => (
+            <div
+              key={s.value + s.label.en}
+              className={`flex items-baseline gap-4 border-b border-rule py-5 sm:border-b-0 sm:py-6 ${i ? "sm:border-l sm:pl-6" : ""}`}
+            >
+              <dt className="font-serif text-4xl font-medium tracking-tight">{s.value}</dt>
+              <dd className="text-sm leading-snug text-press-muted">{t(s.label)}</dd>
+            </div>
+          ))}
+        </dl>
 
-      <div className="relative mx-auto mt-16 max-w-6xl px-4 sm:px-6">
-        <p className="font-mono text-xs tracking-widest text-muted uppercase">{t(ui.hero.brandsLabel)}</p>
-        {/* Infinite marquee: the list is rendered twice and the track slides by exactly one copy */}
-        <div className="marquee mt-6 overflow-hidden">
-          <div className="marquee-track flex w-max items-center">
-            {[0, 1].map((copy) => (
-              <ul key={copy} className={`flex shrink-0 items-center ${copy ? "marquee-dup" : ""}`} aria-hidden={copy ? true : undefined}>
-                {brands.map((b) => (
-                  <li key={b.name} className="px-6 sm:px-8">
-                    <img
-                      src={b.logo}
-                      alt={copy ? "" : b.name}
-                      title={b.name}
-                      style={{ height: `calc(clamp(26px, 2.6vw, 36px) * ${b.scale})` }}
-                      className="w-auto max-w-none opacity-50 transition-opacity duration-300 hover:opacity-100"
-                    />
-                  </li>
-                ))}
-              </ul>
+        {/* Clients: static row of logos printed in ink */}
+        <div className="mt-12 border-t border-rule pt-6">
+          <p className="text-sm text-press-muted">{t(ui.hero.brandsLabel)}</p>
+          <ul className="mt-6 flex flex-wrap items-center gap-x-10 gap-y-6">
+            {brands.map((b) => (
+              <li key={b.name}>
+                <img
+                  src={b.logo}
+                  alt={b.name}
+                  title={b.name}
+                  style={{ height: `calc(clamp(22px, 2.2vw, 30px) * ${b.scale})` }}
+                  className="w-auto max-w-none opacity-70 brightness-0 transition-opacity hover:opacity-100"
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
