@@ -1,3 +1,49 @@
 {
-  "results": {}
+  "results": {
+    "reservas": {
+      "url": "https://frailinstudio.com",
+      "performance": 97,
+      "accessibility": 94,
+      "seo": 100,
+      "bestPractices": 100,
+      "measuredAt": "2026-10-24T17:21:53.100Z",
+      "reportUrl": "https://pagespeed.web.dev/analysis?url=https%3A%2F%2Ffrailinstudio.com&form_factor=mobile"
+    },
+    "masterpiece": {
+      "url": "https://www.masterpiecectg.com",
+      "performance": 99,
+      "accessibility": 79,
+      "seo": 100,
+      "bestPractices": 100,
+      "measuredAt": "2026-10-24T17:21:53.133Z",
+      "reportUrl": "https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fwww.masterpiecectg.com&form_factor=mobile"
+    },
+    "majestic": {
+      "url": "https://www.majesticluxejewels.com",
+      "performance": 71,
+      "accessibility": 96,
+      "seo": 100,
+      "bestPractices": 100,
+      "measuredAt": "2026-10-24T17:22:15.482Z",
+      "reportUrl": "https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fwww.majesticluxejewels.com&form_factor=mobile"
+    },
+    "dulces": {
+      "url": "https://www.dulcesdetallescartagenaer.com/",
+      "performance": 70,
+      "accessibility": 90,
+      "seo": 100,
+      "bestPractices": 100,
+      "measuredAt": "2026-10-24T17:22:14.997Z",
+      "reportUrl": "https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fwww.dulcesdetallescartagenaer.com%2F&form_factor=mobile"
+    },
+    "cataplan": {
+      "url": "https://cataplan.vercel.app",
+      "performance": 85,
+      "accessibility": 96,
+      "seo": 100,
+      "bestPractices": 100,
+      "measuredAt": "2026-10-24T17:22:31.252Z",
+      "reportUrl": "https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fcataplan.vercel.app&form_factor=mobile"
+    }
+  }
 }
