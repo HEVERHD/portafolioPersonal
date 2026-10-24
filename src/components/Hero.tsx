@@ -27,7 +27,7 @@ export function Hero() {
 
             <p className="mt-6 font-serif text-[2.9rem] leading-[1.02] font-medium tracking-[-0.02em] text-balance sm:text-7xl">
               {t(ui.hero.headline)}{" "}
-              <em className="font-normal text-terra [font-variation-settings:'SOFT'_100]">{t(ui.hero.headlineAccent)}</em>
+              <em className="font-normal text-terra">{t(ui.hero.headlineAccent)}</em>
             </p>
 
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-press-muted">{t(ui.hero.pitch)}</p>

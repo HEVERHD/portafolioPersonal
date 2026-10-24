@@ -4,10 +4,12 @@ import { LANGUAGE_ALTERNATES, SITE_DESCRIPTION, SITE_TITLE, SITE_URL, structured
 import { THEME_SCRIPT } from "@/lib/theme-script";
 import "./globals.css";
 
-// Editorial identity: serif headlines, plain sans body, a handwritten accent
-const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", style: ["normal", "italic"], axes: ["opsz", "SOFT"] });
+// Editorial identity: serif headlines, plain sans body, a handwritten accent.
+// Fraunces uses only the two static weights the site needs (its variable axes tripled the download
+// and delayed the headline, which is the mobile LCP); Caveat only draws small notes, so no preload.
+const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-fraunces", style: ["normal", "italic"], weight: ["400", "500"] });
 const instrument = Instrument_Sans({ subsets: ["latin"], variable: "--font-instrument" });
-const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat" });
+const caveat = Caveat({ subsets: ["latin"], variable: "--font-caveat", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
