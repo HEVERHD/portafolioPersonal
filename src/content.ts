@@ -48,6 +48,33 @@ export const ui = {
     full: { es: "Ver el portafolio completo", en: "See the full portfolio" },
     fit: { es: "Relevante para este rol", en: "Relevant to this role" },
   },
+  assistant: {
+    open: { es: "Pregúntale a mi portafolio", en: "Ask my portfolio" },
+    close: { es: "Cerrar el asistente", en: "Close the assistant" },
+    note: { es: "¿preguntas? pregúntame", en: "questions? ask me" },
+    title: { es: "Pregúntale a mi portafolio", en: "Ask my portfolio" },
+    intro: {
+      es: "Hola, soy Tinta, el asistente de Hevert. Pregúntame por su experiencia, sus proyectos o su stack.",
+      en: "Hi, I'm Tinta, Hevert's assistant. Ask me about his experience, projects or stack.",
+    },
+    disclaimer: {
+      es: "Respuestas generadas con IA a partir de este portafolio; pueden tener errores. No guardo la conversación.",
+      en: "AI-generated answers based on this portfolio; they may contain mistakes. The conversation isn't stored.",
+    },
+    placeholder: { es: "Escribe tu pregunta…", en: "Type your question…" },
+    send: { es: "Enviar", en: "Send" },
+    thinking: { es: "Tinta está escribiendo…", en: "Tinta is typing…" },
+    rateLimited: {
+      es: "Llegaste al límite de preguntas por ahora. Puedes escribirle a Hevert directamente por WhatsApp.",
+      en: "You've reached the question limit for now. You can message Hevert directly on WhatsApp.",
+    },
+    error: { es: "No pude responder. Inténtalo de nuevo en un momento.", en: "I couldn't answer. Please try again in a moment." },
+    suggestions: [
+      { es: "¿Qué ha hecho con React Native?", en: "What has he built with React Native?" },
+      { es: "¿Tiene experiencia en e-commerce?", en: "Does he have e-commerce experience?" },
+      { es: "¿Cómo trabaja con equipos remotos?", en: "How does he work with remote teams?" },
+    ],
+  },
   sections: {
     experience: { es: "Trayectoria", en: "Experience" },
     experienceTitle: { es: "Equipos de producto, clientes reales", en: "Product teams, real clients" },

@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-assistant",
+  "private": true,
+  "description": "Pregúntale a mi portafolio: chat con Claude que responde con los datos de hevertdavid.com. Se despliega en Google Cloud Run.",
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --env-file-if-exists=.env.local --watch server.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.133.0"
+  }
+}

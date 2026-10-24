@@ -2,6 +2,7 @@ import type { Lang } from "@/content";
 import { LangProvider } from "@/lib/i18n";
 import type { RoleId } from "@/roles";
 import { About } from "./About";
+import { Assistant } from "./Assistant";
 import { Contact } from "./Contact";
 import { Experience } from "./Experience";
 import { Hero } from "./Hero";
@@ -26,6 +27,7 @@ export function HomePage({ lang, role }: { lang: Lang; role?: RoleId }) {
         <About />
         <Contact />
       </main>
+      <Assistant />
     </LangProvider>
   );
 }

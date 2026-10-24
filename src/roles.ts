@@ -25,6 +25,8 @@ export type Role = {
   jobs: string[];
   /** CV tailored to the role, built by cv/build.mjs; without it the page links the general CV. */
   cv?: T;
+  /** Suggested questions for the assistant on this role's page. */
+  questions?: T[];
   /** Bullets that replace a job's points (not its highlight lines) in the role's CV, keyed by company. */
   cvPoints?: Record<string, T[]>;
 };
@@ -52,6 +54,11 @@ export const roles: Role[] = [
     skills: ["ecommerce", "frontend", "mobile", "backend"],
     jobs: ["ITG Globers"],
     cv: { es: "/cv/Hevert-Gelis-CV-ES-VTEX.pdf", en: "/cv/Hevert-Gelis-CV-EN-VTEX.pdf" },
+    questions: [
+      { es: "¿Qué hizo en las tiendas VTEX de Chedraui y Pepe Ganga?", en: "What did he do on the Chedraui and Pepe Ganga VTEX stores?" },
+      { es: "¿Ha trabajado con FastStore?", en: "Has he worked with FastStore?" },
+      { es: "¿Tiene experiencia con checkout y pagos?", en: "Does he have checkout and payments experience?" },
+    ],
     cvPoints: {
       "ITG Globers": [
         {
@@ -106,6 +113,11 @@ export const roles: Role[] = [
     projects: ["reservas", "faststore", "masterpiece"],
     skills: ["mobile", "frontend", "backend", "ecommerce"],
     jobs: ["Hypernova Labs", "ITG Globers"],
+    questions: [
+      { es: "¿Cómo fue la migración de Java a React Native?", en: "How did the Java to React Native migration go?" },
+      { es: "¿Qué apps ha publicado en las tiendas?", en: "Which apps has he shipped to the stores?" },
+      { es: "¿Qué es Framework II?", en: "What is Framework II?" },
+    ],
   },
   {
     id: "frontend",
@@ -128,6 +140,11 @@ export const roles: Role[] = [
     projects: ["reservas", "masterpiece", "faststore", "majestic"],
     skills: ["frontend", "ecommerce", "backend", "mobile"],
     jobs: ["ADO Technologies (Scanovate)", "Sigefi", "Hypernova Labs"],
+    questions: [
+      { es: "¿Qué dashboards ha construido?", en: "What dashboards has he built?" },
+      { es: "¿Qué tan rápidos son sus sitios en Next.js?", en: "How fast are his Next.js sites?" },
+      { es: "¿Tiene experiencia con backend?", en: "Does he have backend experience?" },
+    ],
   },
 ];
 
