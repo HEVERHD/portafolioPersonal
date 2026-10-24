@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { jobs, ui, type Job, type Lang } from "@/content";
-import { useLang } from "@/lib/i18n";
+import { useLang, useRole } from "@/lib/i18n";
 import { useInView } from "@/lib/useInView";
 import { ArrowUpRight } from "./icons";
 import { Section, Tags } from "./Section";
@@ -125,6 +125,7 @@ function useTimelineProgress(count: number) {
 
 export function Experience() {
   const { lang, t } = useLang();
+  const role = useRole();
   const now = useNowIndex();
   const { listRef, fillRef, itemRefs, reached } = useTimelineProgress(jobs.length);
   const careerStart = Math.min(...jobs.map((j) => monthIndex(j.start)));
@@ -160,6 +161,9 @@ export function Experience() {
                 <JobDuration job={job} now={now} total={total} />
               </div>
               <div>
+                {role?.jobs.includes(job.company) && (
+                  <p className="mb-2 inline-block bg-accent px-2 py-0.5 text-xs font-semibold text-white">{t(ui.role.fit)}</p>
+                )}
                 <h3 className="font-display text-2xl font-medium tracking-tight">{t(job.role)}</h3>
                 <p className="mt-1 text-sm text-muted">
                   <span className="text-ink">{job.company}</span>

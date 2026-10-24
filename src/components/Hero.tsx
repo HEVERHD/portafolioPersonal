@@ -2,14 +2,19 @@
 
 import { brands, contact, ui } from "@/content";
 import images from "@/data/images.json";
-import { useLang } from "@/lib/i18n";
+import { useCv, useLang, useRole } from "@/lib/i18n";
+import { pagePath } from "@/roles";
 import { ArrowUpRight, Download, WhatsApp } from "./icons";
 import { NowLine } from "./NowLine";
 import { Picture } from "./Picture";
 
 export function Hero() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const role = useRole();
   const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(t(ui.whatsappMsg))}`;
+  // Role pages swap the headline and pitch; the rest of the hero stays the same
+  const copy = role ?? ui.hero;
+  const cv = useCv();
 
   return (
     <section className="bg-paper font-body text-press">
@@ -17,20 +22,31 @@ export function Hero() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           {/* Copy */}
           <div className="lg:col-span-7">
+            {role && (
+              <p className="mb-8 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-y border-rule py-2.5 text-sm">
+                <span className="text-press-muted">
+                  {t(ui.role.banner)} <span className="font-semibold text-press">{t(role.label)}</span>
+                </span>
+                <a href={pagePath(lang)} className="border-b border-press-muted text-press-muted transition-colors hover:border-terra hover:text-terra">
+                  {t(ui.role.full)}
+                </a>
+              </p>
+            )}
+
             {/* The page's h1 carries the name and role for search engines; the big line below is the visual headline */}
             <h1 className="flex items-center gap-3 text-sm font-normal text-press-muted">
               <span className="h-px w-8 shrink-0 bg-terra" />
               <span>
-                <span className="font-semibold text-press">Hevert Gelis</span> · {t(ui.hero.eyebrow)}
+                <span className="font-semibold text-press">Hevert Gelis</span> · {t(copy.eyebrow)}
               </span>
             </h1>
 
             <p className="mt-6 font-serif text-[2.9rem] leading-[1.02] font-medium tracking-[-0.02em] text-balance sm:text-7xl">
-              {t(ui.hero.headline)}{" "}
-              <em className="font-normal text-terra">{t(ui.hero.headlineAccent)}</em>
+              {t(copy.headline)}{" "}
+              <em className="font-normal text-terra">{t(copy.headlineAccent)}</em>
             </p>
 
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-press-muted">{t(ui.hero.pitch)}</p>
+            <p className="mt-7 max-w-xl text-lg leading-relaxed text-press-muted">{t(copy.pitch)}</p>
 
             <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
               <a
@@ -49,7 +65,7 @@ export function Hero() {
                 {t(ui.hero.ctaSecondary)} <ArrowUpRight className="size-3.5" />
               </a>
               <a
-                href={t(contact.cv)}
+                href={cv}
                 download
                 className="inline-flex items-center gap-1.5 border-b border-press pb-0.5 text-sm font-semibold transition-colors hover:border-terra hover:text-terra"
               >

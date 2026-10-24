@@ -1,4 +1,6 @@
-import { contact, stack } from "@/content";
+import type { Metadata } from "next";
+import { contact, stack, type Lang } from "@/content";
+import { pagePath, type Role } from "@/roles";
 
 /** Canonical address of the portfolio; every other deployment points search engines here. */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.hevertdavid.com").replace(/\/$/, "");
@@ -13,6 +15,30 @@ export const SITE_DESCRIPTION_EN =
 
 /** hreflang links: Spanish at /, English at /en, Spanish as the default for other languages. */
 export const LANGUAGE_ALTERNATES = { es: "/", en: "/en", "x-default": "/" };
+
+/** Title, description, canonical and hreflang for a role page (/vtex, /en/vtex…). */
+export function roleMetadata(lang: Lang, role: Role): Metadata {
+  const url = pagePath(lang, role.id);
+  return {
+    title: role.title[lang],
+    description: role.description[lang],
+    alternates: {
+      canonical: url,
+      languages: { es: pagePath("es", role.id), en: pagePath("en", role.id), "x-default": pagePath("es", role.id) },
+    },
+    openGraph: {
+      title: role.title[lang],
+      description: role.description[lang],
+      url,
+      siteName: "Hevert Gelis",
+      locale: lang === "es" ? "es_CO" : "en_US",
+      type: "profile",
+      firstName: "Hevert",
+      lastName: "Gelis",
+    },
+    twitter: { card: "summary_large_image", title: role.title[lang] },
+  };
+}
 
 /** schema.org Person + WebSite, rendered as JSON-LD in the root layout. */
 export function structuredData() {

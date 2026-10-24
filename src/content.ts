@@ -43,6 +43,11 @@ export const ui = {
     brandsLabel: { es: "He construido producto para", en: "I've built product for" },
     location: { es: "Bogotá · Cartagena · Panamá (remoto)", en: "Bogotá · Cartagena · Panama (remote)" },
   },
+  role: {
+    banner: { es: "Versión enfocada en", en: "Version focused on" },
+    full: { es: "Ver el portafolio completo", en: "See the full portfolio" },
+    fit: { es: "Relevante para este rol", en: "Relevant to this role" },
+  },
   sections: {
     experience: { es: "Trayectoria", en: "Experience" },
     experienceTitle: { es: "Equipos de producto, clientes reales", en: "Product teams, real clients" },

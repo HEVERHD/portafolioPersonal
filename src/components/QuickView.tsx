@@ -2,13 +2,14 @@
 
 import { useEffect, useRef } from "react";
 import { about, brands, contact, stack, ui } from "@/content";
-import { useLang } from "@/lib/i18n";
+import { useCv, useLang } from "@/lib/i18n";
 import { Download, GitHub, LinkedIn, Mail, WhatsApp } from "./icons";
 import { Eyebrow } from "./Section";
 
 /** Recruiter view: the whole profile on one screen, opened from the navbar. */
 export function QuickView({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { t } = useLang();
+  const cv = useCv();
   const ref = useRef<HTMLDialogElement>(null);
   const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(t(ui.whatsappMsg))}`;
   const core = stack.find((g) => g.id === "frontend")?.items.map((i) => i.name) ?? [];
@@ -79,7 +80,7 @@ export function QuickView({ open, onClose }: { open: boolean; onClose: () => voi
 
         <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
           <a
-            href={t(contact.cv)}
+            href={cv}
             download
             className="inline-flex items-center gap-2 bg-ink px-5 py-3 text-sm font-semibold text-bg transition-colors hover:bg-accent"
           >

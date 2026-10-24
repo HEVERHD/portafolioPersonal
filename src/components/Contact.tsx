@@ -1,12 +1,13 @@
 "use client";
 
 import { contact, ui } from "@/content";
-import { useLang } from "@/lib/i18n";
+import { useCv, useLang } from "@/lib/i18n";
 import { ArrowUpRight, Download, GitHub, LinkedIn, Mail, WhatsApp } from "./icons";
 import { Eyebrow } from "./Section";
 
 export function Contact() {
   const { t } = useLang();
+  const cv = useCv();
   const wa = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(t(ui.whatsappMsg))}`;
 
   const channels = [
@@ -47,7 +48,7 @@ export function Contact() {
       </ul>
 
       <a
-        href={t(contact.cv)}
+        href={cv}
         download
         className="mt-8 inline-flex items-center gap-2 bg-ink px-5 py-3.5 text-sm font-semibold text-bg transition-colors hover:bg-accent"
       >

@@ -1,4 +1,4 @@
-// Prints cv/cv.html to public/cv/*.pdf (Spanish and English) with headless Edge or Chrome.
+// Prints cv/cv.html to public/cv/*.pdf (Spanish, English and role variants) with headless Edge or Chrome.
 // Usage: node cv/build.mjs   (set BROWSER=/path/to/chrome to use another Chromium)
 import { spawn } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
@@ -45,8 +45,10 @@ try {
 
   mkdirSync(outDir, { recursive: true });
   const src = pathToFileURL(join(root, "cv", "cv.html")).href;
-  for (const lang of ["es", "en"]) {
-    await send("Page.navigate", { url: `${src}?lang=${lang}` });
+  // General CV in both languages, plus the role variants the role pages link to (src/roles.ts)
+  const prints = [["es"], ["en"], ["es", "vtex"]];
+  for (const [lang, variant] of prints) {
+    await send("Page.navigate", { url: `${src}?lang=${lang}${variant ? `&variant=${variant}` : ""}` });
     await sleep(3000); // web fonts and photo
     const { data } = await send("Page.printToPDF", {
       printBackground: true,
@@ -54,9 +56,10 @@ try {
       displayHeaderFooter: false,
       marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0,
     });
-    const file = join(outDir, `Hevert-Gelis-CV-${lang.toUpperCase()}.pdf`);
+    const name = [lang, variant].filter(Boolean).join("-").toUpperCase();
+    const file = join(outDir, `Hevert-Gelis-CV-${name}.pdf`);
     writeFileSync(file, Buffer.from(data, "base64"));
-    console.log(`${lang}: ${file}`);
+    console.log(`${name}: ${file}`);
   }
   ws.close();
 } finally {

@@ -1,30 +1,43 @@
 "use client";
 
 import { createContext, useContext, useEffect } from "react";
-import type { Lang } from "@/content";
+import { contact, type Lang } from "@/content";
+import { getRole, pagePath, type RoleId } from "@/roles";
 
-/** Each language lives at its own address so search engines can index both. */
-export const LANG_PATH: Record<Lang, string> = { es: "/", en: "/en" };
+const LangContext = createContext<{ lang: Lang; role?: RoleId }>({ lang: "es" });
 
-const LangContext = createContext<Lang>("es");
-
-/** The page's language comes from its route (/ or /en), never from the browser, so crawlers see stable content. */
-export function LangProvider({ lang, children }: { lang: Lang; children: React.ReactNode }) {
+/**
+ * The page's language and role come from its route (/, /en, /vtex, /en/vtex…), never from the
+ * browser, so crawlers see stable content.
+ */
+export function LangProvider({ lang, role, children }: { lang: Lang; role?: RoleId; children: React.ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  return <LangContext.Provider value={lang}>{children}</LangContext.Provider>;
+  return <LangContext.Provider value={{ lang, role }}>{children}</LangContext.Provider>;
 }
 
 /** Returns the active language, a translator for `{ es, en }` records and a switcher that navigates to the other route. */
 export function useLang() {
-  const lang = useContext(LangContext);
+  const { lang, role } = useContext(LangContext);
   const t = (s: Record<Lang, string>) => s[lang];
   const setLang = (l: Lang) => {
     if (l === lang) return;
-    // Keep the visitor on the same section when switching language
-    window.location.assign(LANG_PATH[l] + window.location.hash);
+    // Keep the visitor on the same role and section when switching language
+    window.location.assign(pagePath(l, role) + window.location.hash);
   };
   return { lang, setLang, t };
+}
+
+/** The role this page is aimed at, if any (see src/roles.ts). */
+export function useRole() {
+  const { role } = useContext(LangContext);
+  return role ? getRole(role) : undefined;
+}
+
+/** CV for the current page: the role's tailored version when there is one, otherwise the general one. */
+export function useCv() {
+  const { lang } = useContext(LangContext);
+  return useRole()?.cv?.[lang] ?? contact.cv[lang];
 }

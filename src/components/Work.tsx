@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { categories, projects, ui, type Category, type Project } from "@/content";
-import { useLang } from "@/lib/i18n";
+import { useLang, useRole } from "@/lib/i18n";
+import { byRole } from "@/roles";
 import { ArrowUpRight, Check } from "./icons";
 import { BookingDemo } from "./BookingDemo";
 import { FastStoreDemo } from "./FastStoreDemo";
@@ -362,11 +363,16 @@ function ProjectDialog({ list, index, onClose, onNavigate }: {
 
 export function Work() {
   const { t } = useLang();
+  const role = useRole();
   const [filter, setFilter] = useState<Category | "all">("all");
   const [open, setOpen] = useState<number | null>(null);
   const [view, setView] = useState<"cards" | "index">("cards");
 
-  const visible = projects.filter((p) => filter === "all" || p.category === filter);
+  // On a role page its projects come first and the first one takes the large card
+  const ordered = role
+    ? byRole(projects, role.projects, (p) => p.id).map((p) => ({ ...p, featured: p.id === role.projects[0] }))
+    : projects;
+  const visible = ordered.filter((p) => filter === "all" || p.category === filter);
   const showcase = visible.filter((p) => p.category !== "internal");
   const internal = visible.filter((p) => p.category === "internal");
   const count = (id: Category | "all") =>

@@ -2,7 +2,8 @@
 
 import type { CSSProperties, JSX } from "react";
 import { skills, stack, ui, type Skill, type StackGroup, type Tech } from "@/content";
-import { useLang } from "@/lib/i18n";
+import { useLang, useRole } from "@/lib/i18n";
+import { byRole } from "@/roles";
 import { IconBackend, IconFrontend, IconMobile, IconStore } from "./icons";
 import { Eyebrow, Section } from "./Section";
 
@@ -111,11 +112,12 @@ function SkillEntry({ skill, index }: { skill: Skill; index: number }) {
 
 export function Services() {
   const { t } = useLang();
+  const role = useRole();
 
   return (
     <Section id="servicios" eyebrow={t(ui.sections.services)} title={t(ui.sections.servicesTitle)}>
       <div className="grid gap-x-12 gap-y-12 md:grid-cols-2">
-        {skills.map((s, i) => (
+        {byRole(skills, role?.skills, (s) => s.id).map((s, i) => (
           <SkillEntry key={s.id} skill={s} index={i} />
         ))}
       </div>
