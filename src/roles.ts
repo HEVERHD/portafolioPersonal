@@ -23,8 +23,10 @@ export type Role = {
   skills: Skill["id"][];
   /** Companies whose experience fits this role, marked in the timeline. */
   jobs: string[];
-  /** CV tailored to the role; falls back to the general one. */
-  cv?: Partial<T>;
+  /** CV tailored to the role, built by cv/build.mjs; without it the page links the general CV. */
+  cv?: T;
+  /** Bullets that replace a job's points (not its highlight lines) in the role's CV, keyed by company. */
+  cvPoints?: Record<string, T[]>;
 };
 
 export const roles: Role[] = [
@@ -49,7 +51,39 @@ export const roles: Role[] = [
     projects: ["faststore", "masterpiece", "majestic", "dulces"],
     skills: ["ecommerce", "frontend", "mobile", "backend"],
     jobs: ["ITG Globers"],
-    cv: { es: "/cv/Hevert-Gelis-CV-ES-VTEX.pdf" },
+    cv: { es: "/cv/Hevert-Gelis-CV-ES-VTEX.pdf", en: "/cv/Hevert-Gelis-CV-EN-VTEX.pdf" },
+    cvPoints: {
+      "ITG Globers": [
+        {
+          es: "Tiendas e-commerce de Chedraui y Pepe Ganga sobre VTEX IO Store Framework: componentes custom en React y TypeScript configurables desde el Site Editor, y maquetación responsive de home, PLP y PDP.",
+          en: "Chedraui and Pepe Ganga e-commerce stores on VTEX IO Store Framework: custom React and TypeScript components configurable from the Site Editor, and responsive home, PLP and PDP layouts.",
+        },
+        {
+          es: "Regionalización por tienda o región, con precios y disponibilidad según la ubicación del cliente.",
+          en: "Regionalization by store or region, with prices and availability based on the customer's location.",
+        },
+        {
+          es: "Personalizaciones de checkout (checkout-ui-custom) y consumo de APIs VTEX (Catalog, Intelligent Search, Checkout/OrderForm) y GraphQL.",
+          en: "Checkout customizations (checkout-ui-custom) and VTEX APIs (Catalog, Intelligent Search, Checkout/OrderForm) and GraphQL.",
+        },
+        {
+          es: "Contenido gestionado desde Headless CMS y optimización de rendimiento y Core Web Vitals.",
+          en: "Content managed from the Headless CMS, and performance and Core Web Vitals optimization.",
+        },
+        {
+          es: "Participé en Framework II, un framework interno sobre React Native para crear apps a partir de JSON declarativos (server-driven UI).",
+          en: "Contributed to Framework II, an internal React Native framework for building apps from declarative JSON (server-driven UI).",
+        },
+        {
+          es: "Funcionalidades web y móviles para Bancolombia y App Morado, consumiendo APIs REST con foco en rendimiento y experiencia de usuario.",
+          en: "Web and mobile features for Bancolombia and App Morado on REST APIs, focused on performance and UX.",
+        },
+        {
+          es: "Equipos ágiles multipaís con GitFlow, code review y Jira.",
+          en: "Multi-country agile teams with GitFlow, code review and Jira.",
+        },
+      ],
+    },
   },
   {
     id: "react-native",

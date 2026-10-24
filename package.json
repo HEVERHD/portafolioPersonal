@@ -11,7 +11,8 @@
     "lint": "tsc --noEmit",
     "reel": "remotion studio",
     "lighthouse": "node --env-file-if-exists=.env.local --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/lighthouse.mjs",
-    "images": "node scripts/optimize-images.mjs"
+    "images": "node scripts/optimize-images.mjs",
+    "cv": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON cv/build.mjs"
   },
   "dependencies": {
     "@remotion/google-fonts": "4.0.530",

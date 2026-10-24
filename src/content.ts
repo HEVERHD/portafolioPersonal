@@ -228,8 +228,10 @@ export type Job = {
   points: T[];
   tags: string[];
   /** Store links render as Google Play / App Store badges; `url` + `cta` is for web products. */
-  highlights?: { name: string; meta: T; text: T; android?: string; ios?: string; url?: string; cta?: T }[];
+  highlights?: { name: string; meta: T; text: T; android?: string; ios?: string; url?: string; cta?: T; cv?: T }[];
 };
+// The CV (cv/data.mjs) is built from these jobs: `points` become bullets and a highlight's `cv`
+// line, when present, is added before them.
 
 export const jobs: Job[] = [
   {
@@ -327,6 +329,10 @@ export const jobs: Job[] = [
         },
         android: "https://play.google.com/store/apps/details?id=com.planetmedia.paymentsloyalty.chedraui",
         ios: "https://apps.apple.com/co/app/chedraui-tienda-en-l%C3%ADnea/id1239945600",
+        cv: {
+          es: "Chedraui (México, 5M+ descargas, 4.2★): desarrollé el login y el home de la app de supermercado en línea.",
+          en: "Chedraui (Mexico, 5M+ downloads, 4.2★): built the login and home screens of the online supermarket app.",
+        },
       },
       {
         name: "Pepe Ganga",
@@ -336,6 +342,10 @@ export const jobs: Job[] = [
           en: "Integrated online payments through the payment gateway in the toys and home retail chain's shopping app.",
         },
         android: "https://play.google.com/store/apps/details?id=com.pepeganga",
+        cv: {
+          es: "Pepe Ganga (Colombia): integré los pagos en línea con la pasarela de pagos de la app de compras.",
+          en: "Pepe Ganga (Colombia): integrated online payments through the shopping app's payment gateway.",
+        },
       },
     ],
   },

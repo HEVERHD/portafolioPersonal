@@ -1,12 +1,19 @@
-// Prints cv/cv.html to public/cv/*.pdf (Spanish, English and role variants) with headless Edge or Chrome.
-// Usage: node cv/build.mjs   (set BROWSER=/path/to/chrome to use another Chromium)
+// Builds every CV from the portfolio's data (cv/data.mjs) and prints cv/cv.html to public/cv/*.pdf
+// with headless Edge or Chrome. Usage: npm run cv   (set BROWSER=/path/to/chrome to use another Chromium)
 import { spawn } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { allCvs, cvData } from "./data.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+// The template reads its data from cv-data.js, one entry per CV
+const cvs = allCvs();
+const data = Object.fromEntries(cvs.map(({ name, lang, role }) => [name, cvData(lang, role)]));
+writeFileSync(join(root, "cv", "cv-data.js"), `window.CV_DATA = ${JSON.stringify(data, null, 2)};
+`);
 const outDir = join(root, "public", "cv");
 const candidates = [
   process.env.BROWSER,
@@ -45,10 +52,8 @@ try {
 
   mkdirSync(outDir, { recursive: true });
   const src = pathToFileURL(join(root, "cv", "cv.html")).href;
-  // General CV in both languages, plus the role variants the role pages link to (src/roles.ts)
-  const prints = [["es"], ["en"], ["es", "vtex"]];
-  for (const [lang, variant] of prints) {
-    await send("Page.navigate", { url: `${src}?lang=${lang}${variant ? `&variant=${variant}` : ""}` });
+  for (const { name } of cvs) {
+    await send("Page.navigate", { url: `${src}?cv=${name}` });
     await sleep(3000); // web fonts and photo
     const { data } = await send("Page.printToPDF", {
       printBackground: true,
@@ -56,7 +61,6 @@ try {
       displayHeaderFooter: false,
       marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0,
     });
-    const name = [lang, variant].filter(Boolean).join("-").toUpperCase();
     const file = join(outDir, `Hevert-Gelis-CV-${name}.pdf`);
     writeFileSync(file, Buffer.from(data, "base64"));
     console.log(`${name}: ${file}`);
