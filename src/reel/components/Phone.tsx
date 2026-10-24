@@ -1,5 +1,4 @@
 import { Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
-import { colors } from "../theme";
 
 const VIEWPORT_W = 390;
 const VIEWPORT_H = 844;
@@ -36,8 +35,9 @@ export const Phone = ({ screen, width, scroll, delay, until, tilt = 0 }: Props) 
         height: screenH + BEZEL * 2,
         padding: BEZEL,
         borderRadius: 64,
-        background: "linear-gradient(145deg, #2a2a3a, #0d0d14 60%)",
-        boxShadow: `0 0 0 2px rgba(255,255,255,0.08), 0 40px 120px rgba(0,0,0,0.6), 0 0 80px ${colors.accent}33`,
+        // A real black phone on paper: soft drop shadow, no glow
+        background: "linear-gradient(145deg, #2b2a27, #121110 60%)",
+        boxShadow: "0 30px 70px rgba(28,26,22,0.28), 0 6px 18px rgba(28,26,22,0.18)",
         opacity: interpolate(frame, [delay, delay + 12], [0, 1], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Caveat, Fraunces, Instrument_Sans } from "next/font/google";
-import { LangProvider } from "@/lib/i18n";
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, structuredData } from "@/lib/site";
+import { LANGUAGE_ALTERNATES, SITE_DESCRIPTION, SITE_TITLE, SITE_URL, structuredData } from "@/lib/site";
 import "./globals.css";
 
 // Editorial identity: serif headlines, plain sans body, a handwritten accent
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   // Both Vercel deployments serve this page; tell search engines which address is the real one
-  alternates: { canonical: "/" },
+  alternates: { canonical: "/", languages: LANGUAGE_ALTERNATES },
   authors: [{ name: "Hevert Gelis", url: SITE_URL }],
   creator: "Hevert Gelis",
   // Social image comes from app/opengraph-image.png and app/twitter-image.png
@@ -41,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           // JSON-LD built from our own static data, not from user input
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData()).replace(/</g, "\\u003c") }}
         />
-        <LangProvider>{children}</LangProvider>
+        {children}
       </body>
     </html>
   );

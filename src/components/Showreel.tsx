@@ -8,7 +8,7 @@ import { useLang } from "@/lib/i18n";
 const ReelPlayer = dynamic(() => import("./ReelPlayer"), { ssr: false });
 
 export function Showreel() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
   const ref = useRef<HTMLDivElement>(null);
   // Mount the player only once the section is close to the viewport, and never for reduced motion.
   const [mount, setMount] = useState(false);
@@ -37,7 +37,7 @@ export function Showreel() {
         <div ref={ref} className="relative overflow-hidden">
           {/* Poster keeps the layout stable and is the reduced-motion fallback */}
           <img
-            src="/reel/poster.jpg"
+            src={lang === "en" ? "/reel/poster-en.jpg" : "/reel/poster.jpg"}
             alt={t(ui.showreel.alt)}
             width={1280}
             height={720}

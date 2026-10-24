@@ -1,25 +1,27 @@
-import { loadFont as loadDisplay } from "@remotion/google-fonts/SpaceGrotesk";
-import { loadFont as loadMono } from "@remotion/google-fonts/JetBrainsMono";
+import { loadFont as loadSerif } from "@remotion/google-fonts/Fraunces";
+import { loadFont as loadSans } from "@remotion/google-fonts/InstrumentSans";
 
-// Same palette as the portfolio (src/app/globals.css)
+// Same editorial palette as the portfolio (src/app/globals.css)
 export const colors = {
-  bg: "#07070c",
-  surface: "#0e0e17",
-  line: "rgba(255,255,255,0.08)",
-  ink: "#ededf3",
-  muted: "#9b9bb2",
-  accent: "#7c6cff",
-  neon: "#3ec7ff",
+  bg: "#f3efe6",
+  surface: "#e9e3d6",
+  line: "#d6cfbf",
+  ink: "#1c1a16",
+  muted: "#6b665c",
+  accent: "#c4471d",
 };
+
+const serif = loadSerif("normal", { weights: ["500"], subsets: ["latin"] }).fontFamily;
+loadSerif("italic", { weights: ["400"], subsets: ["latin"] });
 
 export const fonts = {
-  display: loadDisplay("normal", { weights: ["500", "700"], subsets: ["latin"] }).fontFamily,
-  mono: loadMono("normal", { weights: ["400", "500"], subsets: ["latin"] }).fontFamily,
+  serif,
+  sans: loadSans("normal", { weights: ["400", "600"], subsets: ["latin"] }).fontFamily,
 };
 
-export const gradientText = {
-  backgroundImage: `linear-gradient(100deg, ${colors.ink} 15%, ${colors.neon} 55%, ${colors.accent})`,
-  WebkitBackgroundClip: "text",
-  backgroundClip: "text",
-  color: "transparent",
+/** Terracotta italic, the accent used in the site's headlines. */
+export const accentText = {
+  fontStyle: "italic",
+  fontWeight: 400,
+  color: colors.accent,
 } as const;

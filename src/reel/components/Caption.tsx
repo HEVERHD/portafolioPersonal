@@ -7,7 +7,7 @@ type Props = {
   readonly detail: string;
 };
 
-/** Left-aligned text block used by the project scenes. */
+/** Left-aligned text block used by the project scenes, set like the site's section headings. */
 export const Caption = ({ eyebrow, title, detail }: Props) => {
   const frame = useCurrentFrame();
   const enter = (start: number) => ({
@@ -20,25 +20,26 @@ export const Caption = ({ eyebrow, title, detail }: Props) => {
   });
 
   return (
-    <div style={{ width: 720 }}>
-      <div style={{ fontFamily: fonts.mono, fontSize: 26, letterSpacing: 6, color: colors.neon, ...enter(4) }}>
+    <div style={{ width: 720, borderTop: `3px solid ${colors.ink}`, paddingTop: 32 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 20, fontFamily: fonts.sans, fontSize: 30, color: colors.muted, ...enter(4) }}>
+        <span style={{ width: 56, height: 3, background: colors.accent }} />
         {eyebrow}
       </div>
       <div
         style={{
-          fontFamily: fonts.display,
-          fontWeight: 700,
-          fontSize: 96,
+          fontFamily: fonts.serif,
+          fontWeight: 500,
+          fontSize: 104,
           lineHeight: 1,
           letterSpacing: -2,
           color: colors.ink,
-          marginTop: 24,
+          marginTop: 28,
           ...enter(10),
         }}
       >
         {title}
       </div>
-      <div style={{ fontFamily: fonts.display, fontSize: 36, lineHeight: 1.35, color: colors.muted, marginTop: 32, ...enter(18) }}>
+      <div style={{ fontFamily: fonts.sans, fontSize: 36, lineHeight: 1.4, color: colors.muted, marginTop: 32, ...enter(18) }}>
         {detail}
       </div>
     </div>

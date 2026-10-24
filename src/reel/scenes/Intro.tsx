@@ -1,58 +1,51 @@
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
-import { colors, fonts, gradientText } from "../theme";
+import { copy, type ReelLang } from "../copy";
+import { accentText, colors, fonts } from "../theme";
 
-export const Intro = () => {
+export const Intro = ({ lang = "es" }: { readonly lang?: ReelLang }) => {
   const frame = useCurrentFrame();
+  const text = copy[lang].intro;
+  const rise = (start: number) => ({
+    opacity: interpolate(frame, [start, start + 18], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
+    translate: interpolate(frame, [start, start + 28], ["0px 50px", "0px 0px"], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.bezier(0.16, 1, 0.3, 1),
+    }),
+  });
 
   return (
-    <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
+    <AbsoluteFill style={{ justifyContent: "center", padding: "0 180px" }}>
       <div
         style={{
-          fontFamily: fonts.mono,
+          display: "flex",
+          alignItems: "center",
+          gap: 22,
+          fontFamily: fonts.sans,
           fontSize: 34,
-          letterSpacing: 4,
           color: colors.muted,
           opacity: interpolate(frame, [0, 15], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
         }}
       >
-        hevert<span style={{ color: colors.neon }}>.</span>dev
+        <span style={{ width: 64, height: 3, background: colors.accent }} />
+        {text.eyebrow}
       </div>
       <div
         style={{
-          fontFamily: fonts.display,
-          fontWeight: 700,
-          fontSize: 150,
+          fontFamily: fonts.serif,
+          fontWeight: 500,
+          fontSize: 190,
           lineHeight: 1,
-          letterSpacing: -4,
-          marginTop: 36,
+          letterSpacing: -5,
+          marginTop: 44,
           color: colors.ink,
-          opacity: interpolate(frame, [8, 26], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
-          translate: interpolate(frame, [8, 36], ["0px 50px", "0px 0px"], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-            easing: Easing.bezier(0.16, 1, 0.3, 1),
-          }),
+          ...rise(8),
         }}
       >
-        Apps reales.
+        {text.lead}
       </div>
-      <div
-        style={{
-          fontFamily: fonts.display,
-          fontWeight: 700,
-          fontSize: 150,
-          lineHeight: 1.1,
-          letterSpacing: -4,
-          ...gradientText,
-          opacity: interpolate(frame, [22, 40], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
-          translate: interpolate(frame, [22, 50], ["0px 50px", "0px 0px"], {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-            easing: Easing.bezier(0.16, 1, 0.3, 1),
-          }),
-        }}
-      >
-        Negocios reales.
+      <div style={{ fontFamily: fonts.serif, fontSize: 190, lineHeight: 1.1, letterSpacing: -5, ...accentText, ...rise(22) }}>
+        {text.accent}
       </div>
     </AbsoluteFill>
   );

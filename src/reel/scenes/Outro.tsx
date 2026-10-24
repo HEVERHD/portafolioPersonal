@@ -1,20 +1,24 @@
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
-import { colors, fonts, gradientText } from "../theme";
+import { copy, SITE, STACK, type ReelLang } from "../copy";
+import { accentText, colors, fonts } from "../theme";
 
-export const Outro = () => {
+export const Outro = ({ lang = "es" }: { readonly lang?: ReelLang }) => {
   const frame = useCurrentFrame();
+  const text = copy[lang].outro;
+  const fadeIn = (start: number) =>
+    interpolate(frame, [start, start + 18], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   return (
     <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", textAlign: "center" }}>
       <div
         style={{
-          fontFamily: fonts.display,
-          fontWeight: 700,
-          fontSize: 120,
+          fontFamily: fonts.serif,
+          fontWeight: 500,
+          fontSize: 140,
           lineHeight: 1.05,
-          letterSpacing: -3,
+          letterSpacing: -4,
           color: colors.ink,
-          opacity: interpolate(frame, [0, 18], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
+          opacity: fadeIn(0),
           translate: interpolate(frame, [0, 30], ["0px 40px", "0px 0px"], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
@@ -22,33 +26,14 @@ export const Outro = () => {
           }),
         }}
       >
-        Del primer commit
+        {text.lead}
         <br />
-        <span style={gradientText}>a producción.</span>
+        <span style={accentText}>{text.accent}</span>
       </div>
-      <div
-        style={{
-          fontFamily: fonts.mono,
-          fontSize: 32,
-          color: colors.muted,
-          marginTop: 48,
-          letterSpacing: 2,
-          opacity: interpolate(frame, [20, 38], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
-        }}
-      >
-        React · Next.js · React Native
-      </div>
-      <div
-        style={{
-          fontFamily: fonts.display,
-          fontWeight: 500,
-          fontSize: 44,
-          color: colors.ink,
-          marginTop: 28,
-          opacity: interpolate(frame, [30, 48], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
-        }}
-      >
-        hevert<span style={{ color: colors.neon }}>.</span>dev
+      <div style={{ width: 120, height: 3, background: colors.ink, marginTop: 56, opacity: fadeIn(18) }} />
+      <div style={{ fontFamily: fonts.sans, fontSize: 34, color: colors.muted, marginTop: 36, opacity: fadeIn(20) }}>{STACK}</div>
+      <div style={{ fontFamily: fonts.serif, fontWeight: 500, fontSize: 52, color: colors.ink, marginTop: 20, opacity: fadeIn(30) }}>
+        {SITE}
       </div>
     </AbsoluteFill>
   );

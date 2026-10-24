@@ -1,44 +1,30 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
 import type { Lang } from "@/content";
 
-const STORAGE_KEY = "lang";
+/** Each language lives at its own address so search engines can index both. */
+export const LANG_PATH: Record<Lang, string> = { es: "/", en: "/en" };
 
-const LangContext = createContext<{ lang: Lang; setLang: (l: Lang) => void }>({
-  lang: "es",
-  setLang: () => {},
-});
+const LangContext = createContext<Lang>("es");
 
-export function LangProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("es");
-
-  useEffect(() => {
-    let saved: string | null = null;
-    try {
-      saved = localStorage.getItem(STORAGE_KEY);
-    } catch {}
-    if (saved === "es" || saved === "en") setLangState(saved);
-    else if (!navigator.language.toLowerCase().startsWith("es")) setLangState("en");
-  }, []);
-
+/** The page's language comes from its route (/ or /en), never from the browser, so crawlers see stable content. */
+export function LangProvider({ lang, children }: { lang: Lang; children: React.ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  const setLang = (l: Lang) => {
-    setLangState(l);
-    try {
-      localStorage.setItem(STORAGE_KEY, l);
-    } catch {}
-  };
-
-  return <LangContext.Provider value={{ lang, setLang }}>{children}</LangContext.Provider>;
+  return <LangContext.Provider value={lang}>{children}</LangContext.Provider>;
 }
 
-/** Returns the active language and a translator for `{ es, en }` records. */
+/** Returns the active language, a translator for `{ es, en }` records and a switcher that navigates to the other route. */
 export function useLang() {
-  const { lang, setLang } = useContext(LangContext);
+  const lang = useContext(LangContext);
   const t = (s: Record<Lang, string>) => s[lang];
+  const setLang = (l: Lang) => {
+    if (l === lang) return;
+    // Keep the visitor on the same section when switching language
+    window.location.assign(LANG_PATH[l] + window.location.hash);
+  };
   return { lang, setLang, t };
 }

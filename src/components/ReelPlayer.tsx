@@ -1,11 +1,14 @@
 "use client";
 
 import { Player, type PlayerRef } from "@remotion/player";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
+import { useLang } from "@/lib/i18n";
 import { SHOWREEL_DURATION, Showreel } from "@/reel/Showreel";
 
-/** Plays the Remotion showreel live in the browser; pauses while off-screen. */
+/** Plays the Remotion showreel live in the browser, in the page's language; pauses while off-screen. */
 export default function ReelPlayer() {
+  const { lang } = useLang();
+  const inputProps = useMemo(() => ({ lang }), [lang]);
   const playerRef = useRef<PlayerRef>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -27,6 +30,7 @@ export default function ReelPlayer() {
       <Player
         ref={playerRef}
         component={Showreel}
+        inputProps={inputProps}
         durationInFrames={SHOWREEL_DURATION}
         fps={30}
         compositionWidth={1920}
