@@ -11,18 +11,27 @@ const mask = (icon: string): CSSProperties => ({
   WebkitMask: `url(/tech/${icon}.svg) center / contain no-repeat`,
 });
 
+/** Monochrome brand marks (pure white or black, like Next.js) would vanish on one of the themes. */
+function isMonochrome(hex: string) {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return luminance > 0.9 || luminance < 0.08;
+}
+
 /** Technology with its brand-colored logo; the underline takes the brand color on hover (.tech-chip). */
 function TechChip({ tech, large }: { tech: Tech; large?: boolean }) {
   const size = large ? "size-5" : "size-4";
+  // Monochrome marks are printed in ink so they read on paper by day and by night
+  const logoColor = isMonochrome(tech.color) ? "currentColor" : tech.color;
   return (
     <li
       className={`tech-chip inline-flex items-center gap-2 border-b border-transparent pb-0.5 text-ink/90 transition-colors ${
         large ? "text-[15px] font-medium" : "text-sm"
       }`}
-      style={{ "--c": tech.color } as CSSProperties}
+      style={{ "--c": logoColor } as CSSProperties}
     >
       {tech.icon ? (
-        <span aria-hidden className={`block shrink-0 ${size}`} style={{ backgroundColor: tech.color, ...mask(tech.icon) }} />
+        <span aria-hidden className={`block shrink-0 ${size}`} style={{ backgroundColor: logoColor, ...mask(tech.icon) }} />
       ) : tech.badge ? (
         <span
           aria-hidden

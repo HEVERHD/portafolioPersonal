@@ -29,6 +29,21 @@
   --font-mono: ui-monospace, monospace;
 }
 
+/* Night mode: set on <html data-theme="dark"> by the theme script in the layout */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+html[data-theme="dark"] {
+  /* Light ink on dark paper; terracotta brightened to keep its contrast */
+  --color-paper: #17150f;
+  --color-paper-2: #221f18;
+  --color-press: #ece6d8;
+  --color-press-muted: #a39c8e;
+  --color-rule: #3a352b;
+  --color-terra: #e2683e;
+  --color-surface: #1c1a14;
+  color-scheme: dark;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;

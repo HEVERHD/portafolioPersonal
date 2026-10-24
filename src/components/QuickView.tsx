@@ -49,7 +49,7 @@ export function QuickView({ open, onClose }: { open: boolean; onClose: () => voi
       }}
       onClick={(e) => e.target === ref.current && onClose()}
       aria-labelledby="quick-view-title"
-      className="m-auto max-h-[92vh] w-[min(760px,calc(100vw-2rem))] overflow-y-auto border border-ink bg-surface p-0 text-ink shadow-2xl backdrop:bg-ink/40"
+      className="m-auto max-h-[92vh] w-[min(760px,calc(100vw-2rem))] overflow-y-auto border border-ink bg-surface p-0 text-ink shadow-2xl backdrop:bg-black/50"
     >
       <div className="p-6 sm:p-10">
         <div className="flex items-start justify-between gap-4">

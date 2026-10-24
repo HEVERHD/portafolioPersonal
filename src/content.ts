@@ -25,8 +25,8 @@ export const ui = {
       en: "Frontend Developer · React · React Native · Next.js",
     },
     pitch: {
-      es: "Llevo apps de producción al siguiente nivel: migré productos completos a React Native y los publiqué en App Store y Google Play. He trabajado en apps que usan millones de personas, y tengo una base sólida en backend con Node.js, NestJS y bases de datos.",
-      en: "I take production apps to the next level: I've migrated full products to React Native and shipped them to the App Store and Google Play. I've worked on apps used by millions of people, and I have a solid backend foundation with Node.js, NestJS and databases.",
+      es: "Desarrollo productos web y móviles listos para producción: he migrado aplicaciones completas a React Native y las he publicado en App Store y Google Play. He trabajado en apps de gran utilidad en sectores como retail y banca, y tengo una base sólida en backend con Node.js, NestJS y bases de datos.",
+      en: "I build web and mobile products ready for production: I've migrated full applications to React Native and shipped them to the App Store and Google Play. I've worked on high-utility apps in sectors such as retail and banking, and I have a solid backend foundation with Node.js, NestJS and databases.",
     },
     ctaPrimary: { es: "Hablemos por WhatsApp", en: "Message me on WhatsApp" },
     ctaSecondary: { es: "Ver proyectos", en: "See my work" },
@@ -70,6 +70,9 @@ export const ui = {
     },
   },
   work: {
+    view: { es: "Vista", en: "View" },
+    cards: { es: "Tarjetas", en: "Cards" },
+    index: { es: "Índice", en: "Index" },
     details: { es: "Ver detalles", en: "View details" },
     features: { es: "Qué construí", en: "What I built" },
     stack: { es: "Stack", en: "Stack" },
@@ -92,10 +95,10 @@ export const ui = {
   liveApp: { es: "App en producción", en: "Live app" },
   remote: {
     eyebrow: { es: "Trabajo remoto", en: "Remote work" },
-    lead: { es: "Zonas horarias distintas, mismo ritmo.", en: "Different time zones, same pace." },
+    lead: { es: "Distintas zonas horarias, el mismo compromiso.", en: "Different time zones, the same commitment." },
     title: {
-      es: "Me integro rápido a equipos remotos: entiendo el negocio, me comunico claro y entrego a tiempo, esté donde esté el cliente.",
-      en: "I ramp up fast on remote teams: I understand the business, communicate clearly and deliver on time, wherever the client is.",
+      es: "Me integro con facilidad a equipos remotos: comprendo las necesidades del negocio, comunico con claridad y cumplo los plazos acordados, sin importar dónde esté el cliente.",
+      en: "I integrate smoothly into remote teams: I understand the needs of the business, communicate clearly and meet agreed deadlines, wherever the client is.",
     },
     // Country cards; hovering or tapping one rotates the globe to its `focus` marker
     places: [
@@ -118,6 +121,10 @@ export const ui = {
   stores: {
     getItOn: { es: "Disponible en", en: "Get it on" },
     downloadOn: { es: "Descárgala en", en: "Download on the" },
+  },
+  theme: {
+    toDark: { es: "Activar modo noche", en: "Switch to night mode" },
+    toLight: { es: "Activar modo día", en: "Switch to day mode" },
   },
   // Recruiter quick view: the whole profile on one screen
   quick: {
@@ -230,8 +237,8 @@ export const jobs: Job[] = [
         name: "Aludra Ventas Asistidas",
         meta: { es: "Cochez y Cía · Panamá · iOS y Android", en: "Cochez y Cía · Panama · iOS & Android" },
         text: {
-          es: "Migré la app completa de Java nativo a React Native, funcionalidad por funcionalidad, y la publiqué en App Store y Google Play.",
-          en: "Migrated the entire app from native Java to React Native, feature by feature, and shipped it to the App Store and Google Play.",
+          es: "Es la app con la que los asesores de Cochez atienden a cada cliente desde el celular, en el piso de venta: buscan productos (incluso por voz o con la cámara), arman cotizaciones e imprimen precios sin tener que ir a un computador. Migré la app completa de Java nativo a React Native, funcionalidad por funcionalidad, y la publiqué en App Store y Google Play.",
+          en: "It's the app Cochez sales associates use to serve each customer from their phone, right on the store floor: they find products (even by voice or camera), build quotes and print price tags without walking to a computer. I migrated the entire app from native Java to React Native, feature by feature, and shipped it to the App Store and Google Play.",
         },
         android: "https://play.google.com/store/apps/details?id=com.hnlappsales",
         ios: "https://apps.apple.com/co/app/aludra-ventas-asistidas/id1525609760",
@@ -294,8 +301,8 @@ export const jobs: Job[] = [
         name: "Chedraui · Tienda en línea",
         meta: { es: "México · 5M+ descargas · 4.2★", en: "Mexico · 5M+ downloads · 4.2★" },
         text: {
-          es: "Desarrollé el login y el home de la app de supermercado: la puerta de entrada y la primera pantalla que ven millones de usuarios.",
-          en: "I built the login and home screens of the supermarket app: the entry point and first screen millions of users see.",
+          es: "Desarrollé el login y el home de la app de supermercado: la puerta de entrada y la primera pantalla que ve cada cliente al abrir la app.",
+          en: "I built the login and home screens of the supermarket app: the entry point and the first screen every customer sees when opening it.",
         },
         android: "https://play.google.com/store/apps/details?id=com.planetmedia.paymentsloyalty.chedraui",
         ios: "https://apps.apple.com/co/app/chedraui-tienda-en-l%C3%ADnea/id1239945600",
@@ -376,12 +383,15 @@ export type Project = {
   featured?: boolean;
   /** Interactive replica shown inside the project dialog. */
   demo?: "faststore";
+  /** Handwritten note drawn over the card's screenshot. */
+  note?: T;
 };
 
 export const projects: Project[] = [
   {
     id: "reservas",
     name: "Sistema de reservas online",
+    note: { es: "confirmación directa por WhatsApp", en: "confirmed straight on WhatsApp" },
     category: "booking",
     kind: { es: "Producto propio · 3 negocios", en: "My own product · 3 businesses" },
     summary: {
@@ -409,6 +419,7 @@ export const projects: Project[] = [
   {
     id: "faststore",
     name: "FastStore Demo",
+    note: { es: "regionalizador + multimoneda", en: "region picker + currencies" },
     category: "store",
     kind: { es: "VTEX FastStore · Demo técnica", en: "VTEX FastStore · Tech demo" },
     summary: {
@@ -431,6 +442,7 @@ export const projects: Project[] = [
   {
     id: "masterpiece",
     name: "Masterpiece CTG",
+    note: { es: "+100 productos, pedidos por WhatsApp", en: "100+ products, WhatsApp orders" },
     category: "store",
     kind: { es: "Tienda de ropa · Cartagena", en: "Fashion store · Cartagena" },
     summary: {
@@ -451,6 +463,7 @@ export const projects: Project[] = [
   {
     id: "majestic",
     name: "Majestic Luxe Jewels",
+    note: { es: "pagos en línea con Wompi", en: "online payments with Wompi" },
     category: "store",
     kind: { es: "Joyería de lujo", en: "Luxury jewelry" },
     summary: {
@@ -471,6 +484,7 @@ export const projects: Project[] = [
   {
     id: "dulces",
     name: "Dulces Detalles ER",
+    note: { es: "pedidos a 2 sucursales", en: "orders routed to 2 branches" },
     category: "store",
     kind: { es: "Regalos personalizados · Cartagena", en: "Custom gifts · Cartagena" },
     summary: {
@@ -492,6 +506,7 @@ export const projects: Project[] = [
   {
     id: "cataplan",
     name: "CataPlan",
+    note: { es: "reservas desde el celular", en: "book right from your phone" },
     category: "brand",
     kind: { es: "Turismo · Cartagena", en: "Travel · Cartagena" },
     summary: {
@@ -659,8 +674,8 @@ export const stack: StackGroup[] = [
 
 export const about = {
   text: {
-    es: "Frontend con 5+ años en producción, React Native en App Store y Google Play, apps con millones de usuarios y base sólida en backend. Lo que mejor hago: tomar un producto que funciona a medias y dejarlo listo para escalar.",
-    en: "Frontend developer with 5+ years in production, React Native apps on the App Store and Google Play, products used by millions and a solid backend foundation. What I do best: take a product that half works and make it ready to scale.",
+    es: "Soy desarrollador frontend, con más de cinco años llevando productos a producción. He publicado apps en App Store y Google Play, he trabajado en soluciones de retail y banca, y tengo una base sólida en backend. Lo que más disfruto es tomar un producto que funciona a medias y dejarlo listo para crecer.",
+    en: "I'm a frontend developer with more than five years taking products to production. I've shipped apps to the App Store and Google Play, worked on retail and banking solutions, and have a solid backend foundation. What I enjoy most is taking a product that half works and making it ready to grow.",
   },
   education: [
     {

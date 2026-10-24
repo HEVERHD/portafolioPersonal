@@ -70,7 +70,7 @@ export function Hero() {
                 <path d="M38 30l9 5 2-10" />
               </svg>
             </div>
-            <div className="border border-rule bg-paper-2 p-2.5 shadow-[0_1px_0_#d6cfbf]">
+            <div className="border border-rule bg-paper-2 p-2.5">
               <img
                 src="/hevert-studio.jpg"
                 alt="Hevert Gelis en su estudio"
@@ -107,7 +107,7 @@ export function Hero() {
                   alt={b.name}
                   title={b.name}
                   style={{ height: `calc(clamp(22px, 2.2vw, 30px) * ${b.scale})` }}
-                  className="w-auto max-w-none opacity-70 brightness-0 transition-opacity hover:opacity-100"
+                  className="w-auto max-w-none opacity-70 brightness-0 transition-opacity hover:opacity-100 dark:invert"
                 />
               </li>
             ))}

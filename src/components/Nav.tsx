@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ui } from "@/content";
 import { useLang } from "@/lib/i18n";
+import { useTheme } from "@/lib/theme";
 import { QuickView } from "./QuickView";
 
 const links = [
@@ -17,6 +18,8 @@ export function Nav() {
   const { lang, setLang, t } = useLang();
   const [open, setOpen] = useState(false);
   const [quick, setQuick] = useState(false);
+  const { theme, toggle } = useTheme();
+  const themeLabel = t(theme === "dark" ? ui.theme.toLight : ui.theme.toDark);
 
   return (
     <>
@@ -57,6 +60,18 @@ export function Nav() {
               </span>
             ))}
           </div>
+          {/* Half-filled circle: ink on paper by day, paper on ink by night */}
+          <button
+            onClick={toggle}
+            aria-label={themeLabel}
+            title={themeLabel}
+            className="grid size-8 place-items-center text-press-muted transition-colors hover:text-terra"
+          >
+            <svg viewBox="0 0 24 24" className="size-[18px]" aria-hidden>
+              <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
+              <path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" />
+            </svg>
+          </button>
           <button
             className="grid size-9 place-items-center border border-rule md:hidden"
             onClick={() => setOpen(!open)}

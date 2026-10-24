@@ -5,7 +5,9 @@ import { categories, projects, ui, type Category, type Project } from "@/content
 import { useLang } from "@/lib/i18n";
 import { ArrowUpRight, Check } from "./icons";
 import { FastStoreDemo } from "./FastStoreDemo";
+import { HandNote } from "./HandNote";
 import { LighthouseScores } from "./LighthouseScores";
+import { ProjectIndex } from "./ProjectIndex";
 import { Eyebrow, Section, Tags } from "./Section";
 
 /** Phone mockup. `hoverScroll` pans the page on parent hover; `scrollable` lets the visitor scroll it. */
@@ -92,6 +94,13 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
             className={`absolute right-[5%] bottom-[-18%] w-[24%] transition-transform duration-500 group-hover:-translate-y-[8%] ${
               featured ? "md:bottom-[6%] md:w-[26%]" : ""
             }`}
+          />
+        )}
+        {/* Handwritten note pointing at the phone mockup */}
+        {project.note && project.mobile && (
+          <HandNote
+            text={t(project.note)}
+            className={`absolute right-[29%] bottom-[14%] z-10 ${featured ? "md:right-[32%] md:bottom-[24%]" : ""}`}
           />
         )}
       </div>
@@ -223,7 +232,7 @@ function ProjectDialog({ list, index, onClose, onNavigate }: {
         onClose();
       }}
       onClick={(e) => e.target === ref.current && onClose()}
-      className="m-auto max-h-[92vh] w-[min(1100px,calc(100vw-2rem))] overflow-hidden border border-ink bg-surface p-0 text-ink shadow-2xl backdrop:bg-ink/40"
+      className="m-auto max-h-[92vh] w-[min(1100px,calc(100vw-2rem))] overflow-hidden border border-ink bg-surface p-0 text-ink shadow-2xl backdrop:bg-black/50"
       aria-labelledby="project-dialog-title"
     >
       {project && (
@@ -350,6 +359,7 @@ export function Work() {
   const { t } = useLang();
   const [filter, setFilter] = useState<Category | "all">("all");
   const [open, setOpen] = useState<number | null>(null);
+  const [view, setView] = useState<"cards" | "index">("cards");
 
   const visible = projects.filter((p) => filter === "all" || p.category === filter);
   const showcase = visible.filter((p) => p.category !== "internal");
@@ -359,6 +369,23 @@ export function Work() {
 
   return (
     <Section id="proyectos" eyebrow={t(ui.sections.work)} title={t(ui.sections.workTitle)}>
+      {/* Card or index view */}
+      <div className="mb-6 flex items-center gap-3 text-sm" role="group" aria-label={t(ui.work.view)}>
+        <span className="text-muted">{t(ui.work.view)}:</span>
+        {(["cards", "index"] as const).map((v, i) => (
+          <span key={v} className="flex items-center gap-3">
+            {i > 0 && <span aria-hidden className="text-line">/</span>}
+            <button
+              onClick={() => setView(v)}
+              aria-pressed={view === v}
+              className={view === v ? "font-semibold text-ink underline decoration-accent underline-offset-4" : "text-muted hover:text-ink"}
+            >
+              {t(ui.work[v])}
+            </button>
+          </span>
+        ))}
+      </div>
+
       {/* Filters */}
       <div className="-mx-4 overflow-x-auto px-4 [scrollbar-width:none] sm:mx-0 sm:px-0">
         <div className="flex w-max gap-6 border-b border-line" role="group" aria-label={t(ui.sections.work)}>
@@ -380,7 +407,13 @@ export function Work() {
         </div>
       </div>
 
-      {showcase.length > 0 && (
+      {view === "index" && (
+        <div className="mt-8">
+          <ProjectIndex projects={[...showcase, ...internal]} onOpen={(p) => setOpen(showcase.indexOf(p))} />
+        </div>
+      )}
+
+      {view === "cards" && showcase.length > 0 && (
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {showcase.map((p, i) => (
             <ProjectCard key={p.id} project={p} onOpen={() => setOpen(i)} />
@@ -388,7 +421,7 @@ export function Work() {
         </div>
       )}
 
-      {internal.length > 0 && (
+      {view === "cards" && internal.length > 0 && (
         <>
           {filter === "all" && (
             <Eyebrow className="mt-14">{t(ui.sections.internal)}</Eyebrow>

@@ -2,6 +2,7 @@
 
 import createGlobe, { type Arc, type Marker } from "cobe";
 import { useEffect, useRef } from "react";
+import { useTheme, type Theme } from "@/lib/theme";
 
 export type GlobePlace = {
   id: string;
@@ -19,9 +20,13 @@ type Props = {
   className?: string;
 };
 
-// Terracotta markers on a paper-colored globe, matching the site palette
-const NEON: [number, number, number] = [0.77, 0.28, 0.11];
-const DIM: [number, number, number] = [0.72, 0.68, 0.6];
+type RGB = [number, number, number];
+
+// Terracotta markers on a paper-colored globe, matching the site palette in each theme
+const PALETTE: Record<Theme, { marker: RGB; dim: RGB; base: RGB; glow: RGB; dark: number; brightness: number }> = {
+  light: { marker: [0.77, 0.28, 0.11], dim: [0.72, 0.68, 0.6], base: [0.91, 0.89, 0.84], glow: [0.95, 0.94, 0.9], dark: 0, brightness: 2 },
+  dark: { marker: [0.89, 0.41, 0.24], dim: [0.4, 0.37, 0.32], base: [0.22, 0.2, 0.16], glow: [0.12, 0.11, 0.09], dark: 1, brightness: 4 },
+};
 const CENTER_LNG = -80;
 const SWAY = 0.55;
 const TAU = Math.PI * 2;
@@ -31,7 +36,8 @@ const toPhi = (lng: number) => Math.PI - ((lng * Math.PI) / 180 - Math.PI / 2);
 // Shortest signed angle from a to b, so easing never unwinds extra turns after a long drag
 const angleDelta = (a: number, b: number) => ((((b - a + Math.PI) % TAU) + TAU) % TAU) - Math.PI;
 
-function markersAndArcs(places: GlobePlace[], homeId: string, focusId: string | null) {
+function markersAndArcs(places: GlobePlace[], homeId: string, focusId: string | null, theme: Theme) {
+  const { marker, dim } = PALETTE[theme];
   const home = places.find((p) => p.id === homeId)!;
   // Focusing home keeps every route lit; focusing elsewhere dims the other routes
   const dimOthers = focusId !== null && focusId !== homeId;
@@ -39,7 +45,7 @@ function markersAndArcs(places: GlobePlace[], homeId: string, focusId: string | 
     id: p.id,
     location: p.location,
     size: p.id === focusId ? 0.09 : p.id === homeId ? 0.07 : 0.05,
-    color: dimOthers && p.id !== focusId && p.id !== homeId ? DIM : NEON,
+    color: dimOthers && p.id !== focusId && p.id !== homeId ? dim : marker,
   }));
   const arcs: Arc[] = places
     .filter((p) => p.id !== homeId)
@@ -47,7 +53,7 @@ function markersAndArcs(places: GlobePlace[], homeId: string, focusId: string | 
       id: `${homeId}-${p.id}`,
       from: home.location,
       to: p.location,
-      color: dimOthers && p.id !== focusId ? DIM : NEON,
+      color: dimOthers && p.id !== focusId ? dim : marker,
     }));
   return { markers, arcs };
 }
@@ -61,10 +67,15 @@ export function Globe({ places, homeId, focusId, className = "" }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const globeRef = useRef<ReturnType<typeof createGlobe> | null>(null);
   const focusRef = useRef(focusId);
+  const { theme } = useTheme();
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
 
+  // Recreated when the theme changes, since cobe takes its colors at creation time
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const palette = PALETTE[theme];
     const size = canvas.offsetWidth;
     const dpr = Math.min(window.devicePixelRatio, 2);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -77,16 +88,16 @@ export function Globe({ places, homeId, focusId, className = "" }: Props) {
       height: size * dpr,
       phi,
       theta: 0.28,
-      dark: 0,
+      dark: palette.dark,
       diffuse: 1.2,
       mapSamples: 16000,
-      mapBrightness: 2,
+      mapBrightness: palette.brightness,
       mapBaseBrightness: 0,
-      baseColor: [0.91, 0.89, 0.84],
-      markerColor: NEON,
-      glowColor: [0.95, 0.94, 0.9],
-      ...markersAndArcs(places, homeId, focusRef.current),
-      arcColor: NEON,
+      baseColor: palette.base,
+      markerColor: palette.marker,
+      glowColor: palette.glow,
+      ...markersAndArcs(places, homeId, focusRef.current, theme),
+      arcColor: palette.marker,
       arcWidth: 0.6,
       arcHeight: 0.25,
       markerElevation: 0.02,
@@ -162,12 +173,12 @@ export function Globe({ places, homeId, focusId, className = "" }: Props) {
       globeRef.current = null;
     };
     // places/homeId are static for the lifetime of the globe
-  }, []);
+  }, [theme]);
 
   // Highlight the focused place and dim the rest
   useEffect(() => {
     focusRef.current = focusId;
-    globeRef.current?.update(markersAndArcs(places, homeId, focusId));
+    globeRef.current?.update(markersAndArcs(places, homeId, focusId, themeRef.current));
   }, [focusId, places, homeId]);
 
   // Per-place label styles, anchored to cobe's --cobe-{id} anchors (hidden where unsupported).

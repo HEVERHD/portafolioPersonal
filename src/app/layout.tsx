@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Caveat, Fraunces, Instrument_Sans } from "next/font/google";
 import { LANGUAGE_ALTERNATES, SITE_DESCRIPTION, SITE_TITLE, SITE_URL, structuredData } from "@/lib/site";
+import { THEME_SCRIPT } from "@/lib/theme-script";
 import "./globals.css";
 
 // Editorial identity: serif headlines, plain sans body, a handwritten accent
@@ -33,7 +34,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${fraunces.variable} ${instrument.variable} ${caveat.variable}`}>
+    // data-theme is set by THEME_SCRIPT before React hydrates, so the attribute is expected to differ
+    <html lang="es" className={`${fraunces.variable} ${instrument.variable} ${caveat.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>
         <script
           type="application/ld+json"
