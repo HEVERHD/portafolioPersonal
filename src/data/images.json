@@ -1,0 +1,32 @@
+{
+  "logos": {
+    "/brands/aludra.png": {
+      "width": 518,
+      "height": 120
+    },
+    "/brands/bancolombia.png": {
+      "width": 510,
+      "height": 120
+    },
+    "/brands/chedraui.png": {
+      "width": 642,
+      "height": 120
+    },
+    "/brands/cochez.png": {
+      "width": 445,
+      "height": 120
+    },
+    "/brands/morado.png": {
+      "width": 458,
+      "height": 120
+    },
+    "/brands/pepeganga.png": {
+      "width": 274,
+      "height": 120
+    },
+    "/brands/scanovate.png": {
+      "width": 499,
+      "height": 120
+    }
+  }
+}

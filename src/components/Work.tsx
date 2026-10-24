@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { categories, projects, ui, type Category, type Project } from "@/content";
 import { useLang } from "@/lib/i18n";
 import { ArrowUpRight, Check } from "./icons";
+import { BookingDemo } from "./BookingDemo";
 import { FastStoreDemo } from "./FastStoreDemo";
 import { HandNote } from "./HandNote";
 import { LighthouseScores } from "./LighthouseScores";
+import { Picture } from "./Picture";
 import { ProjectIndex } from "./ProjectIndex";
 import { Eyebrow, Section, Tags } from "./Section";
 
@@ -76,12 +78,13 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
     >
       {/* Media: desktop capture with the phone version on top */}
       <div className={`relative overflow-hidden bg-surface-2 ${featured ? "md:order-2 md:min-h-full" : ""}`}>
-        <img
-          src={project.desktop}
+        <Picture
+          src={project.desktop!}
+          widths={[600, 1200]}
+          sizes={featured ? "(min-width: 768px) 620px, 95vw" : "(min-width: 768px) 540px, 95vw"}
           alt={project.name}
           width={1200}
           height={750}
-          loading="lazy"
           className={`w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03] ${
             featured ? "aspect-[16/10] md:absolute md:inset-0 md:aspect-auto md:size-full" : "aspect-[16/10]"
           }`}
@@ -240,10 +243,14 @@ function ProjectDialog({ list, index, onClose, onNavigate }: {
           {/* Media */}
           <div className="relative flex items-center justify-center gap-6 bg-surface-2 p-6 md:p-8">
             {project.desktop && (
-              <img
+              <Picture
                 src={project.desktop}
+                widths={[600, 1200]}
+                sizes="(min-width: 768px) 520px, 60vw"
                 alt={project.name}
-                className="hidden w-[68%] border border-line shadow-lg shadow-black/10 sm:block"
+                width={1200}
+                height={750}
+                className="hidden h-auto w-[68%] border border-line shadow-lg shadow-black/10 sm:block"
               />
             )}
             {project.mobile && (
@@ -297,10 +304,8 @@ function ProjectDialog({ list, index, onClose, onNavigate }: {
               <LighthouseScores projectId={project.id} detailed />
             </div>
 
-            {project.demo === "faststore" && (
-              <div className="mt-6">
-                <FastStoreDemo />
-              </div>
+            {project.demo && (
+              <div className="mt-6">{project.demo === "faststore" ? <FastStoreDemo /> : <BookingDemo />}</div>
             )}
 
             <div className="mt-6 space-y-4">

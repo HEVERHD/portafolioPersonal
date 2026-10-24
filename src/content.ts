@@ -160,6 +160,22 @@ export const ui = {
     time: { es: "en Bogotá", en: "in Bogotá" },
     lastCommit: { es: "Último commit:", en: "Last commit:" },
   },
+  // Interactive replica of the booking system inside its project dialog
+  booking: {
+    title: { es: "Pruébalo aquí", en: "Try it here" },
+    note: {
+      es: "Réplica con datos de ejemplo: no se envía nada. Así llega una reserva al WhatsApp del negocio.",
+      en: "Replica with sample data: nothing is sent. This is how a booking reaches the business on WhatsApp.",
+    },
+    service: { es: "1. Servicio", en: "1. Service" },
+    day: { es: "2. Día", en: "2. Day" },
+    time: { es: "3. Hora", en: "3. Time" },
+    taken: { es: "ocupado", en: "taken" },
+    pick: { es: "Elige servicio, día y hora para ver el mensaje.", en: "Pick a service, day and time to see the message." },
+    greeting: { es: "Hola Frailin Studio, quiero reservar:", en: "Hi Frailin Studio, I'd like to book:" },
+    confirmed: { es: "✅ ¡Listo! Tu cita quedó confirmada. Te esperamos.", en: "✅ Done! Your appointment is confirmed. See you soon." },
+    minutes: { es: "min", en: "min" },
+  },
   // Interactive replica of the FastStore demo inside its project dialog
   demo: {
     title: { es: "Pruébalo aquí", en: "Try it here" },
@@ -382,7 +398,7 @@ export type Project = {
   codeUrl?: string;
   featured?: boolean;
   /** Interactive replica shown inside the project dialog. */
-  demo?: "faststore";
+  demo?: "faststore" | "booking";
   /** Handwritten note drawn over the card's screenshot. */
   note?: T;
 };
@@ -415,6 +431,7 @@ export const projects: Project[] = [
       { name: "StyleCut (demo)", url: "https://barberia-demo-eta.vercel.app" },
     ],
     featured: true,
+    demo: "booking",
   },
   {
     id: "faststore",

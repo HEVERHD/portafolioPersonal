@@ -2,6 +2,7 @@
 
 import { about, ui } from "@/content";
 import { useLang } from "@/lib/i18n";
+import { Picture } from "./Picture";
 import { Section } from "./Section";
 
 export function About() {
@@ -12,12 +13,13 @@ export function About() {
       <div className="grid items-start gap-10 md:grid-cols-[minmax(0,340px)_1fr] md:gap-16">
         {/* Same printed frame as the hero portrait */}
         <div className="w-full max-w-sm border border-line bg-surface-2 p-2.5">
-          <img
+          <Picture
             src="/hevert-pro.jpg"
+            widths={[480, 720, 900]}
+            sizes="(min-width: 768px) 340px, 90vw"
             alt="Hevert Gelis"
             width={900}
             height={1350}
-            loading="lazy"
             className="aspect-[4/5] w-full object-cover object-top"
           />
         </div>

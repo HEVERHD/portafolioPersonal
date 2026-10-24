@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Project } from "@/content";
 import { useLang } from "@/lib/i18n";
 import { ArrowUpRight } from "./icons";
+import { Picture } from "./Picture";
 
 const PREVIEW_W = 360;
 
@@ -60,11 +61,14 @@ export function ProjectIndex({ projects, onOpen }: { projects: Project[]; onOpen
               </span>
               {/* Touch screens: thumbnail instead of the floating preview */}
               {p.desktop && (
-                <img
+                <Picture
                   src={p.desktop}
+                  widths={[600]}
+                  sizes="96px"
                   alt=""
-                  loading="lazy"
-                  className="hidden aspect-[16/10] w-24 shrink-0 border border-line object-cover object-top [@media(pointer:coarse)]:block"
+                  width={1200}
+                  height={750}
+                  className="hidden aspect-[16/10] h-auto w-24 shrink-0 border border-line object-cover object-top [@media(pointer:coarse)]:block"
                 />
               )}
               <span className="min-w-0 flex-1">
@@ -116,7 +120,17 @@ export function ProjectIndex({ projects, onOpen }: { projects: Project[]; onOpen
         }`}
         style={{ width: PREVIEW_W }}
       >
-        {hovered?.desktop && <img src={hovered.desktop} alt="" className="aspect-[16/10] w-full object-cover object-top" />}
+        {hovered?.desktop && (
+          <Picture
+            src={hovered.desktop}
+            widths={[600, 1200]}
+            sizes={`${PREVIEW_W}px`}
+            alt=""
+            width={1200}
+            height={750}
+            className="aspect-[16/10] h-auto w-full object-cover object-top"
+          />
+        )}
       </div>
     </div>
   );

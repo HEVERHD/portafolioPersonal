@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { ui } from "@/content";
 import { useLang } from "@/lib/i18n";
+import { Picture } from "./Picture";
 
 const ReelPlayer = dynamic(() => import("./ReelPlayer"), { ssr: false });
 
@@ -36,8 +37,10 @@ export function Showreel() {
       <div className="border border-line bg-surface-2 p-2.5">
         <div ref={ref} className="relative overflow-hidden">
           {/* Poster keeps the layout stable and is the reduced-motion fallback */}
-          <img
+          <Picture
             src={lang === "en" ? "/reel/poster-en.jpg" : "/reel/poster.jpg"}
+            widths={[800, 1280]}
+            sizes="(min-width: 1152px) 1100px, 95vw"
             alt={t(ui.showreel.alt)}
             width={1280}
             height={720}

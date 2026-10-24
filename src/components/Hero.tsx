@@ -1,9 +1,11 @@
 "use client";
 
 import { brands, contact, ui } from "@/content";
+import images from "@/data/images.json";
 import { useLang } from "@/lib/i18n";
 import { ArrowUpRight, Download, WhatsApp } from "./icons";
 import { NowLine } from "./NowLine";
+import { Picture } from "./Picture";
 
 export function Hero() {
   const { t } = useLang();
@@ -71,12 +73,16 @@ export function Hero() {
               </svg>
             </div>
             <div className="border border-rule bg-paper-2 p-2.5">
-              <img
+              {/* The page's largest element: served first and in AVIF/WebP */}
+              <Picture
                 src="/hevert-studio.jpg"
+                widths={[480, 720, 900]}
+                sizes="(min-width: 1024px) 440px, (min-width: 640px) 384px, 90vw"
                 alt="Hevert Gelis en su estudio"
                 width={900}
                 height={1350}
                 className="aspect-[4/5] w-full object-cover object-[50%_20%]"
+                priority
               />
             </div>
             <figcaption className="mt-3 text-right text-xs text-press-muted">{t(ui.hero.location)}</figcaption>
@@ -103,9 +109,14 @@ export function Hero() {
             {brands.map((b) => (
               <li key={b.name}>
                 <img
-                  src={b.logo}
+                  src={b.logo.replace(/^\/brands\/(.+)\.png$/, "/img/$1.webp")}
                   alt={b.name}
                   title={b.name}
+                  // Intrinsic size lets the browser reserve the space before the logo loads
+                  width={images.logos[b.logo as keyof typeof images.logos]?.width}
+                  height={images.logos[b.logo as keyof typeof images.logos]?.height}
+                  loading="lazy"
+                  decoding="async"
                   style={{ height: `calc(clamp(22px, 2.2vw, 30px) * ${b.scale})` }}
                   className="w-auto max-w-none opacity-70 brightness-0 transition-opacity hover:opacity-100 dark:invert"
                 />
