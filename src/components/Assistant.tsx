@@ -2,22 +2,32 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { ui } from "@/content";
+import { answer } from "@/lib/answers";
 import { useLang, useRole } from "@/lib/i18n";
 import { Mascot } from "./Mascot";
 
-/** Cloud Run service in /assistant. Without it (e.g. a preview build) the assistant isn't shown. */
+/**
+ * Optional Cloud Run service in /assistant (answers with Claude). Without it, Tinta answers from the
+ * portfolio's own data right in the browser (src/lib/answers.ts): no server and no cost.
+ */
 const ENDPOINT = process.env.NEXT_PUBLIC_ASSISTANT_URL?.replace(/\/$/, "");
 const NOTE_KEY = "assistant-note-seen";
 const MAX_CHARS = 600;
 
 type Message = { role: "user" | "assistant"; content: string };
 
+/** "https://play.google.com/store/apps/details?id=…" reads as "play.google.com/…"; short links stay whole. */
+function shortUrl(url: string) {
+  const bare = url.replace(/^https:\/\/(www\.)?/, "");
+  return bare.length > 32 ? `${bare.split("/")[0]}/…` : bare;
+}
+
 /** Turns plain URLs in an answer into links; everything else stays text, so nothing is rendered as HTML. */
 function Linkified({ text }: { text: string }) {
   return text.split(/(https:\/\/[^\s)]+[^\s).,;:!?])/g).map((part, i) =>
     i % 2 ? (
       <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="break-all underline decoration-terra underline-offset-2 hover:text-terra">
-        {part.replace(/^https:\/\/(www\.)?/, "")}
+        {shortUrl(part)}
       </a>
     ) : (
       part
@@ -30,7 +40,7 @@ function Linkified({ text }: { text: string }) {
  * assistant service, grounded on the same data as the site.
  */
 export function Assistant() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
   const role = useRole();
   const id = useId();
   const [open, setOpen] = useState(false);
@@ -64,8 +74,6 @@ export function Assistant() {
 
   useEffect(() => () => abortRef.current?.abort(), []);
 
-  if (!ENDPOINT) return null;
-
   const toggle = () => {
     setOpen((o) => !o);
     setShowNote(false);
@@ -85,6 +93,22 @@ export function Assistant() {
 
     const controller = new AbortController();
     abortRef.current = controller;
+
+    if (!ENDPOINT) {
+      // Local answers are instant; typing them out a few words at a time keeps Tinta feeling alive
+      const full = answer(q, lang);
+      const words = full.split(/(?<=\s)/);
+      let shown = "";
+      for (let i = 0; i < words.length; i += 3) {
+        if (controller.signal.aborted) return;
+        shown += words.slice(i, i + 3).join("");
+        setMessages([...history, { role: "assistant", content: shown }]);
+        await new Promise((r) => setTimeout(r, 30));
+      }
+      setBusy(false);
+      return;
+    }
+
     try {
       const res = await fetch(`${ENDPOINT}/chat`, {
         method: "POST",
@@ -204,7 +228,7 @@ export function Assistant() {
                 {t(ui.assistant.send)}
               </button>
             </div>
-            <p className="mt-2 text-[11px] leading-snug text-press-muted">{t(ui.assistant.disclaimer)}</p>
+            <p className="mt-2 text-[11px] leading-snug text-press-muted">{t(ENDPOINT ? ui.assistant.disclaimer : ui.assistant.disclaimerLocal)}</p>
           </form>
         </section>
       )}

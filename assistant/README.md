@@ -2,6 +2,8 @@
 
 Servicio pequeño que responde preguntas sobre Hevert con **Claude Haiku 5.5**, usando solo lo que dice el portafolio. Lo usa el chat de Tinta (`src/components/Assistant.tsx`) y corre en **Google Cloud Run**.
 
+Es **opcional**: mientras el portafolio no tenga `NEXT_PUBLIC_ASSISTANT_URL`, Tinta responde en el navegador con `src/lib/answers.ts`, que busca en los mismos datos del sitio, sin IA, sin servidor y sin costo.
+
 - `knowledge.md`: todo lo que sabe el asistente. Se genera desde `src/content.ts` y `src/roles.ts` con `npm run assistant:knowledge` (desde la raíz del portafolio). No se edita a mano.
 - `server.mjs`: `POST /chat` responde en streaming; `GET /health` dice si está en modo `live` o `demo`.
 - Protecciones: límite de 20 preguntas por hora por visitante, preguntas de hasta 600 caracteres, historial de hasta 12 turnos, CORS solo para los orígenes permitidos y respuestas de máximo 700 tokens. Los logs guardan solo el consumo de tokens, nunca el texto de las conversaciones.

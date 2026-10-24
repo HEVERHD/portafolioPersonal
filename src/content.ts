@@ -61,6 +61,10 @@ export const ui = {
       es: "Respuestas generadas con IA a partir de este portafolio; pueden tener errores. No guardo la conversación.",
       en: "AI-generated answers based on this portfolio; they may contain mistakes. The conversation isn't stored.",
     },
+    disclaimerLocal: {
+      es: "Respuestas automáticas armadas con la información de este portafolio. Para algo más específico, escríbele a Hevert.",
+      en: "Automatic answers built from this portfolio's information. For anything more specific, message Hevert.",
+    },
     placeholder: { es: "Escribe tu pregunta…", en: "Type your question…" },
     send: { es: "Enviar", en: "Send" },
     thinking: { es: "Tinta está escribiendo…", en: "Tinta is typing…" },
