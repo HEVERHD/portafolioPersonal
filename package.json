@@ -12,6 +12,7 @@
     "reel": "remotion studio",
     "lighthouse": "node --env-file-if-exists=.env.local --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/lighthouse.mjs",
     "images": "node scripts/optimize-images.mjs",
+    "icons": "node scripts/icons.mjs",
     "cv": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON cv/build.mjs",
     "assistant:knowledge": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/assistant-knowledge.mjs"
   },
