@@ -499,6 +499,7 @@ export const projects: Project[] = [
     tags: ["VTEX FastStore", "Next.js", "TypeScript", "GraphQL", "Sass"],
     desktop: "/projects/faststore.jpg",
     mobile: "/reel/screens/faststore.jpg",
+    url: "https://faststore-demo-x2dr.vercel.app/",
     codeUrl: "https://github.com/HEVERHD/faststore-demo",
     demo: "faststore",
   },

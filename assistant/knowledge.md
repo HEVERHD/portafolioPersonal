@@ -68,7 +68,7 @@ Tienda headless sobre VTEX FastStore con Next.js y GraphQL: regionalizador por c
 - Tema propio con design tokens en Sass
 - Contenido del Headless CMS traducido al español
 Tecnologías: VTEX FastStore, Next.js, TypeScript, GraphQL, Sass
-Enlaces: Código: https://github.com/HEVERHD/faststore-demo
+Enlaces: Sitio: https://faststore-demo-x2dr.vercel.app/ · Código: https://github.com/HEVERHD/faststore-demo
 
 ### Masterpiece CTG (Tienda de ropa · Cartagena)
 Tienda de ropa y accesorios con más de 100 productos, pedidos por WhatsApp y un panel para que el dueño administre su catálogo.

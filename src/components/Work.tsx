@@ -150,7 +150,7 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void
               {t(ui.visit)} <ArrowUpRight className="size-3.5" />
             </a>
           )}
-          {!project.url && project.codeUrl && (
+          {project.codeUrl && (
             <a
               href={project.codeUrl}
               target="_blank"
@@ -311,26 +311,31 @@ function ProjectDialog({ list, index, onClose, onNavigate }: {
 
             <div className="mt-6 space-y-4">
               <LiveLinks project={project} />
-              {project.url && !project.live && (
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-ink px-5 py-3 text-sm font-semibold text-bg transition-colors hover:bg-accent"
-                >
-                  {t(ui.visit)} <ArrowUpRight />
-                </a>
-              )}
-              {!project.url && project.codeUrl && (
-                <a
-                  href={project.codeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-ink px-5 py-3 text-sm font-semibold text-bg transition-colors hover:bg-accent"
-                >
-                  {t(ui.code)} <ArrowUpRight />
-                </a>
-              )}
+              <div className="flex flex-wrap gap-3">
+                {project.url && !project.live && (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-ink px-5 py-3 text-sm font-semibold text-bg transition-colors hover:bg-accent"
+                  >
+                    {t(ui.visit)} <ArrowUpRight />
+                  </a>
+                )}
+                {/* The code is the main link when there's no live site, a secondary one otherwise */}
+                {project.codeUrl && (
+                  <a
+                    href={project.codeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold transition-colors ${
+                      project.url ? "border border-ink text-ink hover:border-accent hover:text-accent" : "bg-ink text-bg hover:bg-accent"
+                    }`}
+                  >
+                    {t(ui.code)} <ArrowUpRight />
+                  </a>
+                )}
+              </div>
             </div>
 
             {list.length > 1 && (
