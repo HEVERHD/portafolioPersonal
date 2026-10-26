@@ -4,6 +4,15 @@ export type ReelLang = "es" | "en";
 export const copy = {
   es: {
     intro: { eyebrow: "Hevert Gelis · Desarrollador frontend", lead: "Apps reales.", accent: "Negocios reales." },
+    production: {
+      eyebrow: "En producción",
+      title: "Apps que se usan a diario",
+      apps: [
+        { name: "Chedraui", detail: "México · login y home · 5M+ descargas" },
+        { name: "Pepe Ganga", detail: "Colombia · pagos en línea" },
+        { name: "Aludra", detail: "Panamá · de Java a React Native" },
+      ],
+    },
     booking: {
       eyebrow: "Producto propio",
       title: "Sistema de reservas",
@@ -23,6 +32,15 @@ export const copy = {
   },
   en: {
     intro: { eyebrow: "Hevert Gelis · Frontend developer", lead: "Real apps.", accent: "Real businesses." },
+    production: {
+      eyebrow: "In production",
+      title: "Apps people use every day",
+      apps: [
+        { name: "Chedraui", detail: "Mexico · login and home · 5M+ downloads" },
+        { name: "Pepe Ganga", detail: "Colombia · online payments" },
+        { name: "Aludra", detail: "Panama · from Java to React Native" },
+      ],
+    },
     booking: {
       eyebrow: "My own product",
       title: "Booking system",

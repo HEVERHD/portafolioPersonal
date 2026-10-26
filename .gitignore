@@ -7,3 +7,6 @@ next-env.d.ts
 .DS_Store
 npm-debug.log*
 cv/cv-data.js
+
+# Raw screen recordings: only the rendered, redacted clips in public/reel/clips are published
+public/reel/raw/

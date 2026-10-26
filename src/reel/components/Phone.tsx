@@ -1,16 +1,18 @@
-import { Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
+import { Easing, Img, interpolate, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from "remotion";
 
 const VIEWPORT_W = 390;
 const VIEWPORT_H = 844;
 const BEZEL = 14;
 
 type Props = {
-  /** File in public/screens, captured at a 390px-wide mobile viewport. */
-  readonly screen: string;
+  /** File in public/reel/screens, captured at a 390px-wide mobile viewport. */
+  readonly screen?: string;
+  /** Or a screen recording in public/reel/clips, played from the moment the phone appears. */
+  readonly video?: string;
   /** Rendered width of the whole device, bezel included. */
   readonly width: number;
-  /** How far to scroll the page, in CSS pixels of the original 390px viewport. */
-  readonly scroll: number;
+  /** How far to scroll the screenshot, in CSS pixels of the original 390px viewport. */
+  readonly scroll?: number;
   /** Frame at which the phone starts entering. */
   readonly delay: number;
   /** Frame at which scrolling ends; usually the scene length. */
@@ -19,10 +21,10 @@ type Props = {
 };
 
 /**
- * A phone mockup showing a full-page mobile screenshot that scrolls slowly,
- * as if someone were browsing the live site.
+ * A phone mockup showing either a full-page mobile screenshot that scrolls slowly, as if
+ * someone were browsing the live site, or a screen recording of the app.
  */
-export const Phone = ({ screen, width, scroll, delay, until, tilt = 0 }: Props) => {
+export const Phone = ({ screen, video, width, scroll = 0, delay, until, tilt = 0 }: Props) => {
   const frame = useCurrentFrame();
   const screenW = width - BEZEL * 2;
   const screenH = (screenW * VIEWPORT_H) / VIEWPORT_W;
@@ -60,38 +62,48 @@ export const Phone = ({ screen, width, scroll, delay, until, tilt = 0 }: Props) 
           background: "#000",
         }}
       >
-        <Img
-          src={staticFile(`reel/screens/${screen}`)}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: screenW,
-            translate: interpolate(
-              frame,
-              [delay + 30, until - 10],
-              ["0px 0px", `0px ${-scroll * scale}px`],
-              {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-                easing: Easing.bezier(0.45, 0, 0.25, 1),
-              },
-            ),
-          }}
-        />
-        {/* Dynamic island */}
-        <div
-          style={{
-            position: "absolute",
-            top: 12,
-            left: "50%",
-            translate: "-50% 0px",
-            width: screenW * 0.3,
-            height: 30,
-            borderRadius: 20,
-            background: "#000",
-          }}
-        />
+        {/* OffthreadVideo plays a plain <video> in the site's Player and uses ffmpeg when rendering */}
+        {video && (
+          <Sequence from={delay} layout="none">
+            <OffthreadVideo src={staticFile(`reel/clips/${video}`)} muted style={{ width: screenW, height: screenH, objectFit: "cover" }} />
+          </Sequence>
+        )}
+        {screen && (
+          <Img
+            src={staticFile(`reel/screens/${screen}`)}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: screenW,
+              translate: interpolate(
+                frame,
+                [delay + 30, until - 10],
+                ["0px 0px", `0px ${-scroll * scale}px`],
+                {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                  easing: Easing.bezier(0.45, 0, 0.25, 1),
+                },
+              ),
+            }}
+          />
+        )}
+        {/* Dynamic island; recordings bring their own status bar, so they go without it */}
+        {!video && (
+          <div
+            style={{
+              position: "absolute",
+              top: 12,
+              left: "50%",
+              translate: "-50% 0px",
+              width: screenW * 0.3,
+              height: 30,
+              borderRadius: 20,
+              background: "#000",
+            }}
+          />
+        )}
       </div>
     </div>
   );

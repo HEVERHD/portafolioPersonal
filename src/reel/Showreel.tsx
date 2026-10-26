@@ -6,12 +6,13 @@ import { Backdrop } from "./components/Backdrop";
 import type { ReelLang } from "./copy";
 import { BOOKING_DURATION, Booking } from "./scenes/Booking";
 import { BRANDS_DURATION, Brands } from "./scenes/Brands";
+import { IN_PRODUCTION_DURATION, InProduction } from "./scenes/InProduction";
 import { Intro } from "./scenes/Intro";
 import { Outro } from "./scenes/Outro";
 import { STORES_DURATION, Stores } from "./scenes/Stores";
 
-// 75 + 165 + 150 + 150 + 105 - 4 transitions × 15 = 585 frames (19.5 s at 30 fps)
-export const SHOWREEL_DURATION = 585;
+// 75 + 250 + 165 + 150 + 150 + 105 - 5 transitions × 15 = 820 frames (27.3 s at 30 fps)
+export const SHOWREEL_DURATION = 820;
 
 export type ShowreelProps = { readonly lang?: ReelLang };
 
@@ -23,6 +24,13 @@ export const Showreel = ({ lang = "es" }: ShowreelProps) => (
         <Intro lang={lang} />
       </TransitionSeries.Sequence>
       <TransitionSeries.Transition presentation={fade()} timing={linearTiming({ durationInFrames: 15 })} />
+      <TransitionSeries.Sequence name="In production" durationInFrames={IN_PRODUCTION_DURATION}>
+        <InProduction lang={lang} />
+      </TransitionSeries.Sequence>
+      <TransitionSeries.Transition
+        presentation={slide({ direction: "from-right" })}
+        timing={linearTiming({ durationInFrames: 15 })}
+      />
       <TransitionSeries.Sequence name="Booking" durationInFrames={BOOKING_DURATION}>
         <Booking lang={lang} />
       </TransitionSeries.Sequence>
