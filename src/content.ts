@@ -20,9 +20,10 @@ export const ui = {
     contact: { es: "Contacto", en: "Contact" },
   },
   hero: {
+    // Role line under the name in the CV (cv/data.mjs)
     role: {
-      es: "Desarrollador Frontend · React · React Native · Next.js",
-      en: "Frontend Developer · React · React Native · Next.js",
+      es: "Desarrollador de Software · React · React Native · Next.js · Node.js",
+      en: "Software Developer · React · React Native · Next.js · Node.js",
     },
     pitch: {
       es: "Desarrollo productos web y móviles listos para producción: he migrado aplicaciones completas a React Native y las he publicado en App Store y Google Play. He trabajado en apps de gran utilidad en sectores como retail y banca, y tengo una base sólida en backend con Node.js, NestJS y bases de datos.",
