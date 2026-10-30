@@ -5,13 +5,13 @@ import { pagePath, type Role } from "@/roles";
 /** Canonical address of the portfolio; every other deployment points search engines here. */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.hevertdavid.com").replace(/\/$/, "");
 
-export const SITE_TITLE = "Hevert Gelis · Desarrollador Frontend";
+export const SITE_TITLE = "Hevert Gelis · Desarrollador de Software";
 export const SITE_DESCRIPTION =
-  "Hevert Gelis, desarrollador frontend en Colombia: React, React Native, Next.js y e-commerce en VTEX. Apps en App Store y Google Play y producto para Cochez y Cía, Bancolombia, Chedraui y Pepe Ganga.";
+  "Hevert Gelis, desarrollador de software en Colombia: React, React Native, Next.js, Node.js y e-commerce en VTEX. Apps en App Store y Google Play y producto para Cochez y Cía, Bancolombia, Chedraui y Pepe Ganga.";
 
-export const SITE_TITLE_EN = "Hevert Gelis · Frontend Developer";
+export const SITE_TITLE_EN = "Hevert Gelis · Software Developer";
 export const SITE_DESCRIPTION_EN =
-  "Hevert Gelis, frontend developer in Colombia working remotely: React, React Native, Next.js and VTEX e-commerce. Apps on the App Store and Google Play and product for Cochez y Cía, Bancolombia, Chedraui and Pepe Ganga.";
+  "Hevert Gelis, software developer in Colombia working remotely: React, React Native, Next.js, Node.js and VTEX e-commerce. Apps on the App Store and Google Play and product for Cochez y Cía, Bancolombia, Chedraui and Pepe Ganga.";
 
 /** hreflang links: Spanish at /, English at /en, Spanish as the default for other languages. */
 export const LANGUAGE_ALTERNATES = { es: "/", en: "/en", "x-default": "/" };
@@ -54,7 +54,7 @@ export function structuredData() {
         "@id": `${SITE_URL}/#person`,
         name: "Hevert Gelis",
         alternateName: "Hevert David Gelis Díaz",
-        jobTitle: "Desarrollador Frontend",
+        jobTitle: "Desarrollador de Software",
         url: SITE_URL,
         image: `${SITE_URL}/hevert-pro.jpg`,
         email: `mailto:${contact.email}`,

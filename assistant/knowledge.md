@@ -1,10 +1,10 @@
 # Hevert Gelis (Hevert David Gelis Díaz)
 
-Desarrollador frontend · React, React Native y Next.js. Bogotá · Cartagena · Panamá (remoto).
+Desarrollador de software · React, React Native, Next.js y Node.js. Bogotá · Cartagena · Panamá (remoto).
 
 Desarrollo productos web y móviles listos para producción: he migrado aplicaciones completas a React Native y las he publicado en App Store y Google Play. He trabajado en apps de gran utilidad en sectores como retail y banca, y tengo una base sólida en backend con Node.js, NestJS y bases de datos.
 
-Soy desarrollador frontend, con más de cinco años llevando productos a producción. He publicado apps en App Store y Google Play, he trabajado en soluciones de retail y banca, y tengo una base sólida en backend. Lo que más disfruto es tomar un producto que funciona a medias y dejarlo listo para crecer.
+Soy desarrollador de software, con más de cinco años llevando productos a producción. He publicado apps en App Store y Google Play, he trabajado en soluciones de retail y banca, y tengo una base sólida en backend. Lo que más disfruto es tomar un producto que funciona a medias y dejarlo listo para crecer.
 
 Cifras: 5+ años en producción; 5M+ descargas en apps donde he trabajado; 10+ negocios en línea.
 

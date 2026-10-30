@@ -36,7 +36,7 @@ export const ui = {
       { value: "5M+", label: { es: "descargas en apps donde he trabajado", en: "downloads on apps I've worked on" } },
       { value: "10+", label: { es: "negocios en línea", en: "businesses online" } },
     ],
-    eyebrow: { es: "Desarrollador frontend · React, React Native y Next.js", en: "Frontend developer · React, React Native and Next.js" },
+    eyebrow: { es: "Desarrollador de software · React, React Native, Next.js y Node.js", en: "Software developer · React, React Native, Next.js and Node.js" },
     headline: { es: "Hago apps y tiendas que la gente usa", en: "I build apps and stores people use" },
     headlineAccent: { es: "todos los días.", en: "every single day." },
     note: { es: "hola, soy yo", en: "hi, that's me" },
@@ -176,7 +176,7 @@ export const ui = {
       languages: { es: "Idiomas", en: "Languages" },
       availability: { es: "Disponibilidad", en: "Availability" },
     },
-    role: { es: "Desarrollador Frontend (web y móvil)", en: "Frontend Developer (web and mobile)" },
+    role: { es: "Desarrollador de Software (web y móvil)", en: "Software Developer (web and mobile)" },
     experience: {
       es: "5+ años en producción · apps en App Store y Google Play · e-commerce en VTEX",
       en: "5+ years shipping · apps on the App Store and Google Play · VTEX e-commerce",
@@ -739,8 +739,8 @@ export const stack: StackGroup[] = [
 
 export const about = {
   text: {
-    es: "Soy desarrollador frontend, con más de cinco años llevando productos a producción. He publicado apps en App Store y Google Play, he trabajado en soluciones de retail y banca, y tengo una base sólida en backend. Lo que más disfruto es tomar un producto que funciona a medias y dejarlo listo para crecer.",
-    en: "I'm a frontend developer with more than five years taking products to production. I've shipped apps to the App Store and Google Play, worked on retail and banking solutions, and have a solid backend foundation. What I enjoy most is taking a product that half works and making it ready to grow.",
+    es: "Soy desarrollador de software, con más de cinco años llevando productos a producción. He publicado apps en App Store y Google Play, he trabajado en soluciones de retail y banca, y tengo una base sólida en backend. Lo que más disfruto es tomar un producto que funciona a medias y dejarlo listo para crecer.",
+    en: "I'm a software developer with more than five years taking products to production. I've shipped apps to the App Store and Google Play, worked on retail and banking solutions, and have a solid backend foundation. What I enjoy most is taking a product that half works and making it ready to grow.",
   },
   education: [
     {

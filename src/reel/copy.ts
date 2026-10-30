@@ -3,7 +3,7 @@ export type ReelLang = "es" | "en";
 
 export const copy = {
   es: {
-    intro: { eyebrow: "Hevert Gelis · Desarrollador frontend", lead: "Apps reales.", accent: "Negocios reales." },
+    intro: { eyebrow: "Hevert Gelis · Desarrollador de software", lead: "Apps reales.", accent: "Negocios reales." },
     production: {
       eyebrow: "En producción",
       title: "Apps que se usan a diario",
@@ -31,7 +31,7 @@ export const copy = {
     outro: { lead: "Del primer commit", accent: "a producción." },
   },
   en: {
-    intro: { eyebrow: "Hevert Gelis · Frontend developer", lead: "Real apps.", accent: "Real businesses." },
+    intro: { eyebrow: "Hevert Gelis · Software developer", lead: "Real apps.", accent: "Real businesses." },
     production: {
       eyebrow: "In production",
       title: "Apps people use every day",
